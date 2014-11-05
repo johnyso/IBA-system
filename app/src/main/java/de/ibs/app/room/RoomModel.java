@@ -30,9 +30,7 @@ public class RoomModel extends Fragment {
 
     private void initializeFragments() {
         FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
-        if (this.roomOverview == null){
-            this.roomOverview = new RoomOverview();
-            transaction.add(R.id.fragment_container,roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT).commit();
-        }
+        this.roomOverview = new RoomOverview();
+        transaction.add(R.id.fragment_container, roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT).commit();
     }
 }
