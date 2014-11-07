@@ -7,7 +7,7 @@ import de.ibs.app.AppContract;
 import de.ibs.app.R;
 
 public class RoomActivity extends FragmentActivity {
-    private RoomModel roomModel;
+    RoomModel roomModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,6 @@ public class RoomActivity extends FragmentActivity {
     private void initializeFragments() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         this.roomModel = new RoomModel();
-        transaction.add(this.roomModel, AppContract.ROOM_MODEL_FRAGMENT).commit();
+        transaction.add(R.id.fragment_container, this.roomModel, AppContract.ROOM_MODEL_FRAGMENT).commit();
     }
 }

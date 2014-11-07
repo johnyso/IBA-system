@@ -16,6 +16,11 @@ public class RoomModel extends Fragment {
     private RoomOverview roomOverview;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         this.initializeFragments();
@@ -29,12 +34,14 @@ public class RoomModel extends Fragment {
 
     private void tearDownFragments() {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.remove(this.roomOverview);
+        transaction.remove(this.roomOverview).commit();
     }
 
     private void initializeFragments() {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        this.roomOverview = new RoomOverview();
-        transaction.add(R.id.fragment_container, this.roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT).commit();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (this.roomOverview == null) {
+            this.roomOverview = new RoomOverview();
+            transaction.add(R.id.fragment_container, this.roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT).commit();
+        }
     }
 }
