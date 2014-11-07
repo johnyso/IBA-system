@@ -1,7 +1,11 @@
 package de.ibs.app.room;
 
-import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
 
@@ -24,13 +28,13 @@ public class RoomModel extends Fragment {
     }
 
     private void tearDownFragments() {
-        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.remove(this.roomOverview);
     }
 
     private void initializeFragments() {
-        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         this.roomOverview = new RoomOverview();
-        transaction.add(R.id.fragment_container, roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT).commit();
+        transaction.add(R.id.fragment_container, this.roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT).commit();
     }
 }
