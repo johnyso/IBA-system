@@ -49,6 +49,7 @@ robolectric {
 }
 dependencies {
     repositories {
+        maven { url "http://dl.bintray.com/populov/maven" }
         mavenCentral()
     }
 
@@ -99,6 +100,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.+'
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
 }
 apply plugin: 'idea'
 
