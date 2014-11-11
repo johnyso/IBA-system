@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
+import de.ibs.app.room.provider.SampleRoomGenerator;
 
 public class RoomActivity extends FragmentActivity {
     RoomModel roomModel;
@@ -13,6 +14,9 @@ public class RoomActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.container);
+
+        // TODO: Remove sample Room generator
+        SampleRoomGenerator.createRooms(this);
     }
 
     @Override
