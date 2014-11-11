@@ -33,7 +33,15 @@ public class RoomProviderTest {
     private static final int TEST_WIDTH = 10;
     private static final int TEST_HEIGHT = 2;
     private static final int TEST_LENGTH = 10;
+    private static final String TEST_SPEAKER_IP = "141.62.110.97";
+    private static final int TEST_SPEAKER_WIDTH = 2;
+    private static final int TEST_SPEAKER_HEIGHT = 2;
+    private static final int TEST_SPEAKER_VERTICAL = 3;
+    private static final int TEST_SPEAKER_HORIZONTAL = 4;
+    private static final int TEST_SPEAKER_ROOM = 1;
+
     private static final String TEST_INSERT_URI = "content://de.ibs.room/rooms-1";
+    private static final String TEST_INSERT_URI_SPEAKER = "content://de.ibs.room/rooms-1/speakers-1";
 
     private RoomProvider roomProvider;
     private ShadowContentResolver shadowContentResolver;
@@ -91,15 +99,26 @@ public class RoomProviderTest {
     public void testInsertSpeaker() {
         this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, "WrongUri"), new ContentValues());
     }
-/*
+
     @Test
     public void insertRoomAndSpeaker() {
-        Uri uri = this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
-        assertThat(uri.toString(),equalTo(TEST_INSERT_URI));
-        Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
+        Uri uri = this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), exampleValuesSpeaker());
+        assertThat(uri.toString(),equalTo(TEST_INSERT_URI_SPEAKER));
+        Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), null, null, null, null);
         assertThat(result.getCount(), equalTo(1));
     }
-*/
+
+    private ContentValues exampleValuesSpeaker() {
+        ContentValues value = new ContentValues();
+        value.put(Speakers.IP, TEST_SPEAKER_IP);
+        value.put(Speakers.WIDTH, TEST_SPEAKER_WIDTH);
+        value.put(Speakers.HEIGHT, TEST_SPEAKER_HEIGHT);
+        value.put(Speakers.HORIZONTAL, TEST_SPEAKER_HORIZONTAL);
+        value.put(Speakers.VERTICAL, TEST_SPEAKER_VERTICAL);
+        return value;
+    }
+
 
     @After
     public void tearDown() {

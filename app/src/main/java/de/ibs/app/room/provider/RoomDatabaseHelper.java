@@ -36,4 +36,9 @@ public class RoomDatabaseHelper {
         SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
         return database.query(Speakers.TABLE_NAME, null, where, arg, null, null, null, null);
     }
+
+    public long insertSpeaker(ContentValues values) {
+        SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
+        return database.insert(Speakers.TABLE_NAME, null, values);
+    }
 }

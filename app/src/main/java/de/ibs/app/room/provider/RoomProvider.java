@@ -36,10 +36,16 @@ public class RoomProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         final int uriType = URI_MATCHER.match(uri).getCode();
+        long id;
         switch (uriType) {
             case TYPE_ROOMS:
-                long id = this.roomDatabaseHelper.insertRoom(values);
+                id = this.roomDatabaseHelper.insertRoom(values);
                 return Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + id);
+            case TYPE_SPEAKERS:
+                List<String> list = URI_MATCHER.match(uri).getCapturings();
+                values.put(Speakers.ROOM_ID, list.get(1));
+                id = this.roomDatabaseHelper.insertSpeaker(values);
+                return Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + list.get(1) + "/" + SPEAKERS + "-" + id);
             default:
                 throw new IllegalArgumentException("WrongUri");
         }
