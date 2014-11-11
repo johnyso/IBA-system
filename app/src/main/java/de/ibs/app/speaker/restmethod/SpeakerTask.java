@@ -8,6 +8,7 @@ import android.util.Log;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import de.ibs.app.speaker.SpeakerConstants;
 
 import java.io.IOException;
 
@@ -17,16 +18,19 @@ import java.io.IOException;
 public class SpeakerTask implements Runnable {
     private final Service context;
     private final OkHttpClient client = new OkHttpClient();
+    private final String restPath;
+
 
     public SpeakerTask(Service context, Bundle extras) {
         this.context = context;
+        this.restPath = extras.getString(SpeakerConstants.REST_ID);
     }
 
     @Override
     public void run() {
         String response = null;
         try {
-            response = run("http://141.62.110.99/arduino/down/");
+            response = run("http://141.62.110.99/arduino/"+this.restPath+"/");
         } catch (IOException e) {
             e.printStackTrace();
         }
