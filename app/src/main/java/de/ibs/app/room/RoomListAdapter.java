@@ -41,5 +41,6 @@ public class RoomListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.name.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.NAME)));
+        holder.id = cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms._ID));
     }
 }

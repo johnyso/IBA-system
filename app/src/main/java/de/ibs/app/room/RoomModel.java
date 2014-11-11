@@ -71,9 +71,10 @@ public class RoomModel extends Fragment {
 
     /**
      * ShowRoomDetail will change the Fragment from Overview to Detail
-     * @param id int the Room id 
+     * @param id int the Room id
      */
     public void showRoomDetail(int id) {
+        this.roomDetail.resetList(id);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.hide(this.roomOverview)
                 .show(this.roomDetail)

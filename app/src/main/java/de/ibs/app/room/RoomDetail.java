@@ -25,6 +25,7 @@ import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
 public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
     private Context context;
     private RoomDetailAdapter adapter;
+    private int currentId = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cursorLoader = new CursorLoader(getActivity(),
-                Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-1/" + RoomContract.SPEAKERS), null, null, null, null);
+                Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + this.currentId + "/" + RoomContract.SPEAKERS), null, null, null, null);
         return cursorLoader;
     }
 
@@ -68,5 +69,11 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         Intent intent = new Intent(getActivity(), SpeakerAcitvity.class);
         intent.putExtra(RoomContract.Speakers._ID, holder.id);
         startActivity(intent);
+    }
+
+    public void resetList(int id) {
+        Cursor cursor = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id +"/" + RoomContract.SPEAKERS), null, null, null, null);
+        this.currentId = id;
+        adapter.swapCursor(cursor);
     }
 }
