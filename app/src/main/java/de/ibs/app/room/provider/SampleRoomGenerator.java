@@ -14,9 +14,22 @@ public class SampleRoomGenerator {
     public static void createRooms(Context context){
         Cursor rooms = context.getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI,RoomContract.ROOMS),null,null,null,null);
         if (rooms.getCount() == 0) {
-            context.getContentResolver().insert(Uri.withAppendedPath(RoomContract.CONTENT_URI,RoomContract.ROOMS),roomValues1());
+            Uri uri1 = context.getContentResolver().insert(Uri.withAppendedPath(RoomContract.CONTENT_URI,RoomContract.ROOMS),roomValues1());
             context.getContentResolver().insert(Uri.withAppendedPath(RoomContract.CONTENT_URI,RoomContract.ROOMS),roomValues2());
+
+            context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue1());
+
         }
+    }
+
+    private static ContentValues speakerValue1() {
+        ContentValues value = new ContentValues();
+        value.put(RoomContract.Speakers.IP, "141.62.110.97");
+        value.put(RoomContract.Speakers.WIDTH, 1);
+        value.put(RoomContract.Speakers.HEIGHT, 2);
+        value.put(RoomContract.Speakers.HORIZONTAL, 0);
+        value.put(RoomContract.Speakers.VERTICAL, 0);
+        return value;
     }
 
     private static ContentValues roomValues1(){

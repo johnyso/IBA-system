@@ -23,6 +23,11 @@
             android:enabled="true"
             android:exported="false" >
         </provider>
+
+        <activity
+            android:name=".speaker.SpeakerAcitvity"
+            android:label="@string/title_activity_speaker_acitvity" >
+        </activity>
     </application>
 
 </manifest>

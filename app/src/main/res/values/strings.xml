@@ -7,5 +7,6 @@
     <string name="title_activity_room">RoomActivity</string>
     <string name="ibstheme_tab_room_overview">Room Overview</string>
     <string name="ibstheme_tab_room_favorit">Favorites</string>
+    <string name="title_activity_speaker_acitvity">SpeakerAcitvity</string>
 
 </resources>
