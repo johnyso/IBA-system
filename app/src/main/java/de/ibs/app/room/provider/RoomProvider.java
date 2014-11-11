@@ -10,7 +10,12 @@ import de.ibs.app.room.RoomContract;
 import static de.ibs.app.room.RoomContract.*;
 
 public class RoomProvider extends ContentProvider {
-    public RoomProvider() {
+    private RoomDatabaseHelper roomDatabaseHelper;
+
+    @Override
+    public boolean onCreate() {
+        this.roomDatabaseHelper = new RoomDatabaseHelper(this.getContext());
+        return true;
     }
 
     @Override
@@ -30,17 +35,12 @@ public class RoomProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         final int uriType = URI_MATCHER.match(uri).getCode();
         switch (uriType) {
-            case TYPE_ROOM:
-                return Uri.parse("test");
+            case TYPE_ROOMS:
+                long id = this.roomDatabaseHelper.insertRoom(values);
+                return Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + id);
             default:
                 throw new IllegalArgumentException("WrongUri");
         }
-    }
-
-    @Override
-    public boolean onCreate() {
-        // TODO: Implement this to initialize your content provider on startup.
-        return false;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RoomProvider extends ContentProvider {
         final int uriType = URI_MATCHER.match(uri).getCode();
         switch (uriType) {
             case TYPE_ROOMS:
-                return new MatrixCursor(new String[]{""});
+                return this.roomDatabaseHelper.getRooms();
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
         }

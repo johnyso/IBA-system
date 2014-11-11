@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import static de.ibs.app.room.RoomContract.*;
+
 /**
  * Created by johnyso on 11.11.14.
  */
@@ -16,21 +18,15 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     private static final String SQL_DROP_TABLE = "Drop table if exists "+DATABASE_NAME+".";
     private static final String SQL_DELETE_ALL_FROM_TABLE = "DELETE FROM ";
-/*    public static final String SQL_CREATE_ROOM = "Create table if not exists "
-            + Cameras.TABLE_NAME + "( "
-            + Cameras._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + Cameras.NAME + " " + Cameras.TYPE_NAME + " , "
-            + Cameras.HTTP_PORT + " " + Cameras.TYPE_HTTP_PORT + " , "
-            + Cameras.IP + " " + Cameras.TYPE_IP_INTERN + " , "
-            + Cameras.RTSP_PORT + " " + Cameras.TYPE_RTSP_PORT + " , "
-            + Cameras.USER + " " + Cameras.TYPE_USER + " , "
-            + Cameras.PASSWORD + " " + Cameras.TYPE_PASSWORD + " , "
-            + Cameras.TYPE + " " + Cameras.TYPE_TYPE + " DEFAULT " + CameraContract.MODEL_TVIP41550 + ", "
-            + Cameras.SCREENSHOT + " " + Cameras.TYPE_SCREENSHOT + ", "
-            + Cameras.STREAM + " " + Cameras.TYPE_STREAM + ", "
-            + Cameras.LAST_UPDATE + " " + Cameras.TYPE_LAST_UPDATE + ", "
-            + Cameras.CAMERA_EXT_ID + " " + Cameras.TYPE_CAMERA_EXT_ID + "); ";
-    */
+
+    public static final String SQL_CREATE_ROOM = "Create table if not exists "
+            + Rooms.TABLE_NAME + "( "
+            + Rooms._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + Rooms.NAME + " " + Rooms.TYPE_NAME + " , "
+            + Rooms.HEIGHT + " " + Rooms.TYPE_HEIGHT + " , "
+            + Rooms.WIDTH + " " + Rooms.TYPE_WIDTH + " , "
+            + Rooms.LENGTH + " " + Rooms.TYPE_LENGTH + "); ";
+
 
     public static DatabaseOpenHelper getInstance(Context context){
         if (instance == null) {
@@ -45,7 +41,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //db.execSQL(SQL_CREATE_ROOM);
+        db.execSQL(SQL_CREATE_ROOM);
     }
 
     public void dropTable(String table){
