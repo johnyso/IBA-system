@@ -2,4 +2,5 @@
 <resources>
     <color name="ibstheme_color">#f8f8f8</color>
     <color name="default_background">#FFB200</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -25,5 +25,7 @@
 
         <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
 
+        <item name="android:listViewStyle">@style/ListViewIBSTheme</item>
+
     </style>
 </resources>
