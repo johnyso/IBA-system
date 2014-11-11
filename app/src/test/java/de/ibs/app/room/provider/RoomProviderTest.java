@@ -81,6 +81,20 @@ public class RoomProviderTest {
         assertThat(result.getCount(), equalTo(1));
     }
 
+    @Test
+    public void checkCursorRoom(){
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
+        Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
+        assertThat(result.getCount(),equalTo(1));
+        if(result.moveToFirst()){
+            assertThat(result.getInt(result.getColumnIndex(Rooms._ID)),equalTo(1));
+            assertThat(result.getString(result.getColumnIndex(Rooms.NAME)),equalTo(TEST_NAME));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.HEIGHT)),equalTo(TEST_HEIGHT));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.LENGTH)),equalTo(TEST_LENGTH));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.WIDTH)),equalTo(TEST_WIDTH));
+
+        }
+    }
 
 
     /**
@@ -101,12 +115,29 @@ public class RoomProviderTest {
     }
 
     @Test
-    public void insertRoomAndSpeaker() {
+    public void insertSpeaker() {
         this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
         Uri uri = this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), exampleValuesSpeaker());
         assertThat(uri.toString(),equalTo(TEST_INSERT_URI_SPEAKER));
         Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), null, null, null, null);
         assertThat(result.getCount(), equalTo(1));
+    }
+
+    @Test
+    public void checkCursorSpeaker(){
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
+        Uri uri = this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), exampleValuesSpeaker());
+        Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), null, null, null, null);
+        assertThat(result.getCount(),equalTo(1));
+        if(result.moveToFirst()){
+            assertThat(result.getInt(result.getColumnIndex(Speakers._ID)),equalTo(1));
+            assertThat(result.getString(result.getColumnIndex(Speakers.IP)),equalTo(TEST_SPEAKER_IP));
+            assertThat(result.getInt(result.getColumnIndex(Speakers.HEIGHT)),equalTo(TEST_SPEAKER_HEIGHT));
+            assertThat(result.getInt(result.getColumnIndex(Speakers.WIDTH)),equalTo(TEST_SPEAKER_WIDTH));
+            assertThat(result.getInt(result.getColumnIndex(Speakers.VERTICAL)),equalTo(TEST_SPEAKER_VERTICAL));
+            assertThat(result.getInt(result.getColumnIndex(Speakers.HORIZONTAL)),equalTo(TEST_SPEAKER_HORIZONTAL));
+            assertThat(result.getInt(result.getColumnIndex(Speakers.ROOM_ID)),equalTo(1));
+        }
     }
 
     private ContentValues exampleValuesSpeaker() {
