@@ -48,6 +48,9 @@ public class RoomProviderTest {
         ShadowContentResolver.registerProvider(AUTHORITY, this.roomProvider);
     }
 
+    /**
+     * TEST ROOM
+     */
     @Test
     public void testInitialQueryIsEmpty() {
         Cursor cursor = shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
@@ -69,6 +72,34 @@ public class RoomProviderTest {
         Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
         assertThat(result.getCount(), equalTo(1));
     }
+
+
+
+    /**
+     * TEST SPEAKER
+     */
+    @Test
+    public void testInitialSpeakerQueryIsEmpty() {
+        Cursor cursor = shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), null, null, null, null);
+        assertThat(cursor.getCount(), equalTo(0));
+    }
+
+    /*
+   * Test insert
+   */
+    @Test(expected = IllegalArgumentException.class)
+    public void testInsertSpeaker() {
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, "WrongUri"), new ContentValues());
+    }
+/*
+    @Test
+    public void insertRoomAndSpeaker() {
+        Uri uri = this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
+        assertThat(uri.toString(),equalTo(TEST_INSERT_URI));
+        Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
+        assertThat(result.getCount(), equalTo(1));
+    }
+*/
 
     @After
     public void tearDown() {

@@ -12,7 +12,7 @@ import static de.ibs.app.room.RoomContract.*;
  */
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseOpenHelper";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "ibs";
     private  static DatabaseOpenHelper instance;
 
@@ -26,6 +26,17 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             + Rooms.HEIGHT + " " + Rooms.TYPE_HEIGHT + " , "
             + Rooms.WIDTH + " " + Rooms.TYPE_WIDTH + " , "
             + Rooms.LENGTH + " " + Rooms.TYPE_LENGTH + "); ";
+
+    public static final String SQL_CREATE_SPEAKER = "Create table if not exists "
+            + Speakers.TABLE_NAME + "( "
+            + Speakers._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + Speakers.IP + " " + Speakers.TYPE_IP + " , "
+            + Speakers.HEIGHT + " " + Speakers.TYPE_HEIGHT + " , "
+            + Speakers.WIDTH + " " + Speakers.TYPE_WIDTH + " , "
+            + Speakers.HORIZONTAL + " " + Speakers.TYPE_HORIZONTAL + " , "
+            + Speakers.VERTICAL + " " + Speakers.TYPE_VERTICAL + " , "
+            + Speakers.ROOM_ID + " " + Speakers.TYPE_ROOM_ID + " , "
+            + "FOREIGN KEY(" + Speakers.ROOM_ID + ") REFERENCES " + Rooms.TABLE_NAME + "(" + Rooms._ID + ")); ";
 
 
     public static DatabaseOpenHelper getInstance(Context context){
@@ -42,6 +53,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ROOM);
+        db.execSQL(SQL_CREATE_SPEAKER);
     }
 
     public void dropTable(String table){

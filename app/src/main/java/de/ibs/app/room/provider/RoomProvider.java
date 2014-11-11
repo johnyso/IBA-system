@@ -7,6 +7,8 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import de.ibs.app.room.RoomContract;
 
+import java.util.List;
+
 import static de.ibs.app.room.RoomContract.*;
 
 public class RoomProvider extends ContentProvider {
@@ -50,6 +52,9 @@ public class RoomProvider extends ContentProvider {
         switch (uriType) {
             case TYPE_ROOMS:
                 return this.roomDatabaseHelper.getRooms();
+            case TYPE_SPEAKERS:
+                List<String> list = URI_MATCHER.match(uri).getCapturings();
+                return this.roomDatabaseHelper.getSpeakers(list.get(1));
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
         }

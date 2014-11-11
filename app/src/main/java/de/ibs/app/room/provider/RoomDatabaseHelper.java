@@ -29,4 +29,11 @@ public class RoomDatabaseHelper {
         SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
         return database.query(Rooms.TABLE_NAME, null, null, null, null, null, null, null);
     }
+
+    public Cursor getSpeakers(String roomId) {
+        String where = "Room_id=?";
+        String[] arg = {roomId};
+        SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
+        return database.query(Speakers.TABLE_NAME, null, where, arg, null, null, null, null);
+    }
 }
