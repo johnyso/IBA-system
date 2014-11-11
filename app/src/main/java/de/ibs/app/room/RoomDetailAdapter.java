@@ -23,7 +23,6 @@ public class RoomDetailAdapter extends CursorAdapter {
     static class ViewHolder {
         public TextView name;
         public int id;
-        public int ip;
     }
 
     @Override
@@ -40,5 +39,6 @@ public class RoomDetailAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.name.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Speakers.IP)));
+        holder.id = cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers._ID));
     }
 }
