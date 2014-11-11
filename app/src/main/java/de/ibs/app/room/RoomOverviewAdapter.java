@@ -4,15 +4,18 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import de.ibs.app.R;
 
 /**
  * Created by johnyso on 11.11.14.
  */
 public class RoomOverviewAdapter extends FragmentStatePagerAdapter{
     private static final int MAX_COUNT = 2;
+    private final Context context;
 
     public RoomOverviewAdapter(FragmentManager fm, Context context) {
         super(fm);
+        this.context = context;
     }
 
     @Override
@@ -22,7 +25,11 @@ public class RoomOverviewAdapter extends FragmentStatePagerAdapter{
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Test "+position;
+        if(position == 0){
+            return context.getString(R.string.ibstheme_tab_room_overview);
+        } else {
+            return context.getString(R.string.ibstheme_tab_room_favorit);
+        }
     }
 
     @Override
