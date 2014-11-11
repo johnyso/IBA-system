@@ -19,11 +19,12 @@ public class RoomModel extends Fragment {
     private RoomOverview roomOverview;
     private LocalBroadcastManager localBroadcastManager;
     private RoomListReceiver roomListReceiver;
+    private RoomDetail roomDetail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.roomListReceiver = new RoomListReceiver();
+        this.roomListReceiver = new RoomListReceiver(this);
         this.localBroadcastManager = LocalBroadcastManager.getInstance(getActivity().getApplicationContext());
     }
 
@@ -31,6 +32,7 @@ public class RoomModel extends Fragment {
     public void onResume() {
         super.onResume();
         this.initializeFragments();
+        this.showFragment();
         this.localBroadcastManager.registerReceiver(this.roomListReceiver, new IntentFilter(AppContract.BROADCAST_ACTION_ROOM));
     }
 
@@ -41,16 +43,36 @@ public class RoomModel extends Fragment {
         this.localBroadcastManager.unregisterReceiver(this.roomListReceiver);
     }
 
+    private void showFragment() {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.show(this.roomOverview).commit();
+    }
+
     private void tearDownFragments() {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.remove(this.roomOverview).commit();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.remove(this.roomOverview)
+                .remove(this.roomDetail).commit();
     }
 
     private void initializeFragments() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (this.roomOverview == null) {
             this.roomOverview = new RoomOverview();
-            transaction.add(R.id.fragment_container, this.roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT).commit();
+            transaction.add(R.id.fragment_container, this.roomOverview, AppContract.ROOM_OVERVIEW_FRAGMENT)
+                    .hide(this.roomOverview);
         }
+        if (this.roomDetail == null) {
+            this.roomDetail = new RoomDetail();
+            transaction.add(R.id.fragment_container, this.roomDetail, AppContract.ROOM_DETAIL_FRAGMENT)
+                    .hide(this.roomDetail);
+        }
+        transaction.commit();
+    }
+
+    public void showRoomDetail(int id) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.hide(this.roomOverview)
+                .show(this.roomDetail)
+                .commit();
     }
 }
