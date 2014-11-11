@@ -11,12 +11,15 @@ public class RoomContract {
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     public static final String ROOMS = "rooms";
+    public static final String ROOM = "room";
 
     public static final int TYPE_ROOMS = 1;
+    public static final int TYPE_ROOM = 1;
 
     public static final AdvancedUriMatcher URI_MATCHER = new AdvancedUriMatcher();
 
     static {
         URI_MATCHER.addURI(AUTHORITY, ROOMS, TYPE_ROOMS);
+        URI_MATCHER.addURI(AUTHORITY, ROOM, TYPE_ROOM);
     }
 }

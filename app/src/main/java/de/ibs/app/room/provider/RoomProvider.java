@@ -28,8 +28,13 @@ public class RoomProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        // TODO: Implement this to handle requests to insert a new row.
-        throw new UnsupportedOperationException("Not yet implemented");
+        final int uriType = URI_MATCHER.match(uri).getCode();
+        switch (uriType) {
+            case TYPE_ROOM:
+                return Uri.parse("test");
+            default:
+                throw new IllegalArgumentException("WrongUri");
+        }
     }
 
     @Override

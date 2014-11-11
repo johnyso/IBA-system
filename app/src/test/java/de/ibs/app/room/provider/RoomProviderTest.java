@@ -2,6 +2,7 @@ package de.ibs.app.room.provider;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import de.ibs.app.room.RoomActivity;
@@ -43,5 +44,13 @@ public class RoomProviderTest {
     public void testInitialQueryIsEmpty() {
         Cursor cursor = shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
         assertThat(cursor.getCount(), equalTo(0));
+    }
+
+    /*
+    * Test insert
+    */
+    @Test(expected = IllegalArgumentException.class)
+    public void testInsert() {
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, "WrongUri"), new ContentValues());
     }
 }
