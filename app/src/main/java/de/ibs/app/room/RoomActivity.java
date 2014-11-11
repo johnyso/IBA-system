@@ -38,6 +38,6 @@ public class RoomActivity extends FragmentActivity {
     private void initializeFragments() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         this.roomModel = new RoomModel();
-        transaction.add(R.id.fragment_container, this.roomModel, AppContract.ROOM_MODEL_FRAGMENT).commit();
+        transaction.add(this.roomModel, AppContract.ROOM_MODEL_FRAGMENT).commit();
     }
 }
