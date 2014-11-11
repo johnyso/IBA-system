@@ -69,10 +69,15 @@ public class RoomModel extends Fragment {
         transaction.commit();
     }
 
+    /**
+     * ShowRoomDetail will change the Fragment from Overview to Detail
+     * @param id int the Room id 
+     */
     public void showRoomDetail(int id) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.hide(this.roomOverview)
                 .show(this.roomDetail)
+                .addToBackStack(AppContract.ROOM_DETAIL_BACKSTACK)
                 .commit();
     }
 }
