@@ -1,8 +1,90 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="EditTextIBSTheme" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/ibstheme_edit_text_holo_dark</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="AutoCompleteTextViewIBSTheme" parent="android:Widget.AutoCompleteTextView">
+        <item name="android:dropDownSelector">@drawable/ibstheme_list_selector_holo_dark</item>
+        <item name="android:background">@drawable/ibstheme_edit_text_holo_dark</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="CheckBoxIBSTheme" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/ibstheme_btn_check_holo_dark</item>
+    </style>
+
+    <style name="ButtonIBSTheme" parent="android:Widget.Button">
+        <item name="android:background">@drawable/ibstheme_btn_default_holo_dark</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:minWidth">64dip</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="ImageButtonIBSTheme" parent="android:Widget.ImageButton">
+        <item name="android:background">@drawable/ibstheme_btn_default_holo_dark</item>
+    </style>
+
+    <style name="SpinnerIBSTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/ibstheme_spinner_background_holo_dark</item>
+        <item name="android:dropDownSelector">@drawable/ibstheme_list_selector_holo_dark</item>
+    </style>
+
+    <style name="SpinnerDropDownItemIBSTheme" parent="android:Widget.DropDownItem.Spinner">
+        <item name="android:checkMark">@drawable/ibstheme_btn_radio_holo_dark</item>
+    </style>
+    <style name="TabIBSTheme">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+        <item name="android:background">@drawable/ibstheme_tab_indicator_holo</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">80dip</item>
+    </style>
+
+    <style name="TabTextIBSTheme">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <!-- v14 <item name="android:textAllCaps">true</item> -->
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:maxWidth">180dip</item>
+    </style>
+
+    <style name="ProgressBarIBSTheme" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/ibstheme_progress_horizontal_holo_dark</item>
+        <item name="android:indeterminateDrawable">@drawable/ibstheme_progress_indeterminate_horizontal_holo_dark</item>
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
+    </style>
+
+    <style name="ToggleIBSTheme" parent="android:Widget.Button.Toggle">
+        <item name="android:background">@drawable/ibstheme_btn_toggle_holo_dark</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
+        <item name="android:background">@drawable/custom_tab_indicator</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:divider">@drawable/ibstheme_tab_indicator_holo</item>
+        <item name="android:dividerPadding">10dp</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+    </style>
+
+    <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
     </style>
 
 </resources>

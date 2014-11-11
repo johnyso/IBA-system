@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Holo">
+
+        <item name="android:editTextStyle">@style/EditTextIBSTheme</item>
+
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewIBSTheme</item>
+
+        <item name="android:checkboxStyle">@style/CheckBoxIBSTheme</item>
+
+        <item name="android:buttonStyle">@style/ButtonIBSTheme</item>
+
+        <item name="android:imageButtonStyle">@style/ImageButtonIBSTheme</item>
+
+        <item name="android:spinnerStyle">@style/SpinnerIBSTheme</item>
+
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemIBSTheme</item>
+
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarIBSTheme</item>
+
+        <item name="android:buttonStyleToggle">@style/ToggleIBSTheme</item>
+
+        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
+
+    </style>
+</resources>
