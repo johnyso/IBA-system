@@ -6,4 +6,5 @@ package de.ibs.app;
 public class AppContract {
     public static final String ROOM_MODEL_FRAGMENT = "fragment_room_model";
     public static final String ROOM_OVERVIEW_FRAGMENT = "fragment_overview_model";
+    public static final String BROADCAST_ACTION_ROOM = "broadcast_action_room";
 }

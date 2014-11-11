@@ -1,8 +1,11 @@
 package de.ibs.app.room;
 
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +17,28 @@ import de.ibs.app.R;
  */
 public class RoomModel extends Fragment {
     private RoomOverview roomOverview;
+    private LocalBroadcastManager localBroadcastManager;
+    private RoomListReceiver roomListReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.roomListReceiver = new RoomListReceiver();
+        this.localBroadcastManager = LocalBroadcastManager.getInstance(getActivity().getApplicationContext());
     }
 
     @Override
     public void onResume() {
         super.onResume();
         this.initializeFragments();
+        this.localBroadcastManager.registerReceiver(this.roomListReceiver, new IntentFilter(AppContract.BROADCAST_ACTION_ROOM));
     }
 
     @Override
     public void onPause() {
         super.onPause();
         this.tearDownFragments();
+        this.localBroadcastManager.unregisterReceiver(this.roomListReceiver);
     }
 
     private void tearDownFragments() {

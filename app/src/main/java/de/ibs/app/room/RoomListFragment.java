@@ -1,6 +1,7 @@
 package de.ibs.app.room;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,13 +9,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import de.ibs.app.AppContract;
 import de.ibs.app.R;
+
+import static de.ibs.app.room.RoomListAdapter.*;
 
 /**
  * Created by johnyso on 11.11.14.
@@ -62,6 +67,10 @@ public class RoomListFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("RoomListFragment","List click");
+        // TODO: get ID from viewHolder
+        ViewHolder holder = (ViewHolder) view.getTag();
+        Intent intent = new Intent(AppContract.BROADCAST_ACTION_ROOM);
+        intent.putExtra(RoomContract.Rooms._ID, holder.id);
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
     }
 }
