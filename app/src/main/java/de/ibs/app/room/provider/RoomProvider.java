@@ -3,7 +3,11 @@ package de.ibs.app.room.provider;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
+import de.ibs.app.room.RoomContract;
+
+import static de.ibs.app.room.RoomContract.*;
 
 public class RoomProvider extends ContentProvider {
     public RoomProvider() {
@@ -36,14 +40,19 @@ public class RoomProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
-            String[] selectionArgs, String sortOrder) {
-        // TODO: Implement this to handle query requests from clients.
-        throw new UnsupportedOperationException("Not yet implemented");
+                        String[] selectionArgs, String sortOrder) {
+        final int uriType = URI_MATCHER.match(uri).getCode();
+        switch (uriType) {
+            case TYPE_ROOMS:
+                return new MatrixCursor(new String[]{""});
+            default:
+                throw new UnsupportedOperationException("Not yet implemented");
+        }
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection,
-            String[] selectionArgs) {
+                      String[] selectionArgs) {
         // TODO: Implement this to handle requests to update one or more rows.
         throw new UnsupportedOperationException("Not yet implemented");
     }
