@@ -21,7 +21,6 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
     private EditText width;
     private EditText length;
     private EditText name;
-    private int roomId = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +39,9 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
     @Override
     public void onClick(View v) {
         if(this.height.getText().toString().matches("")
-                && this.width.getText().toString().matches("")
-                && this.length.getText().toString().matches("")
-                && this.name.getText().toString().matches("")){
+                || this.width.getText().toString().matches("")
+                || this.length.getText().toString().matches("")
+                || this.name.getText().toString().matches("")){
             Toast toast = Toast.makeText(getActivity(), "please Enter all Datas", Toast.LENGTH_SHORT);
             toast.show();
         } else {
@@ -52,17 +51,14 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
             values.put(RoomContract.Rooms.WIDTH, this.width.getText().toString());
             values.put(RoomContract.Rooms.LENGTH, this.length.getText().toString());
 
+            this.height.setText("");
+            this.width.setText("");
+            this.length.setText("");
+            this.name.setText("");
+
             getActivity().getContentResolver().insert(Uri.withAppendedPath(RoomContract.CONTENT_URI,RoomContract.ROOMS),values);
             Toast toast = Toast.makeText(getActivity(), "Room added", Toast.LENGTH_SHORT);
             toast.show();
         }
-    }
-
-    public int getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
     }
 }
