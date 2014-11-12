@@ -80,5 +80,7 @@ public class RoomListFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onClick(View v) {
         Log.d("RoomListFragment", "OnClickListener Add new Room");
+        Intent intent = new Intent(AppContract.BROADCAST_ACTION_ADD_ROOM);
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
     }
 }
