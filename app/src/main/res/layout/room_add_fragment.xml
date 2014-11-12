@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Room"
+            android:id="@+id/headline"
+            android:text="@string/room_add_headline"
+            />
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="48dp"
+            >
+        <TextView
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="@string/room_add_width"
+                android:id="@+id/textWidth"
+                android:layout_centerVertical="true"
+                />
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/editWidth"
+                  android:layout_toRightOf="@id/textWidth"
+                />
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="48dp"
+            >
+        <TextView
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="@string/room_add_length"
+                android:id="@+id/textLength"
+                android:layout_centerVertical="true"
+                />
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/editLength"
+                  android:layout_toRightOf="@id/textLength"
+                />
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="48dp"
+            >
+        <TextView
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="@string/room_add_height"
+                android:id="@+id/textHeight"
+                android:layout_centerVertical="true"
+                />
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/editHeight"
+                  android:layout_toRightOf="@id/textHeight"
+                />
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="48dp">
+        <TextView
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="@string/room_add_name"
+                android:id="@+id/textName"
+                android:layout_centerVertical="true"
+                />
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/editName"
+                  android:layout_toRightOf="@id/textName"
+                />
+    </RelativeLayout>
+    <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:text="@string/button_add_room"
             />
 
-</RelativeLayout>
+</LinearLayout>

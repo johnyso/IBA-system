@@ -40,6 +40,7 @@ public class RoomProvider extends ContentProvider {
         switch (uriType) {
             case TYPE_ROOMS:
                 id = this.roomDatabaseHelper.insertRoom(values);
+                getContext().getContentResolver().notifyChange(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS), null);
                 return Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + id);
             case TYPE_SPEAKERS:
                 List<String> list = URI_MATCHER.match(uri).getCapturings();
