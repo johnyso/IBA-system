@@ -8,5 +8,6 @@
     <string name="ibstheme_tab_room_overview">Room Overview</string>
     <string name="ibstheme_tab_room_favorit">Favorites</string>
     <string name="title_activity_speaker_acitvity">SpeakerAcitvity</string>
+    <string name="button_add_room">Add Room</string>
 
 </resources>

@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
@@ -24,7 +25,7 @@ import static de.ibs.app.room.RoomListAdapter.*;
 /**
  * Created by johnyso on 11.11.14.
  */
-public class RoomListFragment extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>{
+public class RoomListFragment extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, Button.OnClickListener{
 
     private Context context;
     private RoomListAdapter adapter;
@@ -43,6 +44,8 @@ public class RoomListFragment extends Fragment implements AdapterView.OnItemClic
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
+        Button button = (Button) view.findViewById(R.id.button);
+        button.setOnClickListener(this);
         this.getLoaderManager().initLoader(0,null,this);
         return view;
     }
@@ -72,5 +75,10 @@ public class RoomListFragment extends Fragment implements AdapterView.OnItemClic
         Intent intent = new Intent(AppContract.BROADCAST_ACTION_ROOM);
         intent.putExtra(RoomContract.Rooms._ID, holder.id);
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d("RoomListFragment", "OnClickListener Add new Room");
     }
 }
