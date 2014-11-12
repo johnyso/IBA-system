@@ -20,7 +20,11 @@ public class RoomOverviewAdapter extends FragmentStatePagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return new RoomListFragment();
+        if(position == 0){
+            return new RoomListFragment();
+        } else {
+            return new FavoriteListFragment();
+        }
     }
 
     @Override
