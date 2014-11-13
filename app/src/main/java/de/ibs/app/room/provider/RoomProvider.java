@@ -56,12 +56,16 @@ public class RoomProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         final int uriType = URI_MATCHER.match(uri).getCode();
+        List<String> list;
         switch (uriType) {
             case TYPE_ROOMS:
                 return this.roomDatabaseHelper.getRooms();
             case TYPE_SPEAKERS:
-                List<String> list = URI_MATCHER.match(uri).getCapturings();
+                list = URI_MATCHER.match(uri).getCapturings();
                 return this.roomDatabaseHelper.getSpeakers(list.get(1));
+            case TYPE_ROOM:
+                list = URI_MATCHER.match(uri).getCapturings();
+                return this.roomDatabaseHelper.getRoom(list.get(1));
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
         }

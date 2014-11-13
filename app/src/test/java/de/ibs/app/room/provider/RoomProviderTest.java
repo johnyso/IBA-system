@@ -96,6 +96,20 @@ public class RoomProviderTest {
         }
     }
 
+    @Test
+    public void checkCursorOneRoom(){
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
+        Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1"), null, null, null, null);
+        assertThat(result.getCount(),equalTo(1));
+        if(result.moveToFirst()){
+            assertThat(result.getInt(result.getColumnIndex(Rooms._ID)),equalTo(1));
+            assertThat(result.getString(result.getColumnIndex(Rooms.NAME)),equalTo(TEST_NAME));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.HEIGHT)),equalTo(TEST_HEIGHT));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.LENGTH)),equalTo(TEST_LENGTH));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.WIDTH)),equalTo(TEST_WIDTH));
+
+        }
+    }
 
     /**
      * TEST SPEAKER

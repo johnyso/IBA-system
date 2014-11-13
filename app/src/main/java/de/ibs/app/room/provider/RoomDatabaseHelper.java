@@ -31,7 +31,7 @@ public class RoomDatabaseHelper {
     }
 
     public Cursor getSpeakers(String roomId) {
-        String where = "Room_id=?";
+        String where = Speakers.ROOM_ID + "=?";
         String[] arg = {roomId};
         SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
         return database.query(Speakers.TABLE_NAME, null, where, arg, null, null, null, null);
@@ -40,5 +40,12 @@ public class RoomDatabaseHelper {
     public long insertSpeaker(ContentValues values) {
         SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
         return database.insert(Speakers.TABLE_NAME, null, values);
+    }
+
+    public Cursor getRoom(String roomId) {
+        String where = Rooms._ID + "=?";
+        String[] arg = {roomId};
+        SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
+        return database.query(Rooms.TABLE_NAME, null, where, arg, null, null, null, null);
     }
 }
