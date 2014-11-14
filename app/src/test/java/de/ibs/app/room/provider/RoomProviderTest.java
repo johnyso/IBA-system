@@ -99,6 +99,7 @@ public class RoomProviderTest {
     @Test
     public void checkCursorOneRoom(){
         this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
         Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1"), null, null, null, null);
         assertThat(result.getCount(),equalTo(1));
         if(result.moveToFirst()){

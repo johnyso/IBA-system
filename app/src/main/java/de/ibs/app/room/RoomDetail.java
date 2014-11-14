@@ -9,12 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import de.ibs.app.R;
+import de.ibs.app.roomview.RoomView;
 import de.ibs.app.speaker.SpeakerAcitvity;
 
 import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
@@ -22,10 +25,11 @@ import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
 /**
  * Created by johnyso on 11.11.14.
  */
-public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, RoomView.OnTouchListener {
     private Context context;
     private RoomDetailAdapter adapter;
     private int currentId = 0;
+    private RoomView roomView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,10 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         listView.setAdapter(this.adapter);
         listView.setOnItemClickListener(this);
         this.getLoaderManager().initLoader(0, null, this);
+        this.roomView = (RoomView) view.findViewById(R.id.roomView);
+        this.roomView.setRoomLength(200);
+        this.roomView.setRoomWidth(400);
+        this.roomView.setOnTouchListener(this);
         return view;
     }
 
@@ -74,6 +82,17 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
     public void resetList(int id) {
         Cursor cursor = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id +"/" + RoomContract.SPEAKERS), null, null, null, null);
         this.currentId = id;
+        Cursor cursorRoom = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id), null, null, null, null);
+        if(cursorRoom.moveToFirst()) {
+            this.roomView.setRoomLength(cursorRoom.getInt(cursorRoom.getColumnIndex(RoomContract.Rooms.LENGTH)));
+            this.roomView.setRoomWidth(cursorRoom.getInt(cursorRoom.getColumnIndex(RoomContract.Rooms.HEIGHT)));
+        }
         adapter.swapCursor(cursor);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Log.d("RoomDetail","x: " + event.getX() + " y: " + event.getY());
+        return true;
     }
 }
