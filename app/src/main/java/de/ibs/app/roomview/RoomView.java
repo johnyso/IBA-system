@@ -95,7 +95,9 @@ public class RoomView extends View implements View.OnTouchListener {
 
         double pixelLength = (double) this.roomLength / (double) getHeight();
         double pixelWidth = (double) this.roomWidth / pixelLength ;
-        drawRoundRect.set(0,0,(int) pixelWidth,(int)windowHeight);
+
+        float padding = (float) (getWidth() - pixelWidth)/2;
+        drawRoundRect.set(padding,0,(int) pixelWidth+padding,(int)windowHeight);
 
         Paint innerPaint = new Paint();
         innerPaint.setARGB(0, 0, 0, 0);
@@ -131,11 +133,11 @@ public class RoomView extends View implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.d("RoomDetail","x: " + event.getX() + " y: " + event.getY());
+        Log.d("RoomDetail","x: " + event.getX() + " y: " + event.getY() + "Top: "+ getTop());
         int eventaction = event.getAction();
 
-        this.x = (int)event.getX()-getLeft()-(this.icon.getWidth()/2);
-        this.y = (int)event.getY()-getTop()+(this.icon.getHeight()/2);
+        this.x = (int)event.getX()-(this.icon.getWidth()/2);
+        this.y = (int)event.getY()-(this.icon.getHeight()/2);
 
         this.invalidate();
         switch (eventaction) {
