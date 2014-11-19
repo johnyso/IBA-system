@@ -29,9 +29,13 @@ public class RoomView extends View implements View.OnTouchListener {
     private Object label;
     private Object textX;
     private Object textY;
+    private Bitmap icon;
 
     private int roomLength;
     private int roomWidth;
+    private Canvas canvas;
+    private int x = 20;
+    private int y = 20;
 
     public RoomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -83,7 +87,7 @@ public class RoomView extends View implements View.OnTouchListener {
         this.shadowBounds = new RectF(20,20,20,20);
         // Draw the shadow
         this.textPaint.setColor(Color.WHITE);
-
+        this.canvas = canvas;
         RectF drawRoundRect = new RectF();
 
 
@@ -102,8 +106,8 @@ public class RoomView extends View implements View.OnTouchListener {
         borderPaint.setARGB(255, 255, 128, 0);
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(4);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        canvas.drawBitmap(bitmap, 20, 20, null);
+        this.icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        canvas.drawBitmap(this.icon, this.x, this.y, null);
 
         canvas.drawRoundRect(drawRoundRect, 2, 2, innerPaint);
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
@@ -128,6 +132,37 @@ public class RoomView extends View implements View.OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         Log.d("RoomDetail","x: " + event.getX() + " y: " + event.getY());
+        int eventaction = event.getAction();
+
+        this.x = (int)event.getX()-getLeft()-(this.icon.getWidth()/2);
+        this.y = (int)event.getY()-getTop()+(this.icon.getHeight()/2);
+
+        this.invalidate();
+        switch (eventaction) {
+
+        /*    case MotionEvent.ACTION_DOWN: // touch down so check if the finger is on a ball
+                    // check all the bounds of the ball
+                    if (X > icon.getX() && X < ball.getX()+50 && Y > ball.getY() && Y < ball.getY()+50){
+                        balID = ball.getID();
+                        break;
+                    }
+
+                break;
+
+*/
+            case MotionEvent.ACTION_MOVE:   // touch drag with the ball
+                // move the balls the same as the finger
+
+
+                break;
+
+            case MotionEvent.ACTION_UP:
+                // touch drop - just do things here after dropping
+
+                break;
+        }
+        // redraw the canvas
+
         return true;
     }
 }
