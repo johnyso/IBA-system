@@ -8,11 +8,10 @@
               android:layout_height="wrap_content"
               android:text="RoomOverview"/>
    <ListView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/listView"
             android:layout_weight="1"
-            android:visibility="gone"
             />
     <de.ibs.app.roomview.RoomView
             android:layout_width="match_parent"
@@ -20,8 +19,8 @@
             custom:showText="true"
             custom:labelPosition="left"
             android:id="@+id/roomView"
-            android:background="#00FF00"
             android:layout_below="@id/listView"
+
             />
 
 </RelativeLayout>

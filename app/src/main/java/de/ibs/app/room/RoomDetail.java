@@ -25,7 +25,7 @@ import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
 /**
  * Created by johnyso on 11.11.14.
  */
-public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, RoomView.OnTouchListener {
+public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>{
     private Context context;
     private RoomDetailAdapter adapter;
     private int currentId = 0;
@@ -49,7 +49,6 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         this.roomView = (RoomView) view.findViewById(R.id.roomView);
         this.roomView.setRoomLength(200);
         this.roomView.setRoomWidth(400);
-        this.roomView.setOnTouchListener(this);
         return view;
     }
 
@@ -90,9 +89,4 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         adapter.swapCursor(cursor);
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        Log.d("RoomDetail","x: " + event.getX() + " y: " + event.getY());
-        return true;
-    }
 }

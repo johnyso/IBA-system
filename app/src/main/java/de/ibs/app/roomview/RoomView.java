@@ -3,8 +3,10 @@ package de.ibs.app.roomview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.*;
+import android.graphics.drawable.PictureDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import de.ibs.app.R;
 
@@ -13,7 +15,7 @@ import java.util.AbstractList;
 /**
  * Created by johnyso on 13.11.14.
  */
-public class RoomView extends View {
+public class RoomView extends View implements View.OnTouchListener {
     private boolean showText;
     private int textPos;
     private Paint textPaint;
@@ -45,6 +47,7 @@ public class RoomView extends View {
             a.recycle();
         }
         init();
+        this.setOnTouchListener(this);
     }
 
     private void init() {
@@ -80,23 +83,14 @@ public class RoomView extends View {
         this.shadowBounds = new RectF(20,20,20,20);
         // Draw the shadow
         this.textPaint.setColor(Color.WHITE);
-        canvas.drawLine(
-                2, 2, 20, 20, this.textPaint
-        );
 
         RectF drawRoundRect = new RectF();
 
 
-        float pHeight;
         float windowHeight = getHeight();
-        float windowWidth = getWidth();
-        Log.d("RoomView","windowHeight: "+getHeight());
-        Log.d("RoomView","LengtOrig: "+this.roomLength);
-        Log.d("RoomView","window: "+(double) this.roomLength / (double) getHeight());
+
         double pixelLength = (double) this.roomLength / (double) getHeight();
-        Log.d("RoomView","Length: "+pixelLength);
         double pixelWidth = (double) this.roomWidth / pixelLength ;
-        Log.d("RoomView","Width: "+pixelWidth);
         drawRoundRect.set(0,0,(int) pixelWidth,(int)windowHeight);
 
         Paint innerPaint = new Paint();
@@ -108,14 +102,11 @@ public class RoomView extends View {
         borderPaint.setARGB(255, 255, 128, 0);
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(4);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        canvas.drawBitmap(bitmap, 20, 20, null);
 
         canvas.drawRoundRect(drawRoundRect, 2, 2, innerPaint);
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
-
-        // Draw the label text
-       // canvas.drawText(this.data.get(this.currentItem).this.label, this.textX, this.textY, this.textPaint);
-
-        // Draw the pie slices
     }
 
     public int getRoomLength() {
@@ -132,5 +123,11 @@ public class RoomView extends View {
 
     public void setRoomWidth(int roomWidth) {
         this.roomWidth = roomWidth;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Log.d("RoomDetail","x: " + event.getX() + " y: " + event.getY());
+        return true;
     }
 }
