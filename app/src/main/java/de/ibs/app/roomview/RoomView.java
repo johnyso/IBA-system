@@ -122,6 +122,9 @@ public class RoomView extends View implements View.OnTouchListener {
 
         canvas.drawRoundRect(drawRoundRect, 2, 2, innerPaint);
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
+
+        //TODO: remove this code an put the speakers in
+        canvas.drawCircle(this.paddingLeft+100,0,20,borderPaint);
     }
 
     @Override
