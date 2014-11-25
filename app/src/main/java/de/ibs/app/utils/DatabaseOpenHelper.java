@@ -26,9 +26,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             + Rooms.HEIGHT + " " + Rooms.TYPE_HEIGHT + " , "
             + Rooms.WIDTH + " " + Rooms.TYPE_WIDTH + " , "
             + Rooms.LENGTH + " " + Rooms.TYPE_LENGTH + " , "
-            + Rooms.PERSON_X + " " + Rooms.TYPE_PERSON_X + " , "
-            + Rooms.PERSON_Y + " " + Rooms.TYPE_PERSON_Y + " , "
-            + Rooms.PERSON_HEIGHT + " " + Rooms.TYPE_PERSON_HEIGHT + "); ";
+            + Rooms.PERSON_X + " " + Rooms.TYPE_PERSON_X + " DEFAULT 1, "
+            + Rooms.PERSON_Y + " " + Rooms.TYPE_PERSON_Y + " DEFAULT 1, "
+            + Rooms.PERSON_HEIGHT + " " + Rooms.TYPE_PERSON_HEIGHT + " DEFAULT 1); ";
 
     public static final String SQL_CREATE_SPEAKER = "Create table if not exists "
             + Speakers.TABLE_NAME + "( "
