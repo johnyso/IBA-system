@@ -146,7 +146,7 @@ public class RoomView extends View implements View.OnTouchListener {
         } else if(event.getX() < this.iconLeftPosition){
             this.personX = (int) this.paddingLeft;
         } else if(event.getX() > (int) this.iconRightPosition){
-            this.personX = (int) (this.iconRightPosition);
+            this.personX = (int) (this.iconRightPosition - this.icon.getHeight() / 2);
         }
         this.personY = (int) event.getY() - (this.icon.getHeight() / 2);
 
