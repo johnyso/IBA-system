@@ -1,6 +1,7 @@
 package de.ibs.app.roomview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.util.AttributeSet;
@@ -8,11 +9,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import de.ibs.app.R;
+import de.ibs.app.speaker.SpeakerConstants;
+import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
 /**
  * Created by johnyso on 13.11.14.
  */
 public class RoomView extends View implements View.OnTouchListener {
+    private final Context context;
     private boolean showText;
     private int textPos;
     private Paint textPaint;
@@ -52,6 +56,7 @@ public class RoomView extends View implements View.OnTouchListener {
         }
         init();
         this.setOnTouchListener(this);
+        this.context = context;
     }
 
     private void init() {
@@ -133,7 +138,6 @@ public class RoomView extends View implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.d("RoomDetail", "Persx: " + event.getX() + " Persy: " + event.getY() + "Top: " + getTop());
         int eventaction = event.getAction();
 
         this.iconLeftPosition = this.paddingLeft + (this.icon.getWidth() / 2);
@@ -162,28 +166,19 @@ public class RoomView extends View implements View.OnTouchListener {
         this.invalidate();
         switch (eventaction) {
 
-        /*    case MotionEvent.ACTION_DOWN: // touch down so check if the finger is on a ball
-                    // check all the bounds of the ball
-                    if (X > icon.getX() && X < ball.getX()+50 && Y > ball.getY() && Y < ball.getY()+50){
-                        balID = ball.getID();
-                        break;
-                    }
-
+            case MotionEvent.ACTION_DOWN:
                 break;
 
-*/
-            case MotionEvent.ACTION_MOVE:   // touch drag with the ball
-                // move the balls the same as the finger
-
-
+            case MotionEvent.ACTION_MOVE:
                 break;
 
             case MotionEvent.ACTION_UP:
-                // touch drop - just do things here after dropping
                 Log.d("RoomView","Mouse Up");
+                Intent intent =  new Intent(context, SpeakerRequest.class);
+                intent.putExtra(SpeakerConstants.REST_ID, "horizontal-10");
+                this.context.startService(intent);
                 break;
         }
-        // redraw the canvas
 
         return true;
     }

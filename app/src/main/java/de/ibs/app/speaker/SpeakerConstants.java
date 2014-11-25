@@ -5,5 +5,6 @@ package de.ibs.app.speaker;
  */
 public class SpeakerConstants {
     public static final String REST_ID = "rest_id";
+    public static final String REST_DEGREE = "rest_degree";
 }
 
