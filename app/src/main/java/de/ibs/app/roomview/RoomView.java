@@ -148,7 +148,16 @@ public class RoomView extends View implements View.OnTouchListener {
         } else if(event.getX() > (int) this.iconRightPosition){
             this.personX = (int) (this.iconRightPosition - this.icon.getHeight() / 2);
         }
-        this.personY = (int) event.getY() - (this.icon.getHeight() / 2);
+
+        if(event.getY() >= (getTop() - (this.icon.getHeight() / 2)) && event.getY() <= (this.heightInPixel - (this.icon.getHeight() / 2))){
+            this.personY = (int) event.getY() - (this.icon.getHeight() / 2);
+        }
+/*        else if (event.getY() < getTop()) {
+            this.personY = (int) getTop() - (this.icon.getHeight() / 2);
+        } else if (event.getY() > this.heightInPixel) {
+            this.personY = (int) this.heightInPixel - (this.icon.getHeight() / 2);
+        }
+*/
 
         this.invalidate();
         switch (eventaction) {
@@ -171,7 +180,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
             case MotionEvent.ACTION_UP:
                 // touch drop - just do things here after dropping
-
+                Log.d("RoomView","Mouse Up");
                 break;
         }
         // redraw the canvas
