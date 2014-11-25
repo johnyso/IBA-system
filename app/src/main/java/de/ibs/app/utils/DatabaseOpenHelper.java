@@ -12,7 +12,7 @@ import static de.ibs.app.room.RoomContract.*;
  */
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseOpenHelper";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "ibs";
     private  static DatabaseOpenHelper instance;
 
@@ -25,7 +25,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             + Rooms.NAME + " " + Rooms.TYPE_NAME + " , "
             + Rooms.HEIGHT + " " + Rooms.TYPE_HEIGHT + " , "
             + Rooms.WIDTH + " " + Rooms.TYPE_WIDTH + " , "
-            + Rooms.LENGTH + " " + Rooms.TYPE_LENGTH + "); ";
+            + Rooms.LENGTH + " " + Rooms.TYPE_LENGTH + " , "
+            + Rooms.PERSON_X + " " + Rooms.TYPE_PERSON_X + " , "
+            + Rooms.PERSON_Y + " " + Rooms.TYPE_PERSON_Y + " , "
+            + Rooms.PERSON_HEIGHT + " " + Rooms.TYPE_PERSON_HEIGHT + "); ";
 
     public static final String SQL_CREATE_SPEAKER = "Create table if not exists "
             + Speakers.TABLE_NAME + "( "

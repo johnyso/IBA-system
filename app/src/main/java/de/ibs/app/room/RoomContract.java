@@ -37,13 +37,19 @@ public class RoomContract {
         public static final String WIDTH = "width";
         public static final String LENGTH = "length";
         public static final String HEIGHT = "height";
+        public static final String PERSON_X = "person_x";
+        public static final String PERSON_Y = "person_y";
+        public static final String PERSON_HEIGHT = "person_heigth";
 
         public static final String TYPE_NAME = "TEXT";
         public static final String TYPE_WIDTH = "INTEGER";
         public static final String TYPE_LENGTH = "INTEGER";
         public static final String TYPE_HEIGHT = "INTEGER";
+        public static final String TYPE_PERSON_X = "INTEGER";
+        public static final String TYPE_PERSON_Y = "INTEGER";
+        public static final String TYPE_PERSON_HEIGHT = "INTEGER";
 
-        public static final String[] ALL_COLUMNS = {_ID, NAME, WIDTH, LENGTH, HEIGHT};
+        public static final String[] ALL_COLUMNS = {_ID, NAME, WIDTH, LENGTH, HEIGHT, PERSON_X, PERSON_Y, PERSON_HEIGHT};
     }
 
     public static abstract class Speakers implements BaseColumns {

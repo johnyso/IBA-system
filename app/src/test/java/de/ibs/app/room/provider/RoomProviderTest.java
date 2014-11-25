@@ -1,12 +1,9 @@
 package de.ibs.app.room.provider;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import de.ibs.app.room.RoomActivity;
-import de.ibs.app.room.RoomContract;
 import de.ibs.app.utils.DatabaseOpenHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -42,6 +39,9 @@ public class RoomProviderTest {
 
     private static final String TEST_INSERT_URI = "content://de.ibs.room/rooms-1";
     private static final String TEST_INSERT_URI_SPEAKER = "content://de.ibs.room/rooms-1/speakers-1";
+    private static final Integer TEST_PERSON_X = 200;
+    private static final Integer TEST_PERSON_Y = 100;
+    private static final Integer TEST_PERSON_HEIGHT = 1;
 
     private RoomProvider roomProvider;
     private ShadowContentResolver shadowContentResolver;
@@ -87,11 +87,7 @@ public class RoomProviderTest {
         Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
         assertThat(result.getCount(),equalTo(1));
         if(result.moveToFirst()){
-            assertThat(result.getInt(result.getColumnIndex(Rooms._ID)),equalTo(1));
-            assertThat(result.getString(result.getColumnIndex(Rooms.NAME)),equalTo(TEST_NAME));
-            assertThat(result.getInt(result.getColumnIndex(Rooms.HEIGHT)),equalTo(TEST_HEIGHT));
-            assertThat(result.getInt(result.getColumnIndex(Rooms.LENGTH)),equalTo(TEST_LENGTH));
-            assertThat(result.getInt(result.getColumnIndex(Rooms.WIDTH)),equalTo(TEST_WIDTH));
+            checkCursorRoomResults(result);
 
         }
     }
@@ -103,11 +99,7 @@ public class RoomProviderTest {
         Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1"), null, null, null, null);
         assertThat(result.getCount(),equalTo(1));
         if(result.moveToFirst()){
-            assertThat(result.getInt(result.getColumnIndex(Rooms._ID)),equalTo(1));
-            assertThat(result.getString(result.getColumnIndex(Rooms.NAME)),equalTo(TEST_NAME));
-            assertThat(result.getInt(result.getColumnIndex(Rooms.HEIGHT)),equalTo(TEST_HEIGHT));
-            assertThat(result.getInt(result.getColumnIndex(Rooms.LENGTH)),equalTo(TEST_LENGTH));
-            assertThat(result.getInt(result.getColumnIndex(Rooms.WIDTH)),equalTo(TEST_WIDTH));
+            checkCursorRoomResults(result);
 
         }
     }
@@ -178,7 +170,22 @@ public class RoomProviderTest {
             value.put(Rooms.WIDTH, TEST_WIDTH);
             value.put(Rooms.HEIGHT, TEST_HEIGHT);
             value.put(Rooms.LENGTH, TEST_LENGTH);
+            value.put(Rooms.PERSON_X, TEST_PERSON_X);
+            value.put(Rooms.PERSON_Y, TEST_PERSON_Y);
+            value.put(Rooms.PERSON_HEIGHT, TEST_PERSON_HEIGHT);
         return value;
+    }
+
+
+    private void checkCursorRoomResults(Cursor result) {
+        assertThat(result.getInt(result.getColumnIndex(Rooms._ID)),equalTo(1));
+        assertThat(result.getString(result.getColumnIndex(Rooms.NAME)),equalTo(TEST_NAME));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.HEIGHT)),equalTo(TEST_HEIGHT));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.LENGTH)),equalTo(TEST_LENGTH));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.WIDTH)),equalTo(TEST_WIDTH));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_X)), equalTo(TEST_PERSON_X));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_Y)), equalTo(TEST_PERSON_Y));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_HEIGHT)), equalTo(TEST_PERSON_HEIGHT));
     }
 
 }

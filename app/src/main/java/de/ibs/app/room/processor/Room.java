@@ -9,6 +9,9 @@ public class Room {
     private int width;
     private int length;
     private int height;
+    private int personX;
+    private int personY;
+    private int personHeight;
 
     public int getId() {
         return id;
@@ -30,12 +33,27 @@ public class Room {
         return height;
     }
 
+    public Integer getPersonX() {
+        return personX;
+    }
+
+    public int getPersonY() {
+        return personY;
+    }
+
+    public int getPersonHeight() {
+        return personHeight;
+    }
+
     private Room(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.width = builder.width;
         this.length = builder.length;
         this.height = builder.height;
+        this.personX = builder.personX;
+        this.personY = builder.personY;
+        this.personHeight = builder.personHeight;
     }
 
     public static class Builder {
@@ -44,7 +62,9 @@ public class Room {
         private int width;
         private int length;
         private int height;
-
+        private int personX;
+        private int personY;
+        private int personHeight;
 
         public Builder id(int id) {
             this.id = id;
@@ -68,6 +88,21 @@ public class Room {
 
         public Builder height(int height){
             this.height = height;
+            return this;
+        }
+
+        public Builder personX(int personX){
+            this.personX = personX;
+            return this;
+        }
+
+        public Builder personY(int personY){
+            this.personY = personY;
+            return this;
+        }
+
+        public Builder personHeight(int personHeight){
+            this.personHeight = personHeight;
             return this;
         }
 

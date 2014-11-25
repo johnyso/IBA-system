@@ -17,6 +17,9 @@ public class RoomParser {
                     .width(cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms.WIDTH)))
                     .length(cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms.LENGTH)))
                     .height(cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms.HEIGHT)))
+                    .personX(cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms.PERSON_X)))
+                    .personY(cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms.PERSON_Y)))
+                    .personHeight(cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms.PERSON_HEIGHT)))
                     .build();
         } else {
             throw new NoSuchElementException("no Item at position: "+position);
