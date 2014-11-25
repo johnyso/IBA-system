@@ -1,17 +1,23 @@
 package de.ibs.app.roomview;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.*;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import de.ibs.app.R;
+import de.ibs.app.room.RoomContract;
 import de.ibs.app.room.processor.Room;
 import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.restmethod.SpeakerRequest;
+
+import static de.ibs.app.room.RoomContract.CONTENT_URI;
+import static de.ibs.app.room.RoomContract.ROOMS;
 
 /**
  * Created by johnyso on 13.11.14.
@@ -156,6 +162,12 @@ public class RoomView extends View implements View.OnTouchListener {
 
             case MotionEvent.ACTION_UP:
                 Log.d("RoomView","Mouse Up");
+                ContentValues values = new ContentValues();
+                values.put(RoomContract.Rooms.PERSON_X,this.room.getPersonX());
+                values.put(RoomContract.Rooms.PERSON_Y,this.room.getPersonY());
+                values.put(RoomContract.Rooms.PERSON_HEIGHT,this.room.getPersonHeight());
+                context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
+
                 Intent intent =  new Intent(context, SpeakerRequest.class);
                 intent.putExtra(SpeakerConstants.REST_ID, "horizontal-10");
                 this.context.startService(intent);
