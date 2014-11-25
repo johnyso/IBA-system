@@ -19,18 +19,22 @@ public class SpeakerTask implements Runnable {
     private final Service context;
     private final OkHttpClient client = new OkHttpClient();
     private final String restPath;
+    private final String testPath = "http://192.168.240.1/arduino/";
+    private final String origPath = "http://141.62.110.99/arduino/";
+    private final String path;
 
 
     public SpeakerTask(Service context, Bundle extras) {
         this.context = context;
         this.restPath = extras.getString(SpeakerConstants.REST_ID);
+        this.path = testPath;
     }
 
     @Override
     public void run() {
         String response = null;
         try {
-            response = run("http://141.62.110.99/arduino/"+this.restPath+"/");
+            response = run(this.path+this.restPath+"/");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -3,14 +3,11 @@ package de.ibs.app.roomview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.*;
-import android.graphics.drawable.PictureDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import de.ibs.app.R;
-
-import java.util.AbstractList;
 
 /**
  * Created by johnyso on 13.11.14.
@@ -24,18 +21,21 @@ public class RoomView extends View implements View.OnTouchListener {
     private Paint roomPaint;
     private Paint shadowPaint;
     private RectF shadowBounds;
-    private AbstractList data;
-    private int currentItem;
-    private Object label;
-    private Object textX;
-    private Object textY;
+
     private Bitmap icon;
 
     private int roomLength;
     private int roomWidth;
     private Canvas canvas;
-    private int x = 20;
-    private int y = 20;
+    private int personX = 20;
+    private int personY = 20;
+    private int widthInPixel;
+    private double pixelFactor;
+    private double lengthInPixel;
+    private double heightInPixel;
+    private float paddingLeft;
+    private float iconLeftPosition;
+    private float iconRightPosition;
 
     public RoomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -84,20 +84,20 @@ public class RoomView extends View implements View.OnTouchListener {
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        this.shadowBounds = new RectF(20,20,20,20);
+        this.shadowBounds = new RectF(20, 20, 20, 20);
         // Draw the shadow
         this.textPaint.setColor(Color.WHITE);
         this.canvas = canvas;
         RectF drawRoundRect = new RectF();
 
 
-        float windowHeight = getHeight();
+        this.heightInPixel = getHeight();
 
-        double pixelLength = (double) this.roomLength / (double) getHeight();
-        double pixelWidth = (double) this.roomWidth / pixelLength ;
+        this.pixelFactor = (double) this.roomLength / (double) getHeight();
+        this.lengthInPixel = (double) this.roomWidth / this.pixelFactor;
 
-        float padding = (float) (getWidth() - pixelWidth)/2;
-        drawRoundRect.set(padding,0,(int) pixelWidth+padding,(int)windowHeight);
+        this.paddingLeft = (float) (getWidth() - this.lengthInPixel) / 2;
+        drawRoundRect.set(this.paddingLeft, 0, (int) this.lengthInPixel + this.paddingLeft, (float) this.heightInPixel);
 
         Paint innerPaint = new Paint();
         innerPaint.setARGB(0, 0, 0, 0);
@@ -109,7 +109,7 @@ public class RoomView extends View implements View.OnTouchListener {
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(4);
         this.icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        canvas.drawBitmap(this.icon, this.x, this.y, null);
+        canvas.drawBitmap(this.icon, this.personX, this.personY, null);
 
         canvas.drawRoundRect(drawRoundRect, 2, 2, innerPaint);
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
@@ -133,11 +133,22 @@ public class RoomView extends View implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.d("RoomDetail","x: " + event.getX() + " y: " + event.getY() + "Top: "+ getTop());
+        Log.d("RoomDetail", "Persx: " + event.getX() + " Persy: " + event.getY() + "Top: " + getTop());
         int eventaction = event.getAction();
 
-        this.x = (int)event.getX()-(this.icon.getWidth()/2);
-        this.y = (int)event.getY()-(this.icon.getHeight()/2);
+        this.iconLeftPosition = this.paddingLeft + (this.icon.getWidth() / 2);
+        this.iconRightPosition = (float) this.lengthInPixel + this.paddingLeft - (this.icon.getWidth() / 2);
+
+
+
+        if(event.getX() > this.iconLeftPosition && event.getX() < (int) this.iconRightPosition) {
+            this.personX = (int) event.getX() - (this.icon.getWidth() / 2);
+        } else if(event.getX() < this.iconLeftPosition){
+            this.personX = (int) this.paddingLeft;
+        } else if(event.getX() > (int) this.iconRightPosition){
+            this.personX = (int) (this.iconRightPosition);
+        }
+        this.personY = (int) event.getY() - (this.icon.getHeight() / 2);
 
         this.invalidate();
         switch (eventaction) {
