@@ -47,8 +47,6 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         listView.setOnItemClickListener(this);
         this.getLoaderManager().initLoader(0, null, this);
         this.roomView = (RoomView) view.findViewById(R.id.roomView);
-        this.roomView.setRoomLength(200);
-        this.roomView.setRoomWidth(400);
         return view;
     }
 

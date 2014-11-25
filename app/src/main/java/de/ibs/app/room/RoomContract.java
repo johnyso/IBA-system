@@ -26,11 +26,11 @@ public class RoomContract {
     static {
         URI_MATCHER.addURI(AUTHORITY, ROOMS, TYPE_ROOMS);
         URI_MATCHER.addURI(AUTHORITY, ROOM, TYPE_ROOM);
-        URI_MATCHER.addURI(AUTHORITY, ROOM+"/"+SPEAKERS, TYPE_SPEAKERS);
-        URI_MATCHER.addURI(AUTHORITY, ROOM+"/"+SPEAKER, TYPE_SPEAKERS);
+        URI_MATCHER.addURI(AUTHORITY, ROOM + "/" + SPEAKERS, TYPE_SPEAKERS);
+        URI_MATCHER.addURI(AUTHORITY, ROOM + "/" + SPEAKER, TYPE_SPEAKERS);
     }
 
-    public static abstract class Rooms implements BaseColumns{
+    public static abstract class Rooms implements BaseColumns {
         public static final String TABLE_NAME = "rooms";
 
         public static final String NAME = "name";
@@ -42,9 +42,11 @@ public class RoomContract {
         public static final String TYPE_WIDTH = "INTEGER";
         public static final String TYPE_LENGTH = "INTEGER";
         public static final String TYPE_HEIGHT = "INTEGER";
+
+        public static final String[] ALL_COLUMNS = {_ID, NAME, WIDTH, LENGTH, HEIGHT};
     }
 
-    public static abstract class Speakers implements BaseColumns{
+    public static abstract class Speakers implements BaseColumns {
         public static final String TABLE_NAME = "speakers";
 
         public static final String IP = "name";
