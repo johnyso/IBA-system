@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import de.ibs.app.R;
+import de.ibs.app.room.processor.RoomParser;
 import de.ibs.app.roomview.RoomView;
 import de.ibs.app.speaker.SpeakerAcitvity;
 
@@ -81,8 +82,7 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         this.currentId = id;
         Cursor cursorRoom = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id), null, null, null, null);
         if(cursorRoom.moveToFirst()) {
-            this.roomView.setRoomLength(cursorRoom.getInt(cursorRoom.getColumnIndex(RoomContract.Rooms.LENGTH)));
-            this.roomView.setRoomWidth(cursorRoom.getInt(cursorRoom.getColumnIndex(RoomContract.Rooms.HEIGHT)));
+            this.roomView.setRoom(RoomParser.parseRoom(cursorRoom,0));
         }
         adapter.swapCursor(cursor);
     }

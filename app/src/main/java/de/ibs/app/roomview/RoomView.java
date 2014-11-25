@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import de.ibs.app.R;
+import de.ibs.app.room.processor.Room;
 import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
@@ -28,8 +29,6 @@ public class RoomView extends View implements View.OnTouchListener {
 
     private Bitmap icon;
 
-    private int roomLength;
-    private int roomWidth;
     private Canvas canvas;
     private int personX = 20;
     private int personY = 20;
@@ -40,6 +39,7 @@ public class RoomView extends View implements View.OnTouchListener {
     private float paddingLeft;
     private float iconLeftPosition;
     private float iconRightPosition;
+    private Room room;
 
     public RoomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -98,8 +98,8 @@ public class RoomView extends View implements View.OnTouchListener {
 
         this.heightInPixel = getHeight();
 
-        this.pixelFactor = (double) this.roomLength / (double) getHeight();
-        this.lengthInPixel = (double) this.roomWidth / this.pixelFactor;
+        this.pixelFactor = (double) this.room.getLength() / (double) getHeight();
+        this.lengthInPixel = (double) this.room.getWidth() / this.pixelFactor;
 
         this.paddingLeft = (float) (getWidth() - this.lengthInPixel) / 2;
         drawRoundRect.set(this.paddingLeft, 0, (int) this.lengthInPixel + this.paddingLeft, (float) this.heightInPixel);
@@ -118,22 +118,6 @@ public class RoomView extends View implements View.OnTouchListener {
 
         canvas.drawRoundRect(drawRoundRect, 2, 2, innerPaint);
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
-    }
-
-    public int getRoomLength() {
-        return roomLength;
-    }
-
-    public void setRoomLength(int roomLength) {
-        this.roomLength = roomLength;
-    }
-
-    public int getRoomWidth() {
-        return roomWidth;
-    }
-
-    public void setRoomWidth(int roomWidth) {
-        this.roomWidth = roomWidth;
     }
 
     @Override
@@ -181,5 +165,14 @@ public class RoomView extends View implements View.OnTouchListener {
         }
 
         return true;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+        this.invalidate();
+    }
+
+    public Room getRoom() {
+        return room;
     }
 }
