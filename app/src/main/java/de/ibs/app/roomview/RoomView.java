@@ -30,8 +30,6 @@ public class RoomView extends View implements View.OnTouchListener {
     private Bitmap icon;
 
     private Canvas canvas;
-    private int personX = 20;
-    private int personY = 20;
     private int widthInPixel;
     private double pixelFactor;
     private double lengthInPixel;
@@ -114,7 +112,7 @@ public class RoomView extends View implements View.OnTouchListener {
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(4);
         this.icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        canvas.drawBitmap(this.icon, this.personX, this.personY, null);
+        canvas.drawBitmap(this.icon, this.room.getPersonX(), this.room.getPersonY(), null);
 
         canvas.drawRoundRect(drawRoundRect, 2, 2, innerPaint);
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
@@ -130,15 +128,15 @@ public class RoomView extends View implements View.OnTouchListener {
 
 
         if(event.getX() > this.iconLeftPosition && event.getX() < (int) this.iconRightPosition) {
-            this.personX = (int) event.getX() - (this.icon.getWidth() / 2);
+            this.room.setPersonX((int) event.getX() - (this.icon.getWidth() / 2));
         } else if(event.getX() < this.iconLeftPosition){
-            this.personX = (int) this.paddingLeft;
+            this.room.setPersonX((int) this.paddingLeft);
         } else if(event.getX() > (int) this.iconRightPosition){
-            this.personX = (int) (this.iconRightPosition - this.icon.getHeight() / 2);
+            this.room.setPersonX((int) (this.iconRightPosition - this.icon.getHeight() / 2));
         }
 
         if(event.getY() >= (getTop() - (this.icon.getHeight() / 2)) && event.getY() <= (this.heightInPixel - (this.icon.getHeight() / 2))){
-            this.personY = (int) event.getY() - (this.icon.getHeight() / 2);
+            this.room.setPersonY((int) event.getY() - (this.icon.getHeight() / 2));
         }
 /*        else if (event.getY() < getTop()) {
             this.personY = (int) getTop() - (this.icon.getHeight() / 2);

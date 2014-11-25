@@ -13,6 +13,18 @@ public class Room {
     private int personY;
     private int personHeight;
 
+    public void setPersonX(int personX) {
+        this.personX = personX;
+    }
+
+    public void setPersonY(int personY) {
+        this.personY = personY;
+    }
+
+    public void setPersonHeight(int personHeight) {
+        this.personHeight = personHeight;
+    }
+
     public int getId() {
         return id;
     }
