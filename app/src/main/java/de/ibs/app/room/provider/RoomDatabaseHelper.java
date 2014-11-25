@@ -15,6 +15,7 @@ import static de.ibs.app.room.RoomContract.*;
  */
 public class RoomDatabaseHelper {
     private DatabaseOpenHelper databaseOpenHelper;
+
     public RoomDatabaseHelper(Context context) {
         this.databaseOpenHelper = DatabaseOpenHelper.getInstance(context);
     }
@@ -47,5 +48,12 @@ public class RoomDatabaseHelper {
         String[] arg = {roomId};
         SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
         return database.query(Rooms.TABLE_NAME, null, where, arg, null, null, null, null);
+    }
+
+    public int updateRoom(ContentValues values, String roomId) {
+        String where = Rooms._ID + "=?";
+        String[] arg = {roomId};
+        SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
+        return database.update(Rooms.TABLE_NAME, values, where, arg);
     }
 }

@@ -75,6 +75,14 @@ public class RoomProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         // TODO: Implement this to handle requests to update one or more rows.
-        throw new UnsupportedOperationException("Not yet implemented");
+        final int uriType = URI_MATCHER.match(uri).getCode();
+        List<String> list;
+        switch (uriType) {
+            case TYPE_ROOM:
+                list = URI_MATCHER.match(uri).getCapturings();
+                return this.roomDatabaseHelper.updateRoom(values, list.get(1));
+            default:
+                throw new UnsupportedOperationException("Not yet implemented");
+        }
     }
 }

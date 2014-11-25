@@ -104,6 +104,26 @@ public class RoomProviderTest {
         }
     }
 
+    @Test
+    public void checkUpdateRoom(){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Rooms.PERSON_X,200);
+        contentValues.put(Rooms.PERSON_Y,200);
+        contentValues.put(Rooms.PERSON_HEIGHT,100);
+        this.shadowContentResolver.insert(Uri.withAppendedPath(CONTENT_URI, ROOMS), exampleValues());
+
+        int changes = this.shadowContentResolver.update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1"), contentValues, null, null);
+        assertThat(changes, equalTo(1));
+
+        Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS), null, null, null, null);
+        assertThat(result.getCount(),equalTo(1));
+        if(result.moveToFirst()){
+            assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_X)), equalTo(200));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_Y)), equalTo(200));
+            assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_HEIGHT)), equalTo(100));
+        }
+    }
+
     /**
      * TEST SPEAKER
      */
@@ -179,10 +199,10 @@ public class RoomProviderTest {
 
     private void checkCursorRoomResults(Cursor result) {
         assertThat(result.getInt(result.getColumnIndex(Rooms._ID)),equalTo(1));
-        assertThat(result.getString(result.getColumnIndex(Rooms.NAME)),equalTo(TEST_NAME));
-        assertThat(result.getInt(result.getColumnIndex(Rooms.HEIGHT)),equalTo(TEST_HEIGHT));
-        assertThat(result.getInt(result.getColumnIndex(Rooms.LENGTH)),equalTo(TEST_LENGTH));
-        assertThat(result.getInt(result.getColumnIndex(Rooms.WIDTH)),equalTo(TEST_WIDTH));
+        assertThat(result.getString(result.getColumnIndex(Rooms.NAME)), equalTo(TEST_NAME));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.HEIGHT)), equalTo(TEST_HEIGHT));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.LENGTH)), equalTo(TEST_LENGTH));
+        assertThat(result.getInt(result.getColumnIndex(Rooms.WIDTH)), equalTo(TEST_WIDTH));
         assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_X)), equalTo(TEST_PERSON_X));
         assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_Y)), equalTo(TEST_PERSON_Y));
         assertThat(result.getInt(result.getColumnIndex(Rooms.PERSON_HEIGHT)), equalTo(TEST_PERSON_HEIGHT));
