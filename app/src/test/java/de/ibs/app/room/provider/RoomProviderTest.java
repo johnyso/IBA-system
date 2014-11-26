@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import de.ibs.app.room.RoomContract;
 import de.ibs.app.utils.DatabaseOpenHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -31,8 +32,8 @@ public class RoomProviderTest {
     private static final int TEST_HEIGHT = 2;
     private static final int TEST_LENGTH = 10;
     private static final String TEST_SPEAKER_IP = "141.62.110.97";
-    private static final int TEST_SPEAKER_WIDTH = 2;
-    private static final int TEST_SPEAKER_HEIGHT = 2;
+    private static final int TEST_SPEAKER_POSITION_X = 2;
+    private static final int TEST_SPEAKER_POSITION_Y = 2;
     private static final int TEST_SPEAKER_VERTICAL = 3;
     private static final int TEST_SPEAKER_HORIZONTAL = 4;
     private static final int TEST_SPEAKER_ROOM = 1;
@@ -41,6 +42,7 @@ public class RoomProviderTest {
     private static final String TEST_INSERT_URI_SPEAKER = "content://de.ibs.room/rooms-1/speakers-1";
     private static final Integer TEST_PERSON_X = 200;
     private static final Integer TEST_PERSON_Y = 100;
+    private static final int TEST_SPEAKER_POSITION_HEIGHT = 2;
     private static final Integer TEST_PERSON_HEIGHT = 1;
     private static final String TEST_SPEAKER_NAME = "FR";
 
@@ -158,25 +160,32 @@ public class RoomProviderTest {
         Cursor result = this.shadowContentResolver.query(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-1/" + SPEAKERS), null, null, null, null);
         assertThat(result.getCount(),equalTo(1));
         if(result.moveToFirst()){
-            assertThat(result.getInt(result.getColumnIndex(Speakers._ID)),equalTo(1));
-            assertThat(result.getString(result.getColumnIndex(Speakers.NAME)),equalTo(TEST_SPEAKER_NAME));
-            assertThat(result.getString(result.getColumnIndex(Speakers.IP)),equalTo(TEST_SPEAKER_IP));
-            assertThat(result.getInt(result.getColumnIndex(Speakers.POSITION_Y)),equalTo(TEST_SPEAKER_HEIGHT));
-            assertThat(result.getInt(result.getColumnIndex(Speakers.POSITION_X)),equalTo(TEST_SPEAKER_WIDTH));
-            assertThat(result.getInt(result.getColumnIndex(Speakers.VERTICAL)),equalTo(TEST_SPEAKER_VERTICAL));
-            assertThat(result.getInt(result.getColumnIndex(Speakers.HORIZONTAL)),equalTo(TEST_SPEAKER_HORIZONTAL));
-            assertThat(result.getInt(result.getColumnIndex(Speakers.ROOM_ID)),equalTo(1));
+            checkSpeakerCursor(result);
         }
+    }
+
+    private void checkSpeakerCursor(Cursor result) {
+        assertThat(result.getInt(result.getColumnIndex(Speakers._ID)),equalTo(1));
+        assertThat(result.getString(result.getColumnIndex(Speakers.NAME)),equalTo(TEST_SPEAKER_NAME));
+        assertThat(result.getString(result.getColumnIndex(Speakers.IP)),equalTo(TEST_SPEAKER_IP));
+        assertThat(result.getInt(result.getColumnIndex(Speakers.POSITION_Y)),equalTo(TEST_SPEAKER_POSITION_Y));
+        assertThat(result.getInt(result.getColumnIndex(Speakers.POSITION_X)),equalTo(TEST_SPEAKER_POSITION_X));
+        assertThat(result.getInt(result.getColumnIndex(Speakers.POSITION_HEIGHT)),equalTo(TEST_SPEAKER_POSITION_X));
+        assertThat(result.getInt(result.getColumnIndex(Speakers.VERTICAL)),equalTo(TEST_SPEAKER_VERTICAL));
+        assertThat(result.getInt(result.getColumnIndex(Speakers.HORIZONTAL)),equalTo(TEST_SPEAKER_HORIZONTAL));
+        assertThat(result.getInt(result.getColumnIndex(Speakers.ROOM_ID)),equalTo(1));
     }
 
     private ContentValues exampleValuesSpeaker() {
         ContentValues value = new ContentValues();
         value.put(Speakers.NAME, TEST_SPEAKER_NAME);
         value.put(Speakers.IP, TEST_SPEAKER_IP);
-        value.put(Speakers.POSITION_X, TEST_SPEAKER_WIDTH);
-        value.put(Speakers.POSITION_Y, TEST_SPEAKER_HEIGHT);
+        value.put(Speakers.POSITION_X, TEST_SPEAKER_POSITION_X);
+        value.put(Speakers.POSITION_Y, TEST_SPEAKER_POSITION_Y);
+        value.put(Speakers.POSITION_HEIGHT, TEST_SPEAKER_POSITION_HEIGHT);
         value.put(Speakers.HORIZONTAL, TEST_SPEAKER_HORIZONTAL);
         value.put(Speakers.VERTICAL, TEST_SPEAKER_VERTICAL);
+        value.put(Speakers.ROOM_ID, TEST_SPEAKER_ROOM);
         return value;
     }
 

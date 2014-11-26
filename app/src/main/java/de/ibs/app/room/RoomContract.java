@@ -57,18 +57,22 @@ public class RoomContract {
 
         public static final String IP = "ip";
         public static final String NAME = "name";
-        public static final String POSITION_X = "width";
-        public static final String POSITION_Y = "height";
+        public static final String POSITION_X = "position_x";
+        public static final String POSITION_Y = "position_y";
+        public static final String POSITION_HEIGHT = "height";
         public static final String HORIZONTAL = "horizontal";
         public static final String VERTICAL = "vertical";
         public static final String ROOM_ID = "room_id";
 
         public static final String TYPE_IP = "TEXT";
         public static final String TYPE_NAME = "TEXT";
-        public static final String TYPE_WIDTH = "INTEGER";
-        public static final String TYPE_HEIGHT = "INTEGER";
+        public static final String TYPE_POSITION_X = "INTEGER";
+        public static final String TYPE_POSITION_Y = "INTEGER";
+        public static final String TYPE_POSITION_HEIGHT = "INTEGER";
         public static final String TYPE_HORIZONTAL = "INTEGER";
         public static final String TYPE_VERTICAL = "INTEGER";
         public static final String TYPE_ROOM_ID = "INTEGER";
+
+        public static final String[] ALL_COLUMNS = {_ID, IP, NAME, POSITION_X, POSITION_Y, POSITION_HEIGHT, HORIZONTAL, VERTICAL, ROOM_ID};
     }
 }
