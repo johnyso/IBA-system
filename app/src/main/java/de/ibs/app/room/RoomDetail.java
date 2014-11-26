@@ -22,6 +22,7 @@ import de.ibs.app.room.processor.RoomParser;
 import de.ibs.app.roomview.RoomView;
 import de.ibs.app.speaker.SpeakerAcitvity;
 import de.ibs.app.speaker.SpeakerConstants;
+import de.ibs.app.speaker.processor.SpeakerParser;
 import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
 import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
@@ -87,9 +88,15 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         Cursor cursor = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id +"/" + RoomContract.SPEAKERS), null, null, null, null);
         this.currentId = id;
         Cursor cursorRoom = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id), null, null, null, null);
+
         if(cursorRoom.moveToFirst()) {
             this.roomView.setRoom(RoomParser.parseRoom(cursorRoom,0));
         }
+
+        if(cursor.moveToFirst()){
+            this.roomView.setSpeaker(SpeakerParser.parseSpeakers(cursor));
+        }
+
         adapter.swapCursor(cursor);
     }
 

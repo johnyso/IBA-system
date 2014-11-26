@@ -2,7 +2,6 @@ package de.ibs.app.roomview;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.net.Uri;
@@ -13,8 +12,9 @@ import android.view.View;
 import de.ibs.app.R;
 import de.ibs.app.room.RoomContract;
 import de.ibs.app.room.processor.Room;
-import de.ibs.app.speaker.SpeakerConstants;
-import de.ibs.app.speaker.restmethod.SpeakerRequest;
+import de.ibs.app.speaker.processor.Speaker;
+
+import java.util.List;
 
 import static de.ibs.app.room.RoomContract.CONTENT_URI;
 import static de.ibs.app.room.RoomContract.ROOMS;
@@ -44,6 +44,7 @@ public class RoomView extends View implements View.OnTouchListener {
     private float iconLeftPosition;
     private float iconRightPosition;
     private Room room;
+    private Speaker[] speakers;
 
     public RoomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -174,10 +175,11 @@ public class RoomView extends View implements View.OnTouchListener {
                 float y = this.room.getPersonY() - (this.icon.getHeight() / 2);
                 double deg = Math.toDegrees(Math.atan(y/x));
                 Log.d("RoomView","Value degree: " + deg + " From x: " + x + " and y: " + y);
-
+/*
                 Intent intent =  new Intent(context, SpeakerRequest.class);
                 intent.putExtra(SpeakerConstants.REST_ID, "horizontal/"+(int) deg);
                 this.context.startService(intent);
+*/
                 break;
         }
 
@@ -191,5 +193,9 @@ public class RoomView extends View implements View.OnTouchListener {
 
     public Room getRoom() {
         return room;
+    }
+
+    public void setSpeaker(Speaker[] speakers) {
+        this.speakers = speakers;
     }
 }

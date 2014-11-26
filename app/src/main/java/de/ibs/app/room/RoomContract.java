@@ -55,14 +55,16 @@ public class RoomContract {
     public static abstract class Speakers implements BaseColumns {
         public static final String TABLE_NAME = "speakers";
 
-        public static final String IP = "name";
-        public static final String WIDTH = "width";
-        public static final String HEIGHT = "height";
+        public static final String IP = "ip";
+        public static final String NAME = "name";
+        public static final String POSITION_X = "width";
+        public static final String POSITION_Y = "height";
         public static final String HORIZONTAL = "horizontal";
         public static final String VERTICAL = "vertical";
         public static final String ROOM_ID = "room_id";
 
         public static final String TYPE_IP = "TEXT";
+        public static final String TYPE_NAME = "TEXT";
         public static final String TYPE_WIDTH = "INTEGER";
         public static final String TYPE_HEIGHT = "INTEGER";
         public static final String TYPE_HORIZONTAL = "INTEGER";

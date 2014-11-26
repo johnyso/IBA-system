@@ -42,6 +42,7 @@ public class RoomProviderTest {
     private static final Integer TEST_PERSON_X = 200;
     private static final Integer TEST_PERSON_Y = 100;
     private static final Integer TEST_PERSON_HEIGHT = 1;
+    private static final String TEST_SPEAKER_NAME = "FR";
 
     private RoomProvider roomProvider;
     private ShadowContentResolver shadowContentResolver;
@@ -158,9 +159,10 @@ public class RoomProviderTest {
         assertThat(result.getCount(),equalTo(1));
         if(result.moveToFirst()){
             assertThat(result.getInt(result.getColumnIndex(Speakers._ID)),equalTo(1));
+            assertThat(result.getString(result.getColumnIndex(Speakers.NAME)),equalTo(TEST_SPEAKER_NAME));
             assertThat(result.getString(result.getColumnIndex(Speakers.IP)),equalTo(TEST_SPEAKER_IP));
-            assertThat(result.getInt(result.getColumnIndex(Speakers.HEIGHT)),equalTo(TEST_SPEAKER_HEIGHT));
-            assertThat(result.getInt(result.getColumnIndex(Speakers.WIDTH)),equalTo(TEST_SPEAKER_WIDTH));
+            assertThat(result.getInt(result.getColumnIndex(Speakers.POSITION_Y)),equalTo(TEST_SPEAKER_HEIGHT));
+            assertThat(result.getInt(result.getColumnIndex(Speakers.POSITION_X)),equalTo(TEST_SPEAKER_WIDTH));
             assertThat(result.getInt(result.getColumnIndex(Speakers.VERTICAL)),equalTo(TEST_SPEAKER_VERTICAL));
             assertThat(result.getInt(result.getColumnIndex(Speakers.HORIZONTAL)),equalTo(TEST_SPEAKER_HORIZONTAL));
             assertThat(result.getInt(result.getColumnIndex(Speakers.ROOM_ID)),equalTo(1));
@@ -169,9 +171,10 @@ public class RoomProviderTest {
 
     private ContentValues exampleValuesSpeaker() {
         ContentValues value = new ContentValues();
+        value.put(Speakers.NAME, TEST_SPEAKER_NAME);
         value.put(Speakers.IP, TEST_SPEAKER_IP);
-        value.put(Speakers.WIDTH, TEST_SPEAKER_WIDTH);
-        value.put(Speakers.HEIGHT, TEST_SPEAKER_HEIGHT);
+        value.put(Speakers.POSITION_X, TEST_SPEAKER_WIDTH);
+        value.put(Speakers.POSITION_Y, TEST_SPEAKER_HEIGHT);
         value.put(Speakers.HORIZONTAL, TEST_SPEAKER_HORIZONTAL);
         value.put(Speakers.VERTICAL, TEST_SPEAKER_VERTICAL);
         return value;
