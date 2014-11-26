@@ -124,7 +124,7 @@ public class RoomView extends View implements View.OnTouchListener {
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
 
         //TODO: remove this code an put the speakers in
-        canvas.drawCircle(this.paddingLeft+100,0,20,borderPaint);
+        canvas.drawCircle(this.paddingLeft,0,20,borderPaint);
     }
 
     @Override
@@ -170,9 +170,13 @@ public class RoomView extends View implements View.OnTouchListener {
                 values.put(RoomContract.Rooms.PERSON_Y,this.room.getPersonY());
                 values.put(RoomContract.Rooms.PERSON_HEIGHT,this.room.getPersonHeight());
                 context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
+                float x = this.room.getPersonX() - this.paddingLeft - (this.icon.getWidth() / 2) ;
+                float y = this.room.getPersonY() - (this.icon.getHeight() / 2);
+                double deg = Math.toDegrees(Math.atan(y/x));
+                Log.d("RoomView","Value degree: " + deg + " From x: " + x + " and y: " + y);
 
                 Intent intent =  new Intent(context, SpeakerRequest.class);
-                intent.putExtra(SpeakerConstants.REST_ID, "horizontal-10");
+                intent.putExtra(SpeakerConstants.REST_ID, "horizontal/"+(int) deg);
                 this.context.startService(intent);
                 break;
         }

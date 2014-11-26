@@ -16,21 +16,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import de.ibs.app.R;
 import de.ibs.app.room.processor.RoomParser;
 import de.ibs.app.roomview.RoomView;
 import de.ibs.app.speaker.SpeakerAcitvity;
+import de.ibs.app.speaker.SpeakerConstants;
+import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
 import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
 
 /**
  * Created by johnyso on 11.11.14.
  */
-public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>{
+public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, SeekBar.OnSeekBarChangeListener {
     private Context context;
     private RoomDetailAdapter adapter;
     private int currentId = 0;
     private RoomView roomView;
+    private SeekBar seekBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         listView.setOnItemClickListener(this);
         this.getLoaderManager().initLoader(0, null, this);
         this.roomView = (RoomView) view.findViewById(R.id.roomView);
+        this.seekBar = (SeekBar) view.findViewById(R.id.roomHeightSeek);
+        this.seekBar.setOnSeekBarChangeListener(this);
         return view;
     }
 
@@ -87,4 +93,21 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         adapter.swapCursor(cursor);
     }
 
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        Log.d("RoomDetail", "height: " + seekBar.getProgress());
+        Intent intent =  new Intent(context, SpeakerRequest.class);
+        intent.putExtra(SpeakerConstants.REST_ID, "vertical/" + seekBar.getProgress());
+        this.context.startService(intent);
+    }
 }
