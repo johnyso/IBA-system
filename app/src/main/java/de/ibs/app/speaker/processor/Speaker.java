@@ -62,6 +62,10 @@ public class Speaker {
         this.roomId = builder.roomId;
     }
 
+    public void setHorizontal(int horizontal) {
+        this.horizontal = horizontal;
+    }
+
     public static class Builder {
         private int id;
         private String name;

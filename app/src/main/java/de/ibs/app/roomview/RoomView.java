@@ -127,10 +127,14 @@ public class RoomView extends View implements View.OnTouchListener {
         //TODO: remove this code an put the speakers in
 
         Bitmap speakerIcon = BitmapFactory.decodeResource(getResources(), R.drawable.speaker_icon);
-        speakerIcon = Bitmap.createScaledBitmap(speakerIcon,20,20,true);
+        speakerIcon = Bitmap.createScaledBitmap(speakerIcon, 40, 40, true);
+        Bitmap rot;
+        Matrix matrix = new Matrix();
 
-        for (Speaker speaker : this.speakers){
-            canvas.drawBitmap(speakerIcon, this.paddingLeft + speaker.getPositionX(),speaker.getPositionY(),null);
+        for (Speaker speaker : this.speakers) {
+            matrix.setRotate(speaker.getHorizontal(),speakerIcon.getWidth()/2,speakerIcon.getHeight()/2);
+            rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
+            canvas.drawBitmap(rot, this.paddingLeft + speaker.getPositionX(), speaker.getPositionY(), null);
         }
     }
 
@@ -142,16 +146,15 @@ public class RoomView extends View implements View.OnTouchListener {
         this.iconRightPosition = (float) this.lengthInPixel + this.paddingLeft - (this.icon.getWidth() / 2);
 
 
-
-        if(event.getX() > this.iconLeftPosition && event.getX() < (int) this.iconRightPosition) {
+        if (event.getX() > this.iconLeftPosition && event.getX() < (int) this.iconRightPosition) {
             this.room.setPersonX((int) event.getX() - (this.icon.getWidth() / 2));
-        } else if(event.getX() < this.iconLeftPosition){
+        } else if (event.getX() < this.iconLeftPosition) {
             this.room.setPersonX((int) this.paddingLeft);
-        } else if(event.getX() > (int) this.iconRightPosition){
+        } else if (event.getX() > (int) this.iconRightPosition) {
             this.room.setPersonX((int) (this.iconRightPosition - this.icon.getHeight() / 2));
         }
 
-        if(event.getY() >= (getTop() - (this.icon.getHeight() / 2)) && event.getY() <= (this.heightInPixel - (this.icon.getHeight() / 2))){
+        if (event.getY() >= (getTop() - (this.icon.getHeight() / 2)) && event.getY() <= (this.heightInPixel - (this.icon.getHeight() / 2))) {
             this.room.setPersonY((int) event.getY() - (this.icon.getHeight() / 2));
         }
 /*        else if (event.getY() < getTop()) {
@@ -171,16 +174,18 @@ public class RoomView extends View implements View.OnTouchListener {
                 break;
 
             case MotionEvent.ACTION_UP:
-                Log.d("RoomView","Mouse Up");
+                Log.d("RoomView", "Mouse Up");
                 ContentValues values = new ContentValues();
-                values.put(RoomContract.Rooms.PERSON_X,this.room.getPersonX());
-                values.put(RoomContract.Rooms.PERSON_Y,this.room.getPersonY());
-                values.put(RoomContract.Rooms.PERSON_HEIGHT,this.room.getPersonHeight());
+                values.put(RoomContract.Rooms.PERSON_X, this.room.getPersonX());
+                values.put(RoomContract.Rooms.PERSON_Y, this.room.getPersonY());
+                values.put(RoomContract.Rooms.PERSON_HEIGHT, this.room.getPersonHeight());
                 context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
-                float x = this.room.getPersonX() - this.paddingLeft - (this.icon.getWidth() / 2) ;
+                float x = this.room.getPersonX() - this.paddingLeft - (this.icon.getWidth() / 2);
                 float y = this.room.getPersonY() - (this.icon.getHeight() / 2);
-                double deg = Math.toDegrees(Math.atan(y/x));
-                Log.d("RoomView","Value degree: " + deg + " From x: " + x + " and y: " + y);
+                double deg = Math.toDegrees(Math.atan(y / x));
+                this.speakers[1].setHorizontal((int) deg);
+                Log.d("RoomView", "Value degree: " + deg + " From x: " + x + " and y: " + y);
+                this.invalidate();
 /*
                 Intent intent =  new Intent(context, SpeakerRequest.class);
                 intent.putExtra(SpeakerConstants.REST_ID, "horizontal/"+(int) deg);
