@@ -1,5 +1,7 @@
 package de.ibs.app.room.processor;
 
+import android.graphics.RectF;
+
 /**
  * Created by johnyso on 25.11.14.
  */
@@ -12,6 +14,21 @@ public class Room {
     private int personX;
     private int personY;
     private int personHeight;
+    private float paddingLeft;
+    private double lengthInPixel;
+    private float widthInPixel;
+
+    public float getPaddingLeft() {
+        return paddingLeft;
+    }
+
+    public double getLengthInPixel() {
+        return lengthInPixel;
+    }
+
+    public void setPaddingLeft(float paddingLeft) {
+        this.paddingLeft = paddingLeft;
+    }
 
     public void setPersonX(int personX) {
         this.personX = personX;
@@ -68,6 +85,15 @@ public class Room {
         this.personHeight = builder.personHeight;
     }
 
+    public RectF getRectInPixel(int height, int width) {
+        RectF drawRoundRect = new RectF();
+        double pixelFactor = (double) this.getLength() / (double) height;
+        this.lengthInPixel = (double) this.getWidth() / pixelFactor;
+        this.paddingLeft = (float) (width - this.lengthInPixel) / 2;
+        drawRoundRect.set(this.paddingLeft, 0, (int) this.lengthInPixel + this.paddingLeft, (float) height);
+        return drawRoundRect;
+    }
+
     public static class Builder {
         private int id;
         private String name;
@@ -83,37 +109,37 @@ public class Room {
             return this;
         }
 
-        public Builder name(String name){
+        public Builder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder width(int width){
+        public Builder width(int width) {
             this.width = width;
             return this;
         }
 
-        public Builder length(int length){
+        public Builder length(int length) {
             this.length = length;
             return this;
         }
 
-        public Builder height(int height){
+        public Builder height(int height) {
             this.height = height;
             return this;
         }
 
-        public Builder personX(int personX){
+        public Builder personX(int personX) {
             this.personX = personX;
             return this;
         }
 
-        public Builder personY(int personY){
+        public Builder personY(int personY) {
             this.personY = personY;
             return this;
         }
 
-        public Builder personHeight(int personHeight){
+        public Builder personHeight(int personHeight) {
             this.personHeight = personHeight;
             return this;
         }
