@@ -125,7 +125,13 @@ public class RoomView extends View implements View.OnTouchListener {
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
 
         //TODO: remove this code an put the speakers in
-        canvas.drawCircle(this.paddingLeft,0,20,borderPaint);
+
+        Bitmap speakerIcon = BitmapFactory.decodeResource(getResources(), R.drawable.speaker_icon);
+        speakerIcon = Bitmap.createScaledBitmap(speakerIcon,20,20,true);
+
+        for (Speaker speaker : this.speakers){
+            canvas.drawBitmap(speakerIcon, this.paddingLeft + speaker.getPositionX(),speaker.getPositionY(),null);
+        }
     }
 
     @Override
