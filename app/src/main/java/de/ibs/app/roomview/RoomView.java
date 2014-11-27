@@ -24,19 +24,7 @@ import static de.ibs.app.room.RoomContract.ROOMS;
  */
 public class RoomView extends View implements View.OnTouchListener {
     private final Context context;
-    private boolean showText;
-    private int textPos;
-    private Paint textPaint;
-    private int textColor;
-    private float textHeight;
-    private Paint roomPaint;
-    private Paint shadowPaint;
-    private RectF shadowBounds;
-
     private Bitmap icon;
-
-    private Canvas canvas;
-    private int widthInPixel;
     private double pixelFactor;
     private double lengthInPixel;
     private double heightInPixel;
@@ -45,67 +33,32 @@ public class RoomView extends View implements View.OnTouchListener {
     private float iconRightPosition;
     private Room room;
     private Speaker[] speakers;
+    private Canvas canvas;
 
     public RoomView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
+
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.RoomView,
                 0, 0);
-
-        try {
-            this.showText = a.getBoolean(R.styleable.RoomView_showText, false);
-            this.textPos = a.getInteger(R.styleable.RoomView_labelPosition, 0);
-        } finally {
-            a.recycle();
-        }
         init();
         this.setOnTouchListener(this);
-        this.context = context;
     }
 
     private void init() {
-        this.textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        this.textPaint.setColor(this.textColor);
-        if (this.textHeight == 0) {
-            this.textHeight = this.textPaint.getTextSize();
-        } else {
-            this.textPaint.setTextSize(this.textHeight);
-        }
 
-        this.roomPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        this.roomPaint.setStyle(Paint.Style.FILL);
-        this.roomPaint.setTextSize(this.textHeight);
-
-        this.shadowPaint = new Paint(0);
-        this.shadowPaint.setColor(0xff101010);
-        this.shadowPaint.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
-    }
-
-    public boolean isShowText() {
-        return showText;
-    }
-
-    public void setShowText(boolean showText) {
-        this.showText = showText;
-        invalidate();
-        requestLayout();
     }
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        this.shadowBounds = new RectF(20, 20, 20, 20);
-        // Draw the shadow
-        this.textPaint.setColor(Color.WHITE);
         this.canvas = canvas;
         RectF drawRoundRect = new RectF();
 
-
         this.heightInPixel = getHeight();
-
         this.pixelFactor = (double) this.room.getLength() / (double) getHeight();
         this.lengthInPixel = (double) this.room.getWidth() / this.pixelFactor;
-
         this.paddingLeft = (float) (getWidth() - this.lengthInPixel) / 2;
         drawRoundRect.set(this.paddingLeft, 0, (int) this.lengthInPixel + this.paddingLeft, (float) this.heightInPixel);
 
@@ -124,18 +77,6 @@ public class RoomView extends View implements View.OnTouchListener {
         canvas.drawRoundRect(drawRoundRect, 2, 2, innerPaint);
         canvas.drawRoundRect(drawRoundRect, 2, 2, borderPaint);
 
-        //TODO: remove this code an put the speakers in
-
-        Bitmap speakerIcon = BitmapFactory.decodeResource(getResources(), R.drawable.speaker_icon);
-        speakerIcon = Bitmap.createScaledBitmap(speakerIcon, 40, 40, true);
-        Bitmap rot;
-        Matrix matrix = new Matrix();
-
-        for (Speaker speaker : this.speakers) {
-            matrix.setRotate(speaker.getHorizontal(),speakerIcon.getWidth()/2,speakerIcon.getHeight()/2);
-            rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
-            canvas.drawBitmap(rot, this.paddingLeft + speaker.getPositionX(), speaker.getPositionY(), null);
-        }
     }
 
     @Override
@@ -154,7 +95,7 @@ public class RoomView extends View implements View.OnTouchListener {
             this.room.setPersonX((int) (this.iconRightPosition - this.icon.getHeight() / 2));
         }
 
-        if (event.getY() >= (getTop() - (this.icon.getHeight() / 2)) && event.getY() <= (this.heightInPixel - (this.icon.getHeight() / 2))) {
+        if (event.getY() >= ((this.icon.getHeight() / 2)) && event.getY() <= (this.heightInPixel - (this.icon.getHeight() / 2))) {
             this.room.setPersonY((int) event.getY() - (this.icon.getHeight() / 2));
         }
 /*        else if (event.getY() < getTop()) {
@@ -180,17 +121,6 @@ public class RoomView extends View implements View.OnTouchListener {
                 values.put(RoomContract.Rooms.PERSON_Y, this.room.getPersonY());
                 values.put(RoomContract.Rooms.PERSON_HEIGHT, this.room.getPersonHeight());
                 context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
-                float x = this.room.getPersonX() - this.paddingLeft - (this.icon.getWidth() / 2);
-                float y = this.room.getPersonY() - (this.icon.getHeight() / 2);
-                double deg = Math.toDegrees(Math.atan(y / x));
-                this.speakers[1].setHorizontal((int) deg);
-                Log.d("RoomView", "Value degree: " + deg + " From x: " + x + " and y: " + y);
-                this.invalidate();
-/*
-                Intent intent =  new Intent(context, SpeakerRequest.class);
-                intent.putExtra(SpeakerConstants.REST_ID, "horizontal/"+(int) deg);
-                this.context.startService(intent);
-*/
                 break;
         }
 
