@@ -19,6 +19,8 @@ public class SampleRoomGenerator {
 
             context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue1());
             context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue2());
+            context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue3());
+            context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue4());
 
         }
     }
@@ -38,6 +40,26 @@ public class SampleRoomGenerator {
         value.put(RoomContract.Speakers.IP, "141.62.110.97");
         value.put(RoomContract.Speakers.POSITION_X, 200);
         value.put(RoomContract.Speakers.POSITION_Y, 200);
+        value.put(RoomContract.Speakers.HORIZONTAL, 0);
+        value.put(RoomContract.Speakers.VERTICAL, 0);
+        return value;
+    }
+
+    private static ContentValues speakerValue3() {
+        ContentValues value = new ContentValues();
+        value.put(RoomContract.Speakers.IP, "141.62.110.97");
+        value.put(RoomContract.Speakers.POSITION_X, 800);
+        value.put(RoomContract.Speakers.POSITION_Y, 000);
+        value.put(RoomContract.Speakers.HORIZONTAL, 0);
+        value.put(RoomContract.Speakers.VERTICAL, 0);
+        return value;
+    }
+
+    private static ContentValues speakerValue4() {
+        ContentValues value = new ContentValues();
+        value.put(RoomContract.Speakers.IP, "141.62.110.97");
+        value.put(RoomContract.Speakers.POSITION_X, 800);
+        value.put(RoomContract.Speakers.POSITION_Y, 400);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
         return value;

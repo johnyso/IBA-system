@@ -94,6 +94,8 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
 
         if(cursor.moveToFirst()){
             this.roomView.setSpeaker(SpeakerParser.parseSpeakers(cursor));
+        } else {
+            this.roomView.setSpeaker(null);
         }
 
         adapter.swapCursor(cursor);

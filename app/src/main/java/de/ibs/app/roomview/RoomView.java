@@ -67,13 +67,15 @@ public class RoomView extends View implements View.OnTouchListener {
         speakerIcon = Bitmap.createScaledBitmap(speakerIcon, 40, 40, true);
         Bitmap rot;
         Matrix matrix = new Matrix();
-        for (Speaker speaker : this.speakers) {
+        if (speakers != null) {
+            for (Speaker speaker : this.speakers) {
 
-            matrix.setRotate(speaker.getHorizontal(), 0, 0);
+                matrix.setRotate(speaker.getHorizontal(), 0, 0);
 
-            rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
+                rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
 
-            canvas.drawBitmap(rot, this.room.getPaddingLeft() + speaker.getPositionX(), speaker.getPositionY(), null);
+                canvas.drawBitmap(rot, this.room.getPaddingLeft() + speaker.getPositionX(), speaker.getPositionY(), null);
+            }
         }
     }
 
@@ -103,6 +105,24 @@ public class RoomView extends View implements View.OnTouchListener {
         }
 */
 
+        if (speakers != null) {
+            for (Speaker speaker : this.speakers) {
+                float x = this.room.getPersonX() - this.room.getPaddingLeft() - speaker.getPositionX();
+                float y = this.room.getPersonY() - speaker.getPositionY();
+                double deg = Math.toDegrees(Math.atan(y / x));
+
+                if (x < 0 && y < 0) {
+                    deg = deg + 180;
+                } else if (x < 0 && y > 0) {
+                    deg = deg + 180;
+                } else if (x > 0 && y < 0) {
+                    deg = deg + 360;
+                }
+
+                speaker.setHorizontal((int) deg);
+                Log.d("RoomView", "Speaekr: " + speaker.getId() + " Value degree: " + deg + " From x: " + x + " and y: " + y);
+            }
+        }
         this.invalidate();
         switch (eventaction) {
 
@@ -125,15 +145,6 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
 
-                float x = this.room.getPersonX() - this.room.getPaddingLeft() - speakers[1].getPositionX();
-
-                float y = this.room.getPersonY() - this.speakers[1].getPositionY();
-
-                double deg = Math.toDegrees(Math.atan(y / x));
-
-                this.speakers[1].setHorizontal((int) deg);
-
-                Log.d("RoomView", "Value degree: " + deg + " From x: " + x + " and y: " + y);
 
                 this.invalidate();
 
