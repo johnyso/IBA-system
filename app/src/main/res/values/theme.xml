@@ -5,6 +5,8 @@
 
     <style name="AppTheme" parent="android:Theme.Holo">
 
+        <item name="android:windowBackground">@color/colorTheme</item>
+
         <item name="android:editTextStyle">@style/EditTextIBSTheme</item>
 
         <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewIBSTheme</item>
