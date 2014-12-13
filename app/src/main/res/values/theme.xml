@@ -3,31 +3,64 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="android:Theme.Holo">
-
+    <style name="AppTheme" parent="@android:style/Theme.Holo">
         <item name="android:windowBackground">@color/colorTheme</item>
-
-        <item name="android:editTextStyle">@style/EditTextIBSTheme</item>
-
-        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewIBSTheme</item>
-
-        <item name="android:checkboxStyle">@style/CheckBoxIBSTheme</item>
-
-        <item name="android:buttonStyle">@style/ButtonIBSTheme</item>
-
-        <item name="android:imageButtonStyle">@style/ImageButtonIBSTheme</item>
-
-        <item name="android:spinnerStyle">@style/SpinnerIBSTheme</item>
-
-        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemIBSTheme</item>
-
-        <item name="android:progressBarStyleHorizontal">@style/ProgressBarIBSTheme</item>
-
-        <item name="android:buttonStyleToggle">@style/ToggleIBSTheme</item>
-
+        <item name="android:color">#FFFFFF</item>
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_apptheme</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Apptheme</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Apptheme</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Apptheme</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Apptheme</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Apptheme</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_apptheme</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_apptheme</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Apptheme</item>
         <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
-
-        <item name="android:listViewStyle">@style/ListViewIBSTheme</item>
-
+        <item name="android:textColor">#FFFFFF</item>
     </style>
+    <style name="ActionBar.Solid.Apptheme" parent="@android:style/Widget.Holo.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_background_textured_apptheme</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_apptheme</item>
+        <item name="android:backgroundSplit">@drawable/ab_background_textured_apptheme</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Apptheme</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Apptheme" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_apptheme</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Apptheme</item>
+    </style>
+
+    <style name="PopupMenu.Apptheme" parent="@android:style/Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_apptheme</item>
+    </style>
+
+    <style name="DropDownListView.Apptheme" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_apptheme</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Apptheme" parent="@android:style/Widget.Holo.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_apptheme</item>
+    </style>
+
+    <style name="DropDownNav.Apptheme" parent="@android:style/Widget.Holo.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_apptheme</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_apptheme</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_apptheme</item>
+    </style>
+
+    <style name="ProgressBar.Apptheme" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_apptheme</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Apptheme" parent="@android:style/Widget.Holo.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_apptheme</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Apptheme.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Apptheme</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Apptheme</item>
+    </style>
+
+
 </resources>

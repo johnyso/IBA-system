@@ -41,7 +41,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
     private void init() {
         this.borderColor = new Paint();
-        borderColor.setARGB(255, 255, 128, 0);
+        borderColor.setARGB(255, 255, 255, 255);
         borderColor.setStyle(Paint.Style.STROKE);
         borderColor.setStrokeWidth(4);
 
