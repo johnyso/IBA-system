@@ -15,4 +15,28 @@
     <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
     </style>
 
+    <style name="ListStyle" parent="android:Widget.ListView">
+        <item name="android:dividerHeight">8dp</item>
+        <item name="android:divider">@color/colorTheme</item>
+        <item name="android:itemTextAppearance">@style/ListTextStyle</item>
+        <item name="android:background">@color/white60</item>
+    </style>
+
+    <style name="ListTextStyle">
+        <item name="android:textColor">@color/colorTheme</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+    <style name="ListButtonStyle">
+        <item name="android:background">@drawable/list_button_background</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
 </resources>

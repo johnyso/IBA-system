@@ -16,6 +16,7 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_apptheme</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Apptheme</item>
         <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
+        <item name="android:listViewStyle">@style/ListStyle</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
     <style name="ActionBar.Solid.Apptheme" parent="@android:style/Widget.Holo.ActionBar.Solid">

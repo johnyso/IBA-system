@@ -4,4 +4,6 @@
     <color name="default_background">#FFB200</color>
     <color name="white">#FFFFFF</color>
     <color name="colorTheme">#EEC63A</color>
+    <color name="white60">#EAFFFFFF</color>
+    <color name="themeWhite">#fffcf1</color>
 </resources>
