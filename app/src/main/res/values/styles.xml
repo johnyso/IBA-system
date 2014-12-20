@@ -16,7 +16,7 @@
     </style>
 
     <style name="ListStyle" parent="android:Widget.ListView">
-        <item name="android:dividerHeight">8dp</item>
+        <item name="android:dividerHeight">16dp</item>
         <item name="android:divider">@color/colorTheme</item>
         <item name="android:itemTextAppearance">@style/ListTextStyle</item>
         <item name="android:background">@color/white60</item>
