@@ -2,6 +2,7 @@ package de.ibs.app.roomview;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.net.Uri;
@@ -12,7 +13,9 @@ import android.view.View;
 import de.ibs.app.R;
 import de.ibs.app.room.RoomContract;
 import de.ibs.app.room.processor.Room;
+import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.processor.Speaker;
+import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
 import java.util.List;
 
@@ -150,14 +153,14 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 this.invalidate();
 
-/*
+
 
                 Intent intent =  new Intent(context, SpeakerRequest.class);
 
-                intent.putExtra(SpeakerConstants.REST_ID, "horizontal/"+(int) deg);
+                intent.putExtra(SpeakerConstants.REST_ID, "horizontal-"+(int) this.speakers[0].getHorizontal());
 
                 this.context.startService(intent);
-                */
+
                 break;
         }
 

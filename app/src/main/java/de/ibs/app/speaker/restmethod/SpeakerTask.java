@@ -19,8 +19,8 @@ public class SpeakerTask implements Runnable {
     private final Service context;
     private final OkHttpClient client = new OkHttpClient();
     private final String restPath;
-    private final String testPath = "http://192.168.240.1/arduino/";
-    private final String origPath = "http://141.62.110.99/arduino/";
+    private final String testPath = "http://192.168.8.1:8080/index.php/";
+    private final String origPath = "http://192.168.8.1:8080/index.php/";
     private final String path;
 
 
