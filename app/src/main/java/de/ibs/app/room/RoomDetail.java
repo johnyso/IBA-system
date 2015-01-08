@@ -115,7 +115,7 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
     public void onStopTrackingTouch(SeekBar seekBar) {
         Log.d("RoomDetail", "height: " + seekBar.getProgress());
         Intent intent =  new Intent(context, SpeakerRequest.class);
-        intent.putExtra(SpeakerConstants.REST_ID, "vertical/" + seekBar.getProgress());
+        intent.putExtra(SpeakerConstants.REST_ID, "vertical-" + seekBar.getProgress());
         this.context.startService(intent);
     }
 }
