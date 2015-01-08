@@ -27,7 +27,7 @@ public class SampleRoomGenerator {
 
     private static ContentValues speakerValue1() {
         ContentValues value = new ContentValues();
-        value.put(RoomContract.Speakers.IP, "141.62.110.97");
+        value.put(RoomContract.Speakers.IP, "192.168.8.1:8080");
         value.put(RoomContract.Speakers.POSITION_X, 0);
         value.put(RoomContract.Speakers.POSITION_Y, 0);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);

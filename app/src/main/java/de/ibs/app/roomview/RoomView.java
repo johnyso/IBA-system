@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.RoomContract;
 import de.ibs.app.room.processor.Room;
@@ -125,7 +126,6 @@ public class RoomView extends View implements View.OnTouchListener {
                 }
 
                 speaker.setHorizontal((int) deg);
-                Log.d("RoomView", "Speaekr: " + speaker.getId() + " Value degree: " + deg + " From x: " + x + " and y: " + y);
             }
         }
         this.invalidate();
@@ -150,14 +150,11 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
 
-
                 this.invalidate();
-
-
 
                 Intent intent =  new Intent(context, SpeakerRequest.class);
 
-                intent.putExtra(SpeakerConstants.REST_ID, "horizontal-"+ (int)(this.speakers[0].getHorizontal() * 0.28));
+                intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, this.speakers[0].getHorizontal(), this.speakers[0].getIp()));
 
                 this.context.startService(intent);
 

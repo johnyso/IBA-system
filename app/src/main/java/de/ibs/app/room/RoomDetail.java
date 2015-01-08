@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.processor.RoomParser;
 import de.ibs.app.roomview.RoomView;
@@ -115,7 +116,8 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
     public void onStopTrackingTouch(SeekBar seekBar) {
         Log.d("RoomDetail", "height: " + seekBar.getProgress());
         Intent intent =  new Intent(context, SpeakerRequest.class);
-        intent.putExtra(SpeakerConstants.REST_ID, "vertical-" + seekBar.getProgress());
+        //TODO: inplement new one
+        intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.VERTICAL, seekBar.getProgress(), "http://192.168.8.1/index.php/vertical-"));
         this.context.startService(intent);
     }
 }

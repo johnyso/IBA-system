@@ -16,4 +16,14 @@ public class AppContract {
 
     public static final String ROOM_DETAIL_BACKSTACK = "backstack_room_detail";
     public static final String ROOM_ADD_BACKSTACK = "backstack_room_add";
+    public static final int HORIZONTAL = 0;
+    public static final int VERTICAL = 1;
+
+    public static String getRestPath(int direction, int deg, String ip) {
+        if (direction == HORIZONTAL){
+            return "http://" + ip + "/index.php/horizontal-" + (int) (deg * 0.28);
+        } else {
+            return "http://" + ip + "/index.php/vertical-" + deg ;
+        }
+    }
 }
