@@ -157,7 +157,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 Intent intent =  new Intent(context, SpeakerRequest.class);
 
-                intent.putExtra(SpeakerConstants.REST_ID, "horizontal-"+(int) this.speakers[0].getHorizontal() * 0.28);
+                intent.putExtra(SpeakerConstants.REST_ID, "horizontal-"+ (int)(this.speakers[0].getHorizontal() * 0.28));
 
                 this.context.startService(intent);
 
