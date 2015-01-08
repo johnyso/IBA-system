@@ -87,8 +87,8 @@ public class Room {
 
     public RectF getRectInPixel(int height, int width) {
         RectF drawRoundRect = new RectF();
-        double pixelFactor = (double) this.getLength() / (double) height;
-        this.lengthInPixel = (double) this.getWidth() / pixelFactor;
+        double pixelFactor = (double) this.getWidth() / (double) width;
+        this.lengthInPixel = (double) this.getLength() / pixelFactor;
         this.paddingLeft = (float) (width - this.lengthInPixel) / 2;
         drawRoundRect.set(this.paddingLeft, 0, (int) this.lengthInPixel + this.paddingLeft, (float) height);
         return drawRoundRect;

@@ -38,8 +38,8 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue2() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "141.62.110.97");
-        value.put(RoomContract.Speakers.POSITION_X, 200);
-        value.put(RoomContract.Speakers.POSITION_Y, 200);
+        value.put(RoomContract.Speakers.POSITION_X, 0);
+        value.put(RoomContract.Speakers.POSITION_Y, 400);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
         return value;
@@ -48,8 +48,8 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue3() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "141.62.110.97");
-        value.put(RoomContract.Speakers.POSITION_X, 800);
-        value.put(RoomContract.Speakers.POSITION_Y, 000);
+        value.put(RoomContract.Speakers.POSITION_X, 300);
+        value.put(RoomContract.Speakers.POSITION_Y, 0);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
         return value;
@@ -58,7 +58,7 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue4() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "141.62.110.97");
-        value.put(RoomContract.Speakers.POSITION_X, 800);
+        value.put(RoomContract.Speakers.POSITION_X, 300);
         value.put(RoomContract.Speakers.POSITION_Y, 400);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
