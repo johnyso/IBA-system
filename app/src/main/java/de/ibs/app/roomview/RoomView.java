@@ -86,7 +86,7 @@ public class RoomView extends View implements View.OnTouchListener {
         this.iconLeftPosition = this.room.getPaddingLeft() + (this.icon.getWidth() / 2);
         this.iconRightPosition = (float) this.room.getLengthInPixel() + this.room.getPaddingLeft() - (this.icon.getWidth() / 2);
 
-
+        // x-Richtung
         if (event.getX() > this.iconLeftPosition && event.getX() < (int) this.iconRightPosition) {
             this.room.setPersonX((int) event.getX() - (this.icon.getWidth() / 2));
         } else if (event.getX() < this.iconLeftPosition) {
@@ -95,15 +95,17 @@ public class RoomView extends View implements View.OnTouchListener {
             this.room.setPersonX((int) (this.iconRightPosition - this.icon.getHeight() / 2));
         }
 
-        if (event.getY() >= ((this.icon.getHeight() / 2)) && event.getY() <= (this.room.getLengthInPixel() - (this.icon.getHeight() / 2))) {
+        // Y-Richtung
+        if (event.getY() >= ((this.icon.getHeight() / 2)) && event.getY() <= (this.getHeight() - (this.icon.getHeight() / 2))) {
             this.room.setPersonY((int) event.getY() - (this.icon.getHeight() / 2));
         }
-/*        else if (event.getY() < getTop()) {
-            this.personY = (int) getTop() - (this.icon.getHeight() / 2);
-        } else if (event.getY() > this.heightInPixel) {
-            this.personY = (int) this.heightInPixel - (this.icon.getHeight() / 2);
+        else if (event.getY() < this.getTop()) {
+            this.room.setPersonY(0);
         }
-*/
+        else if (event.getY() > this.getHeight() - (this.icon.getHeight() / 2)) {
+            this.room.setPersonY(this.getHeight() - this.icon.getHeight());
+        }
+
 
         if (speakers != null) {
             for (Speaker speaker : this.speakers) {
