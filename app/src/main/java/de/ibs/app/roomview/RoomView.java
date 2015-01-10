@@ -113,6 +113,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
         if (speakers != null) {
             for (Speaker speaker : this.speakers) {
+                // x
                 float x = this.room.getPersonX() - this.room.getPaddingLeft() - speaker.getPositionX();
                 float y = this.room.getPersonY() - speaker.getPositionY();
                 double deg = Math.toDegrees(Math.atan(y / x));
@@ -121,8 +122,8 @@ public class RoomView extends View implements View.OnTouchListener {
                     deg = deg + 180;
                 } else if (x < 0 && y > 0) {
                     deg = deg + 180;
-                } else if (x > 0 && y < 0) {
-                    deg = deg + 360;
+                } else if ( speaker.getPositionY() == 400 ) {
+                    deg = Math.abs(-90 + deg);
                 }
 
                 speaker.setHorizontal((int) deg);
@@ -152,11 +153,17 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 this.invalidate();
 
-                Intent intent =  new Intent(context, SpeakerRequest.class);
+                if (speakers != null) {
+                    for (Speaker speaker : this.speakers) {
+                        Intent intent =  new Intent(context, SpeakerRequest.class);
 
-                intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, this.speakers[0].getHorizontal(), this.speakers[0].getIp()));
+                        intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, speaker.getHorizontal(), speaker.getIp()));
 
-                this.context.startService(intent);
+                        this.context.startService(intent);
+                    }
+                }
+
+
 
                 break;
         }

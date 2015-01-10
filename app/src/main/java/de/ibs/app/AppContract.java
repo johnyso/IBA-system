@@ -1,6 +1,7 @@
 package de.ibs.app;
 
 import android.content.Intent;
+import android.util.Log;
 
 /**
  * Created by johnyso on 05.11.14.
@@ -20,8 +21,11 @@ public class AppContract {
     public static final int VERTICAL = 1;
 
     public static String getRestPath(int direction, int deg, String ip) {
+
+        Log.d("AppContract", "Position: " + Math.abs((int) (deg * 0.28)));
+
         if (direction == HORIZONTAL){
-            return "http://" + ip + "/index.php/horizontal-" + (int) (deg * 0.28);
+            return "http://" + ip + "/index.php/horizontal-" + Math.abs((int) (deg * 0.28));
         } else {
             return "http://" + ip + "/index.php/vertical-" + deg ;
         }
