@@ -129,13 +129,21 @@ public class RoomView extends View implements View.OnTouchListener {
                         }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_RIGHT:
-
+                        if(deg>=0) {
+                            deg = 90 - deg;
+                        } else {
+                            deg = Math.abs(-90 + deg);
+                        }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_BOTTOM:
-
+                        if(deg >= 0) {
+                            deg = Math.abs(-180 + deg);
+                        } else {
+                            deg = Math.abs(deg);
+                        }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_LEFT:
-                        deg = Math.abs(-90 + deg);
+                        deg = Math.abs(deg);
                         break;
                     default:
                         break;
