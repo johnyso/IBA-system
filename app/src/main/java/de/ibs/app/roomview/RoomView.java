@@ -117,13 +117,24 @@ public class RoomView extends View implements View.OnTouchListener {
                 float x = this.room.getPersonX() - this.room.getPaddingLeft() - speaker.getPositionX();
                 float y = this.room.getPersonY() - speaker.getPositionY();
                 double deg = Math.toDegrees(Math.atan(y / x));
+                int align = speaker.getAlignment();
+                int test = RoomContract.Speakers.ALIGNMENT_TOP;
 
-                if (x < 0 && y < 0) {
-                    deg = deg + 180;
-                } else if (x < 0 && y > 0) {
-                    deg = deg + 180;
-                } else if ( speaker.getPositionY() == 400 ) {
-                    deg = Math.abs(-90 + deg);
+                switch (align) {
+                    case RoomContract.Speakers.ALIGNMENT_TOP:
+                        deg = Math.abs(deg);
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_RIGHT:
+
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_BOTTOM:
+
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_LEFT:
+                        deg = Math.abs(-90 + deg);
+                        break;
+                    default:
+                        break;
                 }
 
                 speaker.setHorizontal((int) deg);
