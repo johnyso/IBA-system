@@ -122,7 +122,11 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 switch (align) {
                     case RoomContract.Speakers.ALIGNMENT_TOP:
-                        deg = Math.abs(deg);
+                        if(deg < 0){
+                            deg = 180 + deg;
+                        } else {
+                            deg = Math.abs(deg);
+                        }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_RIGHT:
 
@@ -170,7 +174,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
                         intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, speaker.getHorizontal(), speaker.getIp()));
 
-                        this.context.startService(intent);
+//                        this.context.startService(intent);
                     }
                 }
 
