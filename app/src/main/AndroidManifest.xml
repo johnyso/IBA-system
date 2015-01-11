@@ -47,6 +47,10 @@
             android:name=".speaker.SetUpSpeaker"
             android:label="@string/title_activity_set_up_speaker" >
         </activity>
+        <activity
+            android:name=".room.provider.RoomDetail"
+            android:label="@string/title_activity_room_detail" >
+        </activity>
     </application>
 
 </manifest>
