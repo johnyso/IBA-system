@@ -7,7 +7,7 @@ import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.provider.SampleRoomGenerator;
 
-public class RoomActivity extends FragmentActivity {
+public class StartActivity extends FragmentActivity {
     RoomModel roomModel;
 
     @Override
