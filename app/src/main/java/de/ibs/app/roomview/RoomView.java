@@ -199,7 +199,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
                         intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, speaker.getHorizontal(), speaker.getIp()));
 
-                       // this.context.startService(intent);
+                        this.context.startService(intent);
                     }
                 }
 
