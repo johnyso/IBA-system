@@ -28,9 +28,9 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue1() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.34:8080");
-        value.put(RoomContract.Speakers.POSITION_X, 250);
+        value.put(RoomContract.Speakers.POSITION_X, 0);
         value.put(RoomContract.Speakers.POSITION_Y, 200);
-        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_RIGHT);
+        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_LEFT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
         return value;
@@ -39,9 +39,9 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue2() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.35:8080");
-        value.put(RoomContract.Speakers.POSITION_X, 100);
-        value.put(RoomContract.Speakers.POSITION_Y, 420);
-        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_BOTTOM);
+        value.put(RoomContract.Speakers.POSITION_X, 200);
+        value.put(RoomContract.Speakers.POSITION_Y, 0);
+        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_TOP);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
         return value;

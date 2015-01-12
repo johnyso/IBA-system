@@ -73,8 +73,21 @@ public class RoomView extends View implements View.OnTouchListener {
         Matrix matrix = new Matrix();
         if (speakers != null) {
             for (Speaker speaker : this.speakers) {
+                switch (speaker.getAlignment()){
+                    case RoomContract.Speakers.ALIGNMENT_LEFT:
+                        matrix.setRotate(Math.abs(speaker.getHorizontal()+270), 0, 0);
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_RIGHT:
+                        matrix.setRotate(speaker.getHorizontal()+90, 0, 0);
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_BOTTOM:
+                        matrix.setRotate(Math.abs(speaker.getHorizontal()-360), 0, 0);
+                        break;
+                    default:
+                        matrix.setRotate(speaker.getHorizontal(), 0, 0);
+                        break;
+                }
 
-                matrix.setRotate(speaker.getHorizontal(), 0, 0);
 
                 rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
 
@@ -122,7 +135,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 switch (align) {
                     case RoomContract.Speakers.ALIGNMENT_TOP:
-                        if(deg < 0){
+                        if(deg < 0 || Double.toString(deg).equals("-0.0")){
                             deg = 180 + deg;
                         } else {
                             deg = Math.abs(deg);
@@ -143,7 +156,11 @@ public class RoomView extends View implements View.OnTouchListener {
                         }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_LEFT:
-                        deg = Math.abs(deg);
+                        if(deg<0) {
+                            deg = 90 + deg;
+                        } else {
+                            deg = Math.abs(90 + deg);
+                        }
                         break;
                     default:
                         break;
@@ -182,7 +199,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
                         intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, speaker.getHorizontal(), speaker.getIp()));
 
-                        this.context.startService(intent);
+                       // this.context.startService(intent);
                     }
                 }
 
