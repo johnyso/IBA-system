@@ -1,4 +1,4 @@
-package de.ibs.app.room;
+package de.ibs.app.overview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
+import de.ibs.app.room.RoomDetailActivity;
+import de.ibs.app.room.utils.RoomContract;
 
-import static de.ibs.app.room.RoomListAdapter.*;
+import static de.ibs.app.overview.RoomListAdapter.*;
 
 /**
  * Created by johnyso on 11.11.14.

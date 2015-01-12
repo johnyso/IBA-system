@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import static de.ibs.app.room.RoomContract.*;
+import static de.ibs.app.room.utils.RoomContract.*;
 
 /**
  * Created by johnyso on 11.11.14.

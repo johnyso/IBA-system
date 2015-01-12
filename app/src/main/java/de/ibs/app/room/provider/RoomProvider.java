@@ -3,13 +3,12 @@ package de.ibs.app.room.provider;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.net.Uri;
-import de.ibs.app.room.RoomContract;
+import de.ibs.app.room.utils.RoomContract;
 
 import java.util.List;
 
-import static de.ibs.app.room.RoomContract.*;
+import static de.ibs.app.room.utils.RoomContract.*;
 
 public class RoomProvider extends ContentProvider {
     private RoomDatabaseHelper roomDatabaseHelper;

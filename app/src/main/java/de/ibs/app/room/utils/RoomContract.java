@@ -1,4 +1,4 @@
-package de.ibs.app.room;
+package de.ibs.app.room.utils;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

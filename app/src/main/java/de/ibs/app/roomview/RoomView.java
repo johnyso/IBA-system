@@ -3,7 +3,6 @@ package de.ibs.app.roomview;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.graphics.*;
 import android.net.Uri;
 import android.util.AttributeSet;
@@ -12,16 +11,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
-import de.ibs.app.room.RoomContract;
+import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.room.processor.Room;
 import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.processor.Speaker;
 import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
-import java.util.List;
-
-import static de.ibs.app.room.RoomContract.CONTENT_URI;
-import static de.ibs.app.room.RoomContract.ROOMS;
+import static de.ibs.app.room.utils.RoomContract.CONTENT_URI;
+import static de.ibs.app.room.utils.RoomContract.ROOMS;
 
 /**
  * Created by johnyso on 13.11.14.

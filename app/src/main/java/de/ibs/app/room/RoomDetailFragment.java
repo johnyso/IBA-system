@@ -1,39 +1,26 @@
 package de.ibs.app.room;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.SeekBar;
-import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.processor.RoomParser;
-import de.ibs.app.room.provider.SampleRoomGenerator;
+import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.roomview.RoomView;
-import de.ibs.app.speaker.SpeakerAcitvity;
-import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.processor.SpeakerParser;
-import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
-import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
 
 /**
  * Created by johnyso on 11.11.14.
  */
-public class RoomDetail extends Fragment implements SeekBar.OnSeekBarChangeListener {
+public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     private Context context;
-    private RoomDetailAdapter adapter;
     private int currentId = 1;
     private RoomView roomView;
     private SeekBar seekBar;
@@ -43,7 +30,6 @@ public class RoomDetail extends Fragment implements SeekBar.OnSeekBarChangeListe
         super.onCreate(savedInstanceState);
         this.context = getActivity();
         Cursor cursor = this.context.getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-1/" + RoomContract.SPEAKERS), null, null, null, null);
-        this.adapter = new RoomDetailAdapter(getActivity(), cursor, 0);
         this.currentId = getArguments().getInt(RoomContract.Rooms._ID);
     }
 

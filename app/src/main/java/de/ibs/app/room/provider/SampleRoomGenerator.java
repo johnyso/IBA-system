@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import de.ibs.app.room.RoomContract;
+import de.ibs.app.room.utils.RoomContract;
 
 /**
  * Created by johnyso on 11.11.14.

@@ -1,9 +1,8 @@
-package de.ibs.app.room;
+package de.ibs.app.overview;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.provider.SampleRoomGenerator;

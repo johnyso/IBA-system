@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import de.ibs.app.R;
+import de.ibs.app.room.utils.RoomContract;
 
 /**
  * Created by johnyso on 12.11.14.

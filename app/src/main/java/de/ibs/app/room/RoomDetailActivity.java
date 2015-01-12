@@ -1,36 +1,23 @@
 package de.ibs.app.room;
 
-import android.app.Activity;
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-
 import android.widget.ListView;
-import android.widget.SeekBar;
-import de.ibs.app.AppContract;
 import de.ibs.app.R;
-import de.ibs.app.room.processor.Room;
 import de.ibs.app.room.provider.SampleRoomGenerator;
-import de.ibs.app.roomview.RoomView;
+import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.speaker.NavDrawerItem;
 import de.ibs.app.speaker.NavDrawerListAdapter;
-import de.ibs.app.speaker.processor.Speaker;
 
 import java.util.ArrayList;
 
@@ -183,7 +170,7 @@ public class RoomDetailActivity extends FragmentActivity {
     private void displayView(int position) {
         // update the main content by replacing fragments
 
-        RoomDetail roomDetail = new RoomDetail();
+        RoomDetailFragment roomDetail = new RoomDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(RoomContract.Rooms._ID, this.currentRoom);
         roomDetail.setArguments(bundle);
