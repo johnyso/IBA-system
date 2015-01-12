@@ -30,6 +30,8 @@ public class RoomContract {
         URI_MATCHER.addURI(AUTHORITY, ROOM + "/" + SPEAKER, TYPE_SPEAKERS);
     }
 
+    public static final String CURRENT_ROOM = "currentRoom";
+
     public static abstract class Rooms implements BaseColumns {
         public static final String TABLE_NAME = "rooms";
 

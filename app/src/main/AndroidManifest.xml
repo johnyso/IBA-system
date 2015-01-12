@@ -48,7 +48,7 @@
             android:label="@string/title_activity_set_up_speaker" >
         </activity>
         <activity
-            android:name=".room.provider.RoomDetail"
+            android:name=".room.RoomDetailActivity"
             android:label="@string/title_activity_room_detail" >
         </activity>
     </application>
