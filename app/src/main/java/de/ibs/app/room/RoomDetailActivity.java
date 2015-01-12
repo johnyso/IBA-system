@@ -3,6 +3,7 @@ package de.ibs.app.room;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -58,6 +59,8 @@ public class RoomDetailActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_detail);
+        Intent intent = getIntent();
+        this.currentRoom = intent.getIntExtra(RoomContract.Rooms._ID, 0);
 
         //TODO: Delete This!
 
@@ -182,7 +185,7 @@ public class RoomDetailActivity extends FragmentActivity {
 
         RoomDetail roomDetail = new RoomDetail();
         Bundle bundle = new Bundle();
-        bundle.putInt(RoomContract.CURRENT_ROOM, this.currentRoom);
+        bundle.putInt(RoomContract.Rooms._ID, this.currentRoom);
         roomDetail.setArguments(bundle);
         switch (position) {
 

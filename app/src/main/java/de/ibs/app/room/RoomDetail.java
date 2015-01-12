@@ -44,9 +44,7 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         this.context = getActivity();
         Cursor cursor = this.context.getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-1/" + RoomContract.SPEAKERS), null, null, null, null);
         this.adapter = new RoomDetailAdapter(getActivity(), cursor, 0);
-        if (savedInstanceState != null) {
-            this.currentId = savedInstanceState.getInt(RoomContract.CURRENT_ROOM);
-        }
+        this.currentId = getArguments().getInt(RoomContract.Rooms._ID);
     }
 
     @Override
@@ -61,6 +59,11 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
 
         this.roomView = (RoomView) view.findViewById(R.id.roomView);
         this.roomView.setRoom(RoomParser.parseRoom(cursorRoom,0));
+
+        Cursor cursorSpeaker = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + this.currentId +"/" + RoomContract.SPEAKERS), null, null, null, null);
+        if(cursorSpeaker.getCount() > 0) {
+            this.roomView.setSpeaker(SpeakerParser.parseSpeakers(cursorSpeaker));
+        }
         this.seekBar = (SeekBar) view.findViewById(R.id.roomHeightSeek);
         this.seekBar.setOnSeekBarChangeListener(this);
         return view;
