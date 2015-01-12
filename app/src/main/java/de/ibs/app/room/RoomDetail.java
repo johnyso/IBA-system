@@ -31,7 +31,7 @@ import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
 /**
  * Created by johnyso on 11.11.14.
  */
-public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, SeekBar.OnSeekBarChangeListener {
+public class RoomDetail extends Fragment implements SeekBar.OnSeekBarChangeListener {
     private Context context;
     private RoomDetailAdapter adapter;
     private int currentId = 1;
@@ -50,12 +50,8 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.room_detail_fragment, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.listView);
-        listView.setAdapter(this.adapter);
-        listView.setOnItemClickListener(this);
-        Cursor cursorRoom = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + this.currentId), null, null, null, null);
-        this.getLoaderManager().initLoader(0, null, this);
 
+        Cursor cursorRoom = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + this.currentId), null, null, null, null);
 
         this.roomView = (RoomView) view.findViewById(R.id.roomView);
         this.roomView.setRoom(RoomParser.parseRoom(cursorRoom,0));
@@ -67,50 +63,6 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         this.seekBar = (SeekBar) view.findViewById(R.id.roomHeightSeek);
         this.seekBar.setOnSeekBarChangeListener(this);
         return view;
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader cursorLoader = new CursorLoader(getActivity(),
-                Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + this.currentId + "/" + RoomContract.SPEAKERS), null, null, null, null);
-        return cursorLoader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        data.setNotificationUri(getActivity().getContentResolver(), Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-1/" + RoomContract.SPEAKERS));
-        adapter.changeCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.changeCursor(null);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ViewHolder holder = (ViewHolder) view.getTag();
-        Intent intent = new Intent(getActivity(), SpeakerAcitvity.class);
-        intent.putExtra(RoomContract.Speakers._ID, holder.id);
-        startActivity(intent);
-    }
-
-    public void resetList(int id) {
-        Cursor cursor = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id +"/" + RoomContract.SPEAKERS), null, null, null, null);
-        this.currentId = id;
-        Cursor cursorRoom = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id), null, null, null, null);
-
-        if(cursorRoom.moveToFirst()) {
-            this.roomView.setRoom(RoomParser.parseRoom(cursorRoom,0));
-        }
-
-        if(cursor.moveToFirst()){
-            this.roomView.setSpeaker(SpeakerParser.parseSpeakers(cursor));
-        } else {
-            this.roomView.setSpeaker(null);
-        }
-
-        adapter.swapCursor(cursor);
     }
 
     @Override
