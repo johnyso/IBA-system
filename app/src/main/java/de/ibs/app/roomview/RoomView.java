@@ -176,7 +176,6 @@ public class RoomView extends View implements View.OnTouchListener {
                 break;
 
             case MotionEvent.ACTION_UP:
-                Log.d("RoomView", "Mouse Up");
 
                 ContentValues values = new ContentValues();
 
@@ -192,6 +191,12 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 if (speakers != null) {
                     for (Speaker speaker : this.speakers) {
+                        values.clear();
+                        values.put(RoomContract.Speakers.HORIZONTAL, speaker.getHorizontal());
+
+                        context.getContentResolver().update(RoomContract.getSpeakerPath(this.room.getId(), speaker.getId()), values, null, null);
+
+
                         Intent intent =  new Intent(context, SpeakerRequest.class);
 
                         intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, speaker.getHorizontal(), speaker.getIp()));

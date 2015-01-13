@@ -80,6 +80,9 @@ public class RoomProvider extends ContentProvider {
             case TYPE_ROOM:
                 list = URI_MATCHER.match(uri).getCapturings();
                 return this.roomDatabaseHelper.updateRoom(values, list.get(1));
+            case TYPE_SPEAKER:
+                list = URI_MATCHER.match(uri).getCapturings();
+                return this.roomDatabaseHelper.updateSpeaker(values, list.get(1), list.get(2));
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
         }

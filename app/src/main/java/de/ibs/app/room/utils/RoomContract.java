@@ -27,10 +27,14 @@ public class RoomContract {
         URI_MATCHER.addURI(AUTHORITY, ROOMS, TYPE_ROOMS);
         URI_MATCHER.addURI(AUTHORITY, ROOM, TYPE_ROOM);
         URI_MATCHER.addURI(AUTHORITY, ROOM + "/" + SPEAKERS, TYPE_SPEAKERS);
-        URI_MATCHER.addURI(AUTHORITY, ROOM + "/" + SPEAKER, TYPE_SPEAKERS);
+        URI_MATCHER.addURI(AUTHORITY, ROOM + "/" + SPEAKER, TYPE_SPEAKER);
     }
 
     public static final String CURRENT_ROOM = "currentRoom";
+
+    public static Uri getSpeakerPath(int roomId, int speakerId) {
+        return Uri.withAppendedPath(CONTENT_URI,ROOMS + "-" + roomId + "/" + SPEAKERS + "-" + speakerId);
+    }
 
     public static abstract class Rooms implements BaseColumns {
         public static final String TABLE_NAME = "rooms";

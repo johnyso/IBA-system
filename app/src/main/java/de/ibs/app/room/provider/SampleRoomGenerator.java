@@ -19,8 +19,8 @@ public class SampleRoomGenerator {
 
             context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue1());
             context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue2());
-            //context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue3());
-            //context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue4());
+            context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue3());
+            context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue4());
 
         }
     }
@@ -30,6 +30,7 @@ public class SampleRoomGenerator {
         value.put(RoomContract.Speakers.IP, "192.168.1.34:8080");
         value.put(RoomContract.Speakers.POSITION_X, 170);
         value.put(RoomContract.Speakers.POSITION_Y, 0);
+        value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_TOP);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
@@ -41,6 +42,7 @@ public class SampleRoomGenerator {
         value.put(RoomContract.Speakers.IP, "192.168.1.35:8080");
         value.put(RoomContract.Speakers.POSITION_X, 320);
         value.put(RoomContract.Speakers.POSITION_Y, 200);
+        value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_RIGHT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
@@ -49,9 +51,10 @@ public class SampleRoomGenerator {
 
     private static ContentValues speakerValue3() {
         ContentValues value = new ContentValues();
-        value.put(RoomContract.Speakers.IP, "192.168.1.36:8080");
+        value.put(RoomContract.Speakers.IP, "192.168.1.37:8080");
         value.put(RoomContract.Speakers.POSITION_X, 200);
         value.put(RoomContract.Speakers.POSITION_Y, 455);
+        value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_BOTTOM);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
@@ -60,9 +63,10 @@ public class SampleRoomGenerator {
 
     private static ContentValues speakerValue4() {
         ContentValues value = new ContentValues();
-        value.put(RoomContract.Speakers.IP, "192.168.1.37:8080");
+        value.put(RoomContract.Speakers.IP, "192.168.1.38:8080");
         value.put(RoomContract.Speakers.POSITION_X, 0);
         value.put(RoomContract.Speakers.POSITION_Y, 200);
+        value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_LEFT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
@@ -92,18 +96,18 @@ public class SampleRoomGenerator {
     private static ContentValues roomValues1(){
         ContentValues values = new ContentValues();
         values.put(RoomContract.Rooms.NAME, "Room 1");
-        values.put(RoomContract.Rooms.HEIGHT, "2");
-        values.put(RoomContract.Rooms.WIDTH, "6");
-        values.put(RoomContract.Rooms.LENGTH, "3");
+        values.put(RoomContract.Rooms.HEIGHT, "200");
+        values.put(RoomContract.Rooms.WIDTH, "600");
+        values.put(RoomContract.Rooms.LENGTH, "300");
         return values;
     }
 
     private static ContentValues roomValues2(){
         ContentValues values = new ContentValues();
         values.put(RoomContract.Rooms.NAME, "Room 2");
-        values.put(RoomContract.Rooms.HEIGHT, "2");
-        values.put(RoomContract.Rooms.WIDTH, "3");
-        values.put(RoomContract.Rooms.LENGTH, "2");
+        values.put(RoomContract.Rooms.HEIGHT, "200");
+        values.put(RoomContract.Rooms.WIDTH, "300");
+        values.put(RoomContract.Rooms.LENGTH, "200");
         return values;
     }
 }

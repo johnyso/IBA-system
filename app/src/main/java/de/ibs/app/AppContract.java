@@ -22,7 +22,6 @@ public class AppContract {
 
     public static String getRestPath(int direction, int deg, String ip) {
 
-        Log.d("AppContract", "Position: " + Math.abs((int) (deg * 0.28)));
 
         if (direction == HORIZONTAL){
             return "http://" + ip + "/index.php/horizontal-" + Math.abs((int) (deg * 0.28));

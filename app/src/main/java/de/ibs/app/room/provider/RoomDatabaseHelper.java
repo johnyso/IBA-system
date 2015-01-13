@@ -54,4 +54,11 @@ public class RoomDatabaseHelper {
         SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
         return database.update(Rooms.TABLE_NAME, values, where, arg);
     }
+
+    public int updateSpeaker(ContentValues values, String roomId, String speakerId) {
+        String where = Speakers.ROOM_ID + "=? AND " + Speakers._ID + "=?";
+        String[] arg = {roomId, speakerId};
+        SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
+        return database.update(Speakers.TABLE_NAME, values, where, arg);
+    }
 }

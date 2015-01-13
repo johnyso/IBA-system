@@ -51,8 +51,8 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
         this.roomView.setRoom(this.room);
 
         Cursor cursorSpeaker = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + this.currentId + "/" + RoomContract.SPEAKERS), null, null, null, null);
-        this.speakers = (SpeakerParser.parseSpeakers(cursorSpeaker));
         if (cursorSpeaker.getCount() > 0) {
+            this.speakers = (SpeakerParser.parseSpeakers(cursorSpeaker));
             this.roomView.setSpeaker(this.speakers);
         }
         this.seekBar = (SeekBar) view.findViewById(R.id.roomHeightSeek);
