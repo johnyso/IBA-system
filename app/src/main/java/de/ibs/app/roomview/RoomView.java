@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.*;
 import android.net.Uri;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -204,7 +205,8 @@ public class RoomView extends View implements View.OnTouchListener {
                         this.context.startService(intent);
                     }
                 }
-
+                Intent intent = new Intent(AppContract.BROADCAST_UPDATE_VERTICAL);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
 
                 break;

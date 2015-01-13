@@ -1,16 +1,17 @@
 package de.ibs.app.room;
 
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.processor.Room;
 import de.ibs.app.room.processor.RoomParser;
@@ -20,6 +21,9 @@ import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.processor.Speaker;
 import de.ibs.app.speaker.processor.SpeakerParser;
 import de.ibs.app.speaker.restmethod.SpeakerRequest;
+
+import static de.ibs.app.room.utils.RoomContract.CONTENT_URI;
+import static de.ibs.app.room.utils.RoomContract.ROOMS;
 
 
 /**
@@ -32,6 +36,8 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
     private SeekBar seekBar;
     private Room room;
     private Speaker[] speakers;
+    private LocalBroadcastManager localBroadcastManager;
+    private RoomVerticalBroadcast roomVerticalBroadcast;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,8 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
         this.context = getActivity();
         Cursor cursor = this.context.getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-1/" + RoomContract.SPEAKERS), null, null, null, null);
         this.currentId = getArguments().getInt(RoomContract.Rooms._ID);
+        this.localBroadcastManager = LocalBroadcastManager.getInstance(getActivity().getApplicationContext());
+        this.roomVerticalBroadcast = new RoomVerticalBroadcast(this);
     }
 
     @Override
@@ -56,8 +64,21 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
             this.roomView.setSpeaker(this.speakers);
         }
         this.seekBar = (SeekBar) view.findViewById(R.id.roomHeightSeek);
+        this.seekBar.setProgress(this.room.getPersonHeight());
         this.seekBar.setOnSeekBarChangeListener(this);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.localBroadcastManager.registerReceiver(this.roomVerticalBroadcast, new IntentFilter(AppContract.BROADCAST_UPDATE_VERTICAL));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.localBroadcastManager.unregisterReceiver(this.roomVerticalBroadcast);
     }
 
     @Override
@@ -73,39 +94,48 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 //        Log.d("RoomDetail", "height: " + seekBar.getProgress());
+        this.room.setPersonHeight(seekBar.getProgress());
+        ContentValues values = new ContentValues();
+        values.put(RoomContract.Rooms.PERSON_HEIGHT, seekBar.getProgress());
+        context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
+        updateVerticalAlignment();
+    }
+
+    public void updateVerticalAlignment() {
         float x = this.room.getPersonX() - this.room.getPaddingLeft();
         float y = this.room.getPersonY();
-
-        Log.d("Positions: ", "SeekBar: " + seekBar.getProgress());
+        ContentValues values = new ContentValues();
 
         int deg = 0;
         for (Speaker speaker : this.speakers) {
-            double process = 100.0/(double) seekBar.getProgress();
+            double process = 100.0/(double) this.room.getPersonHeight();
             double height = speaker.getPositionHeight() / process;
             double distSpeaker = speaker.getPositionHeight() - height;
 
             switch (speaker.getAlignment()) {
                 case RoomContract.Speakers.ALIGNMENT_TOP:
-                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / y));
+                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / (this.room.getPersonY()-speaker.getPositionY())));
                     break;
                 case RoomContract.Speakers.ALIGNMENT_RIGHT:
-                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / x));
+                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / (speaker.getPositionX() - x) ));
                     break;
                 case RoomContract.Speakers.ALIGNMENT_BOTTOM:
-                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / y));
+                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / (speaker.getPositionY() - this.room.getPersonY())));
                     break;
                 case RoomContract.Speakers.ALIGNMENT_LEFT:
-                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / x));
+                    deg = (int) Math.toDegrees(Math.atan(distSpeaker / (x - speaker.getPositionX())));
                     break;
 
             }
             Log.d("Positions: ", "Speaker: " + speaker.getAlignment() + " deg: " + deg);
+            values.clear();
+            values.put(RoomContract.Speakers.VERTICAL, deg);
+            context.getContentResolver().update(RoomContract.getSpeakerPath(this.room.getId(), speaker.getId()), values, null, null);
         }
 
 
         Intent intent = new Intent(context, SpeakerRequest.class);
-//        //TODO: inplement new one
-        intent.putExtra(SpeakerConstants.REST_ID, "http://192.168.1.34:8080/index.php/vertical-" + seekBar.getProgress());
+        intent.putExtra(SpeakerConstants.REST_ID, "http://192.168.1.34:8080/index.php/vertical-" + this.room.getPersonHeight());
         //  this.context.startService(intent);
     }
 }
