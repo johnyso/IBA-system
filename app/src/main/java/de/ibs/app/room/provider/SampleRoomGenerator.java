@@ -34,6 +34,7 @@ public class SampleRoomGenerator {
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_TOP);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
+        value.put(RoomContract.Speakers.NAME, "top");
         return value;
     }
 
@@ -46,6 +47,7 @@ public class SampleRoomGenerator {
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_RIGHT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
+        value.put(RoomContract.Speakers.NAME, "Right");
         return value;
     }
 
@@ -58,6 +60,7 @@ public class SampleRoomGenerator {
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_BOTTOM);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
+        value.put(RoomContract.Speakers.NAME, "Bottom");
         return value;
     }
 
@@ -70,6 +73,7 @@ public class SampleRoomGenerator {
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_LEFT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
+        value.put(RoomContract.Speakers.NAME, "Left");
         return value;
     }
 

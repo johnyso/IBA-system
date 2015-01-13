@@ -20,5 +20,12 @@
              android:max="100"
              android:layout_below="@id/roomView"
             />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/roomHeightSeek"
+            android:id="@+id/button_group"
+            android:orientation="vertical"
+            />
 
 </RelativeLayout>

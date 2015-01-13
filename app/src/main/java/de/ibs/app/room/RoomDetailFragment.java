@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
@@ -29,7 +31,7 @@ import static de.ibs.app.room.utils.RoomContract.ROOMS;
 /**
  * Created by johnyso on 11.11.14.
  */
-public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
+public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
     private Context context;
     private int currentId = 1;
     private RoomView roomView;
@@ -66,6 +68,16 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
         this.seekBar = (SeekBar) view.findViewById(R.id.roomHeightSeek);
         this.seekBar.setProgress(this.room.getPersonHeight());
         this.seekBar.setOnSeekBarChangeListener(this);
+
+        LinearLayout layout = (LinearLayout) view.findViewById(R.id.button_group);
+        for (Speaker speaker : this.speakers) {
+            Button button = new Button(getActivity());
+            button.setText("Wandhalterung " + speaker.getName());
+            button.setTag(speaker.getId());
+            button.setOnClickListener(this);
+            layout.addView(button);
+        }
+
         return view;
     }
 
@@ -136,5 +148,11 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
             intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.VERTICAL, deg, speaker.getIp()));
             this.context.startService(intent);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = (Integer) v.getTag();
+        //Broadcast change Fragment
     }
 }
