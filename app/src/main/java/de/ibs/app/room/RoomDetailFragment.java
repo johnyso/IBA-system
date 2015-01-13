@@ -128,14 +128,13 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
 
             }
             Log.d("Positions: ", "Speaker: " + speaker.getAlignment() + " deg: " + deg);
+            speaker.setHorizontal(deg);
             values.clear();
             values.put(RoomContract.Speakers.VERTICAL, deg);
             context.getContentResolver().update(RoomContract.getSpeakerPath(this.room.getId(), speaker.getId()), values, null, null);
+            Intent intent = new Intent(context, SpeakerRequest.class);
+            intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.VERTICAL, deg, speaker.getIp()));
+            this.context.startService(intent);
         }
-
-
-        Intent intent = new Intent(context, SpeakerRequest.class);
-        intent.putExtra(SpeakerConstants.REST_ID, "http://192.168.1.34:8080/index.php/vertical-" + this.room.getPersonHeight());
-        //  this.context.startService(intent);
     }
 }
