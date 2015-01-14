@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.RoomContract;
 import de.ibs.app.room.processor.Room;
@@ -72,8 +73,21 @@ public class RoomView extends View implements View.OnTouchListener {
         Matrix matrix = new Matrix();
         if (speakers != null) {
             for (Speaker speaker : this.speakers) {
+                switch (speaker.getAlignment()){
+                    case RoomContract.Speakers.ALIGNMENT_LEFT:
+                        matrix.setRotate(Math.abs(speaker.getHorizontal()+270), 0, 0);
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_RIGHT:
+                        matrix.setRotate(speaker.getHorizontal()+90, 0, 0);
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_BOTTOM:
+                        matrix.setRotate(Math.abs(speaker.getHorizontal()-360), 0, 0);
+                        break;
+                    default:
+                        matrix.setRotate(speaker.getHorizontal(), 0, 0);
+                        break;
+                }
 
-                matrix.setRotate(speaker.getHorizontal(), 0, 0);
 
                 rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
 
@@ -112,20 +126,47 @@ public class RoomView extends View implements View.OnTouchListener {
 
         if (speakers != null) {
             for (Speaker speaker : this.speakers) {
+                // x
                 float x = this.room.getPersonX() - this.room.getPaddingLeft() - speaker.getPositionX();
                 float y = this.room.getPersonY() - speaker.getPositionY();
                 double deg = Math.toDegrees(Math.atan(y / x));
+                int align = speaker.getAlignment();
+                int test = RoomContract.Speakers.ALIGNMENT_TOP;
 
-                if (x < 0 && y < 0) {
-                    deg = deg + 180;
-                } else if (x < 0 && y > 0) {
-                    deg = deg + 180;
-                } else if (x > 0 && y < 0) {
-                    deg = deg + 360;
+                switch (align) {
+                    case RoomContract.Speakers.ALIGNMENT_TOP:
+                        if(deg < 0 || Double.toString(deg).equals("-0.0")){
+                            deg = 180 + deg;
+                        } else {
+                            deg = Math.abs(deg);
+                        }
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_RIGHT:
+                        if(deg>=0) {
+                            deg = 90 + deg;
+                        } else {
+                            deg = Math.abs(90 + deg);
+                        }
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_BOTTOM:
+                        if(deg >= 0) {
+                            deg = Math.abs(-180 + deg);
+                        } else {
+                            deg = Math.abs(deg);
+                        }
+                        break;
+                    case RoomContract.Speakers.ALIGNMENT_LEFT:
+                        if(deg<0) {
+                            deg = 90 + deg;
+                        } else {
+                            deg = Math.abs(90 + deg);
+                        }
+                        break;
+                    default:
+                        break;
                 }
 
                 speaker.setHorizontal((int) deg);
-                Log.d("RoomView", "Speaekr: " + speaker.getId() + " Value degree: " + deg + " From x: " + x + " and y: " + y);
             }
         }
         this.invalidate();
@@ -150,16 +191,19 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 context.getContentResolver().update(Uri.withAppendedPath(CONTENT_URI, ROOMS + "-" + this.room.getId()), values, null, null);
 
-
                 this.invalidate();
 
+                if (speakers != null) {
+                    for (Speaker speaker : this.speakers) {
+                        Intent intent =  new Intent(context, SpeakerRequest.class);
+
+                        intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, speaker.getHorizontal(), speaker.getIp()));
+
+                        this.context.startService(intent);
+                    }
+                }
 
 
-                Intent intent =  new Intent(context, SpeakerRequest.class);
-
-                intent.putExtra(SpeakerConstants.REST_ID, "horizontal-"+(int) this.speakers[0].getHorizontal());
-
-                this.context.startService(intent);
 
                 break;
         }

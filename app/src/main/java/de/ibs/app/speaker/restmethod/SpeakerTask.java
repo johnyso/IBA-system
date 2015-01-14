@@ -27,14 +27,14 @@ public class SpeakerTask implements Runnable {
     public SpeakerTask(Service context, Bundle extras) {
         this.context = context;
         this.restPath = extras.getString(SpeakerConstants.REST_ID);
-        this.path = testPath;
+        this.path = restPath;
     }
 
     @Override
     public void run() {
         String response = null;
         try {
-            response = run(this.path+this.restPath+"/");
+            response = run(this.path);
         } catch (IOException e) {
             e.printStackTrace();
         }

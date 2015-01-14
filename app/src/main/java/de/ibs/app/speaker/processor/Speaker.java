@@ -9,6 +9,7 @@ public class Speaker {
     private String ip;
     private int positionX;
     private int positionY;
+    private int alignment;
     private int positionHeight;
     private int horizontal;
     private int vertical;
@@ -34,6 +35,10 @@ public class Speaker {
         return positionY;
     }
 
+    public int getAlignment() {
+        return alignment;
+    }
+
     public int getPositionHeight() {
         return positionHeight;
     }
@@ -56,6 +61,7 @@ public class Speaker {
         this.ip = builder.ip;
         this.positionX = builder.positionX;
         this.positionY = builder.positionY;
+        this.alignment = builder.alignment;
         this.positionHeight = builder.positionHeight;
         this.horizontal = builder.horizontal;
         this.vertical = builder.vertical;
@@ -72,6 +78,7 @@ public class Speaker {
         private String ip;
         private int positionX;
         private int positionY;
+        private int alignment;
         private int positionHeight;
         private int horizontal;
         private int vertical;
@@ -99,6 +106,11 @@ public class Speaker {
 
         public Builder positionY(int positionY) {
             this.positionY = positionY;
+            return this;
+        }
+
+        public Builder alignment(int alignment) {
+            this.alignment = alignment;
             return this;
         }
 

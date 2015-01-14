@@ -30,6 +30,8 @@ public class RoomContract {
         URI_MATCHER.addURI(AUTHORITY, ROOM + "/" + SPEAKER, TYPE_SPEAKERS);
     }
 
+    public static final String CURRENT_ROOM = "currentRoom";
+
     public static abstract class Rooms implements BaseColumns {
         public static final String TABLE_NAME = "rooms";
 
@@ -62,17 +64,24 @@ public class RoomContract {
         public static final String POSITION_HEIGHT = "height";
         public static final String HORIZONTAL = "horizontal";
         public static final String VERTICAL = "vertical";
-        public static final String ROOM_ID = "room_id";
+        public static final String ALIGNMENT = "alignment";
 
+        public static final String ROOM_ID = "room_id";
         public static final String TYPE_IP = "TEXT";
         public static final String TYPE_NAME = "TEXT";
         public static final String TYPE_POSITION_X = "INTEGER";
         public static final String TYPE_POSITION_Y = "INTEGER";
+        public static final String TYPE_ALIGNMENT = "INTEGER";
         public static final String TYPE_POSITION_HEIGHT = "INTEGER";
         public static final String TYPE_HORIZONTAL = "INTEGER";
         public static final String TYPE_VERTICAL = "INTEGER";
         public static final String TYPE_ROOM_ID = "INTEGER";
 
-        public static final String[] ALL_COLUMNS = {_ID, IP, NAME, POSITION_X, POSITION_Y, POSITION_HEIGHT, HORIZONTAL, VERTICAL, ROOM_ID};
+        public static final int ALIGNMENT_TOP = 1;
+        public static final int ALIGNMENT_RIGHT = 2;
+        public static final int ALIGNMENT_BOTTOM = 3;
+        public static final int ALIGNMENT_LEFT = 4;
+
+        public static final String[] ALL_COLUMNS = {_ID, IP, NAME, POSITION_X, POSITION_Y, ALIGNMENT, POSITION_HEIGHT, HORIZONTAL, VERTICAL, ROOM_ID};
     }
 }

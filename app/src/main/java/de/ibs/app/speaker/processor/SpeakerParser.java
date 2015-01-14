@@ -21,6 +21,7 @@ public class SpeakerParser {
                         .name(cursor.getString(cursor.getColumnIndex(RoomContract.Speakers.NAME)))
                         .positionX(cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers.POSITION_X)))
                         .positionY(cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers.POSITION_Y)))
+                        .alignment(cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers.ALIGNMENT)))
                         .positionHeight(cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers.POSITION_HEIGHT)))
                         .horizontal(cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers.HORIZONTAL)))
                         .vertical(cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers.VERTICAL)))

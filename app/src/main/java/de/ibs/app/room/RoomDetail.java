@@ -16,8 +16,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.processor.RoomParser;
+import de.ibs.app.room.provider.SampleRoomGenerator;
 import de.ibs.app.roomview.RoomView;
 import de.ibs.app.speaker.SpeakerAcitvity;
 import de.ibs.app.speaker.SpeakerConstants;
@@ -32,7 +34,7 @@ import static de.ibs.app.room.RoomDetailAdapter.ViewHolder;
 public class RoomDetail extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, SeekBar.OnSeekBarChangeListener {
     private Context context;
     private RoomDetailAdapter adapter;
-    private int currentId = 0;
+    private int currentId = 1;
     private RoomView roomView;
     private SeekBar seekBar;
 
@@ -42,6 +44,9 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         this.context = getActivity();
         Cursor cursor = this.context.getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-1/" + RoomContract.SPEAKERS), null, null, null, null);
         this.adapter = new RoomDetailAdapter(getActivity(), cursor, 0);
+        if (savedInstanceState != null) {
+            this.currentId = savedInstanceState.getInt(RoomContract.CURRENT_ROOM);
+        }
     }
 
     @Override
@@ -50,8 +55,12 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(this.adapter);
         listView.setOnItemClickListener(this);
+        Cursor cursorRoom = getActivity().getContentResolver().query(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + this.currentId), null, null, null, null);
         this.getLoaderManager().initLoader(0, null, this);
+
+
         this.roomView = (RoomView) view.findViewById(R.id.roomView);
+        this.roomView.setRoom(RoomParser.parseRoom(cursorRoom,0));
         this.seekBar = (SeekBar) view.findViewById(R.id.roomHeightSeek);
         this.seekBar.setOnSeekBarChangeListener(this);
         return view;
@@ -113,9 +122,10 @@ public class RoomDetail extends Fragment implements AdapterView.OnItemClickListe
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        Log.d("RoomDetail", "height: " + seekBar.getProgress());
-        Intent intent =  new Intent(context, SpeakerRequest.class);
-        intent.putExtra(SpeakerConstants.REST_ID, "vertical/" + seekBar.getProgress());
-        this.context.startService(intent);
+//        Log.d("RoomDetail", "height: " + seekBar.getProgress());
+//        Intent intent =  new Intent(context, SpeakerRequest.class);
+//        //TODO: inplement new one
+//        intent.putExtra(SpeakerConstants.REST_ID,"http://192.168.8.1:8080/index.php/vertical-" + seekBar.getProgress());
+//        this.context.startService(intent);
     }
 }
