@@ -20,7 +20,7 @@ public class SampleRoomGenerator {
             context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue1());
             context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue2());
             context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue3());
-            context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue4());
+            //context.getContentResolver().insert(Uri.parse(uri1+"/"+RoomContract.SPEAKERS),speakerValue4());
 
         }
     }
@@ -28,10 +28,10 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue1() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.34:8080");
-        value.put(RoomContract.Speakers.POSITION_X, 170);
-        value.put(RoomContract.Speakers.POSITION_Y, 0);
+        value.put(RoomContract.Speakers.POSITION_X, 320);
+        value.put(RoomContract.Speakers.POSITION_Y, 10);
         value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
-        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_TOP);
+        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_RIGHT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
         value.put(RoomContract.Speakers.NAME, "top");
@@ -54,10 +54,10 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue3() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.37:8080");
-        value.put(RoomContract.Speakers.POSITION_X, 200);
-        value.put(RoomContract.Speakers.POSITION_Y, 455);
+        value.put(RoomContract.Speakers.POSITION_X, 0);
+        value.put(RoomContract.Speakers.POSITION_Y, 200);
         value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
-        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_BOTTOM);
+        value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_LEFT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
         value.put(RoomContract.Speakers.VERTICAL, 0);
         value.put(RoomContract.Speakers.NAME, "Bottom");

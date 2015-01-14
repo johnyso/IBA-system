@@ -71,12 +71,14 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
         this.seekBar.setOnSeekBarChangeListener(this);
 
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.button_group);
-        for (Speaker speaker : this.speakers) {
-            Button button = new Button(getActivity());
-            button.setText("Wandhalterung " + speaker.getName());
-            button.setTag(speaker.getId());
-            button.setOnClickListener(this);
-            layout.addView(button);
+        if (this.speakers != null) {
+            for (Speaker speaker : this.speakers) {
+                Button button = new Button(getActivity());
+                button.setText("Wandhalterung " + speaker.getName());
+                button.setTag(speaker.getId());
+                button.setOnClickListener(this);
+                layout.addView(button);
+            }
         }
 
         return view;
