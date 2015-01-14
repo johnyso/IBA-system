@@ -1,7 +1,7 @@
 package de.ibs.app.room.processor;
 
 import android.database.Cursor;
-import de.ibs.app.room.RoomContract;
+import de.ibs.app.room.utils.RoomContract;
 
 import java.util.NoSuchElementException;
 

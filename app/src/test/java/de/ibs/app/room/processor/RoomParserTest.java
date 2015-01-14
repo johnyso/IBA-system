@@ -2,7 +2,7 @@ package de.ibs.app.room.processor;
 
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import de.ibs.app.room.RoomContract;
+import de.ibs.app.room.utils.RoomContract;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

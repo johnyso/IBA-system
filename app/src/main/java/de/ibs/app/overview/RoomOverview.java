@@ -1,4 +1,4 @@
-package de.ibs.app.room;
+package de.ibs.app.overview;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

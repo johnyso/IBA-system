@@ -4,11 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import de.ibs.app.room.RoomContract;
 import de.ibs.app.utils.DatabaseOpenHelper;
 
-import static de.ibs.app.room.RoomContract.*;
+import static de.ibs.app.room.utils.RoomContract.*;
 
 /**
  * Created by johnyso on 11.11.14.
@@ -55,5 +53,19 @@ public class RoomDatabaseHelper {
         String[] arg = {roomId};
         SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
         return database.update(Rooms.TABLE_NAME, values, where, arg);
+    }
+
+    public int updateSpeaker(ContentValues values, String roomId, String speakerId) {
+        String where = Speakers.ROOM_ID + "=? AND " + Speakers._ID + "=?";
+        String[] arg = {roomId, speakerId};
+        SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
+        return database.update(Speakers.TABLE_NAME, values, where, arg);
+    }
+
+    public Cursor getSpeaker(String roomId, String speakerId) {
+        String where = Speakers.ROOM_ID + "=? AND " + Speakers._ID + "=?";
+        String[] arg = {roomId, speakerId};
+        SQLiteDatabase database = this.databaseOpenHelper.getWritableDatabase();
+        return database.query(Speakers.TABLE_NAME, null, where, arg, null, null, null, null);
     }
 }

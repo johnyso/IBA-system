@@ -3,25 +3,23 @@ package de.ibs.app.roomview;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.graphics.*;
 import android.net.Uri;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
-import de.ibs.app.room.RoomContract;
+import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.room.processor.Room;
 import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.processor.Speaker;
 import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
-import java.util.List;
-
-import static de.ibs.app.room.RoomContract.CONTENT_URI;
-import static de.ibs.app.room.RoomContract.ROOMS;
+import static de.ibs.app.room.utils.RoomContract.CONTENT_URI;
+import static de.ibs.app.room.utils.RoomContract.ROOMS;
 
 /**
  * Created by johnyso on 13.11.14.
@@ -179,7 +177,6 @@ public class RoomView extends View implements View.OnTouchListener {
                 break;
 
             case MotionEvent.ACTION_UP:
-                Log.d("RoomView", "Mouse Up");
 
                 ContentValues values = new ContentValues();
 
@@ -195,6 +192,12 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 if (speakers != null) {
                     for (Speaker speaker : this.speakers) {
+                        values.clear();
+                        values.put(RoomContract.Speakers.HORIZONTAL, speaker.getHorizontal());
+
+                        context.getContentResolver().update(RoomContract.getSpeakerPath(this.room.getId(), speaker.getId()), values, null, null);
+
+
                         Intent intent =  new Intent(context, SpeakerRequest.class);
 
                         intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, speaker.getHorizontal(), speaker.getIp()));
@@ -202,7 +205,8 @@ public class RoomView extends View implements View.OnTouchListener {
                         this.context.startService(intent);
                     }
                 }
-
+                Intent intent = new Intent(AppContract.BROADCAST_UPDATE_VERTICAL);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
 
                 break;
