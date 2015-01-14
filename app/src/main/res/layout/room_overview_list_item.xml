@@ -15,6 +15,8 @@
             android:layout_height="fill_parent"
             android:layout_below="@id/textView"
             android:weightSum="3"
+            android:paddingRight="28dp"
+            android:paddingLeft="0dp"
             android:orientation="horizontal">
         <RelativeLayout
                 android:layout_width="0dp"

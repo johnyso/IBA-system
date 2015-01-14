@@ -19,7 +19,6 @@
             android:text="@string/button_add_room"
             android:layout_below="@id/listView"
             android:id="@+id/button"
-            android:layout_alignBottom="@id/listView"
             />
 
 
