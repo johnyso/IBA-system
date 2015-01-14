@@ -4,6 +4,7 @@
     <color name="default_background">#FFB200</color>
     <color name="white">#FFFFFF</color>
     <color name="darkGrey">#4D4D4D</color>
+    <color name="lightGrey">#A4A395</color>
     <color name="midGrey">#B3B3A7</color>
     <color name="brightGrey">#CCCCCC</color>
     <color name="colorTheme">#EEC63A</color>

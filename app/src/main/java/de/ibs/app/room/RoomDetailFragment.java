@@ -117,6 +117,9 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
     }
 
     public void updateVerticalAlignment() {
+        if (this.speakers == null) {
+            return;
+        }
         float x = this.room.getPersonX() - this.room.getPaddingLeft();
         float y = this.room.getPersonY();
         ContentValues values = new ContentValues();

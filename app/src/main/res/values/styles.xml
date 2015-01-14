@@ -48,5 +48,10 @@
         <item name="android:layout_marginLeft">32dp</item>
         <item name="android:layout_marginRight">16dp</item>
     </style>
+    <style name="textSecond">
+        <item name="android:textColor">@color/lightGrey</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 
 </resources>

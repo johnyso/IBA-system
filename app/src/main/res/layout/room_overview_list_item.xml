@@ -2,59 +2,90 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:minHeight="48dp"
+                android:minHeight="64dp"
                 android:descendantFocusability="blocksDescendants"
-                android:layout_height="48dp">
+                android:layout_height="64dp">
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:id="@+id/textView"
               style="@style/ListTextStyle"
             />
     <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_below="@id/textView"
+            android:weightSum="3"
             android:orientation="horizontal">
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textViewWidthText"
-                  android:text="@string/room_add_width"
-                  style="@style/ListTextStyle"
-                />
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textViewWidthVariable"
-                  style="@style/ListTextStyle"
-                />
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/textViewWidthText"
+                      android:text="@string/room_add_width"
+                      android:layout_marginRight="5dp"
+                      style="@style/textSecond"
+                    />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/textViewWidthVariable"
+                      android:layout_toRightOf="@id/textViewWidthText"
+                      style="@style/textSecond"
+                    />
+        </RelativeLayout>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textViewLengthText"
-                  android:text="@string/room_add_length"
-                  style="@style/ListTextStyle"
-                />
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textViewLengthVariable"
-                  style="@style/ListTextStyle"
-                />
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/textViewLengthText"
+                      android:text="@string/room_add_length"
+                      android:layout_marginRight="5dp"
+                      style="@style/textSecond"
+                    />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/textViewLengthVariable"
+                      android:layout_toRightOf="@id/textViewLengthText"
+                      style="@style/textSecond"
+                    />
+        </RelativeLayout>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textViewHeightText"
-                  android:text="@string/room_add_height"
-                  style="@style/ListTextStyle"
-                />
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/textViewHeightVariable"
-                  style="@style/ListTextStyle"
-                />
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/textViewHeightText"
+                      android:text="@string/room_add_height"
+                      android:layout_marginRight="5dp"
+                      style="@style/textSecond"
+                    />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/textViewHeightVariable"
+                      android:layout_toRightOf="@id/textViewHeightText"
+                      style="@style/textSecond"
+                    />
+        </RelativeLayout>
     </LinearLayout>
     <ImageButton android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/setting"
-            style="@style/ListButtonStyle"
+                 android:layout_height="match_parent"
+                 android:src="@drawable/setting"
+                 style="@style/ListButtonStyle"
             />
 
 </RelativeLayout>
