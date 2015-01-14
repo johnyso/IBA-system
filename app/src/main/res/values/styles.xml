@@ -19,13 +19,13 @@
         <item name="android:dividerHeight">16dp</item>
         <item name="android:divider">@color/colorTheme</item>
         <item name="android:itemTextAppearance">@style/ListTextStyle</item>
-        <item name="android:background">@color/white60</item>
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="ListTextStyle">
-        <item name="android:textColor">@color/colorTheme</item>
+        <item name="android:textColor">@color/darkGrey</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginLeft">8dp</item>

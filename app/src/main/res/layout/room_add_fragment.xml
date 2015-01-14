@@ -1,101 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:textColor="@color/black"
+                android:paddingTop="24dp"
+                android:paddingLeft="16dp"
+                android:paddingBottom="24dp"
+                android:paddingRight="16dp">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/headline"
-            android:text="@string/room_add_headline"
-            />
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="48dp"
-            >
+
         <TextView
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:text="@string/room_add_width"
-                android:id="@+id/textWidth"
-                android:layout_centerVertical="true"
-                />
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/editWidth"
-                  android:layout_toRightOf="@id/textWidth"
-                  android:inputType="number"
-                  android:hint="@string/room_add_width"
-                  android:singleLine="true"
-                  android:lines="1"
-                  android:maxLines="1"
-                />
-    </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="48dp"
-            >
-        <TextView
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:text="@string/room_add_length"
-                android:id="@+id/textLength"
-                android:layout_centerVertical="true"
-                />
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/editLength"
-                  android:layout_toRightOf="@id/textLength"
-                  android:inputType="number"
-                  android:hint="@string/room_add_length"
-                  android:singleLine="true"
-                  android:lines="1"
-                  android:maxLines="1"
-                />
-    </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="48dp"
-            >
-        <TextView
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:text="@string/room_add_height"
-                android:id="@+id/textHeight"
-                android:layout_centerVertical="true"
-                />
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/editHeight"
-                  android:layout_toRightOf="@id/textHeight"
-                  android:inputType="number"
-                  android:hint="@string/room_add_height"
-                  android:singleLine="true"
-                  android:lines="1"
-                  android:maxLines="1"
-                />
-    </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="48dp">
-        <TextView
-                android:layout_width="48dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/room_add_name"
                 android:id="@+id/textName"
-                android:layout_centerVertical="true"
-                />
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
+
         <EditText android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:id="@+id/editName"
-                  android:layout_toRightOf="@id/textName"
+                  android:layout_below="@id/textName"
                   android:singleLine="true"
                   android:lines="1"
                   android:maxLines="1"
                 />
-    </RelativeLayout>
+
+
+        <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/room_add_width"
+                android:id="@+id/textWidth"
+                android:layout_below="@id/editName"
+                android:layout_alignParentLeft="true"
+                android:textSize="18dp"
+                android:layout_marginTop="36dp"
+                android:textColor="@color/black"
+
+                />
+        <EditText android:layout_width="110dp"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/editWidth"
+                  android:inputType="number"
+                  android:singleLine="true"
+                  android:lines="1"
+                  android:maxLines="1"
+                  android:layout_below="@id/textWidth"
+                  android:layout_alignParentLeft="true"
+                />
+
+
+
+        <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/room_add_length"
+                android:id="@+id/textLength"
+                android:layout_below="@id/editName"
+                android:layout_centerHorizontal="true"
+                android:textSize="18dp"
+                android:layout_marginTop="36dp"
+                android:textColor="@color/black"
+
+                />
+        <EditText android:layout_width="110dp"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/editLength"
+                  android:inputType="number"
+                  android:singleLine="true"
+                  android:lines="1"
+                  android:maxLines="1"
+                  android:layout_below="@+id/textLength"
+                  android:layout_alignStart="@+id/textLength"
+                />
+
+
+
+        <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/room_add_height"
+                android:id="@+id/textHeight"
+                android:layout_below="@id/editName"
+                android:layout_alignParentRight="true"
+                android:textSize="18dp"
+                android:layout_marginTop="36dp"
+                android:textColor="@color/black"
+
+                />
+        <EditText android:layout_width="110dp"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/editHeight"
+                  android:inputType="number"
+                  android:singleLine="true"
+                  android:lines="1"
+                  android:maxLines="1"
+                  android:layout_below="@+id/textHeight"
+                  android:layout_alignParentEnd="true"/>
+
+
+
+
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:id="@+id/button"
             android:text="@string/button_add_room"
+            android:background="@color/white"
+            android:textSize="18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
+
+    <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/halterungHinzufuegenButton"
+            android:text="@string/halterungHinzufuegenButton"
+            android:background="@color/white"
+            android:textSize="18dp"
+            android:layout_above="@+id/button"
+            android:layout_marginBottom="8dp"
             />
 
-</LinearLayout>
+
+</RelativeLayout>

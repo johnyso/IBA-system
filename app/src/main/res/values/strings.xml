@@ -3,16 +3,17 @@
 
     <string name="app_name">IBS</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">EINSTELLUNGEN</string>
     <string name="title_activity_room">RoomActivity</string>
     <string name="ibstheme_tab_room_overview">Room Overview</string>
-    <string name="ibstheme_tab_room_favorit">Favorites</string>
+    <string name="ibstheme_tab_room_favorit">Favoriten</string>
     <string name="title_activity_speaker_acitvity">SpeakerAcitvity</string>
-    <string name="button_add_room">Add Room</string>
-    <string name="room_add_headline">Add Room</string>
-    <string name="room_add_width">Room width</string>
-    <string name="room_add_height">Room height</string>
-    <string name="room_add_length">Room length</string>
-    <string name="room_add_name">Room name</string>
+    <string name="button_add_room">RAUM SPEICHERN</string>
+    <string name="room_add_headline">Raum Hinzufügen</string>
+    <string name="room_add_width">BREITE</string>
+    <string name="room_add_height">HÖHE</string>
+    <string name="room_add_length">LÄNGE</string>
+    <string name="room_add_name">RAUMNAME</string>
+    <string name="halterungHinzufuegenButton">HALTERUNG HINZUFÜGEN +</string>
 
 </resources>
