@@ -20,6 +20,9 @@ public class RoomListAdapter extends CursorAdapter {
     static class ViewHolder {
         public TextView name;
         public int id;
+        public TextView height;
+        public TextView width;
+        public TextView length;
     }
 
     public RoomListAdapter(Context context, Cursor cursor, int i) {
@@ -32,6 +35,9 @@ public class RoomListAdapter extends CursorAdapter {
         View rowView = inflater.inflate(R.layout.room_overview_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder();
         viewHolder.name = (TextView) rowView.findViewById(R.id.textView);
+        viewHolder.height = (TextView) rowView.findViewById(R.id.textViewHeightVariable);
+        viewHolder.width = (TextView) rowView.findViewById(R.id.textViewWidthVariable);
+        viewHolder.length = (TextView) rowView.findViewById(R.id.textViewLengthVariable);
         rowView.setTag(viewHolder);
 
         return rowView;
@@ -42,5 +48,8 @@ public class RoomListAdapter extends CursorAdapter {
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.name.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.NAME)));
         holder.id = cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms._ID));
+        holder.length.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.LENGTH)));
+        holder.width.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.WIDTH)));
+        holder.height.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.HEIGHT)));
     }
 }

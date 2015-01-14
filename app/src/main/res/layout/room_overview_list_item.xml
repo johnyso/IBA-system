@@ -10,6 +10,47 @@
               android:id="@+id/textView"
               style="@style/ListTextStyle"
             />
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+            android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textViewWidthText"
+                  android:text="@string/room_add_width"
+                  style="@style/ListTextStyle"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textViewWidthVariable"
+                  style="@style/ListTextStyle"
+                />
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textViewLengthText"
+                  android:text="@string/room_add_length"
+                  style="@style/ListTextStyle"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textViewLengthVariable"
+                  style="@style/ListTextStyle"
+                />
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textViewHeightText"
+                  android:text="@string/room_add_height"
+                  style="@style/ListTextStyle"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/textViewHeightVariable"
+                  style="@style/ListTextStyle"
+                />
+    </LinearLayout>
     <ImageButton android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/setting"

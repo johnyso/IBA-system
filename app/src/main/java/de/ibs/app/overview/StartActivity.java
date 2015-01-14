@@ -56,7 +56,7 @@ public class StartActivity extends FragmentActivity {
         }
         if (this.addRoom == null) {
             this.addRoom = new RoomAddFragment();
-            transaction.add(R.id.fragment_container, this.addRoom, AppContract.ROOM_ADD_FRAGMENT);
+            transaction.add(R.id.fragment_container, this.addRoom, AppContract.ROOM_ADD_FRAGMENT).hide(this.addRoom);
         }
         transaction.commit();
     }
