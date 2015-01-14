@@ -10,14 +10,16 @@
             android:id="@+id/listView"
             android:layout_weight="1"
             android:dividerHeight="28dp"
-
-            android:layout_alignParentTop="true" android:layout_alignParentStart="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="8dp"
+            />
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_add_room"
             android:layout_below="@id/listView"
             android:id="@+id/button"
-            android:layout_alignBottom="@id/action_menu_divider"
+            android:layout_alignBottom="@id/listView"
             />
 
 
