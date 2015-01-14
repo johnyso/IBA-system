@@ -62,6 +62,9 @@ public class RoomProvider extends ContentProvider {
             case TYPE_SPEAKERS:
                 list = URI_MATCHER.match(uri).getCapturings();
                 return this.roomDatabaseHelper.getSpeakers(list.get(1));
+            case TYPE_SPEAKER:
+                list = URI_MATCHER.match(uri).getCapturings();
+                return this.roomDatabaseHelper.getSpeaker(list.get(1),list.get(2));
             case TYPE_ROOM:
                 list = URI_MATCHER.match(uri).getCapturings();
                 return this.roomDatabaseHelper.getRoom(list.get(1));

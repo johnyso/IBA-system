@@ -19,6 +19,7 @@ import de.ibs.app.room.processor.Room;
 import de.ibs.app.room.processor.RoomParser;
 import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.roomview.RoomView;
+import de.ibs.app.speaker.SpeakerAcitvity;
 import de.ibs.app.speaker.SpeakerConstants;
 import de.ibs.app.speaker.processor.Speaker;
 import de.ibs.app.speaker.processor.SpeakerParser;
@@ -153,6 +154,10 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
     @Override
     public void onClick(View v) {
         int id = (Integer) v.getTag();
+        Intent intent = new Intent(getActivity(),SpeakerAcitvity.class);
+        intent.putExtra(RoomContract.Speakers._ID, id);
+        intent.putExtra(RoomContract.Speakers.ROOM_ID, this.room.getId());
+        startActivity(intent);
         //Broadcast change Fragment
     }
 }
