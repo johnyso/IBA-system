@@ -22,5 +22,6 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="title_activity_room_detail">RoomDetail</string>
+    <string name="button_add_new_room">RAUM HINZUFÜGEN</string>
 
 </resources>

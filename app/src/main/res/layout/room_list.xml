@@ -16,13 +16,11 @@
             />
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_add_room"
+            android:text="@string/button_add_new_room"
             android:layout_below="@id/listView"
             android:id="@+id/button"
             android:layout_marginRight="64dp"
             android:layout_marginLeft="64dp"
             android:layout_marginTop="16dp"
             />
-
-
 </RelativeLayout>
