@@ -4,6 +4,8 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import de.ibs.app.AppContract;
+import de.ibs.app.room.processor.Room;
 import de.ibs.app.room.utils.RoomContract;
 
 import java.util.List;
@@ -82,6 +84,7 @@ public class RoomProvider extends ContentProvider {
         switch (uriType) {
             case TYPE_ROOM:
                 list = URI_MATCHER.match(uri).getCapturings();
+                getContext().getContentResolver().notifyChange(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS),null);
                 return this.roomDatabaseHelper.updateRoom(values, list.get(1));
             case TYPE_SPEAKER:
                 list = URI_MATCHER.match(uri).getCapturings();
