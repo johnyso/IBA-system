@@ -74,6 +74,7 @@ public class StartActivity extends FragmentActivity {
     }
     
     public void AddRoomFragment(){
+        this.addRoom.resetRoom();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(this.roomOverview)
                 .show(this.addRoom)

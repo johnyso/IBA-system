@@ -102,4 +102,12 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
         Uri uri = Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id);
         setRoom(uri);
     }
+
+    public void resetRoom() {
+        this.id.setText("");
+        this.name.setText("");
+        this.height.setText("");
+        this.width.setText("");
+        this.length.setText("");
+    }
 }
