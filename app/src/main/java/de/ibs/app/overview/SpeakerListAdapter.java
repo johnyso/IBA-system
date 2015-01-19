@@ -40,5 +40,6 @@ public class SpeakerListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.name.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Speakers.NAME)));
+        holder.id = cursor.getInt(cursor.getColumnIndex(RoomContract.Speakers._ID));
     }
 }

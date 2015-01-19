@@ -17,10 +17,12 @@ import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.utils.RoomContract;
 
+import static de.ibs.app.overview.SpeakerListAdapter.*;
+
 /**
  * Created by johnyso on 12.11.14.
  */
-public class RoomAddFragment extends Fragment implements Button.OnClickListener{
+public class RoomAddFragment extends Fragment implements Button.OnClickListener, AdapterView.OnItemClickListener {
     private static final int SAVE = 1;
     private static final int ADD = 2;
     private Button button;
@@ -51,6 +53,7 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
         this.name = (EditText) view.findViewById(R.id.editName);
         this.id = (TextView) view.findViewById(R.id.id);
         this.listView = (ListView) view.findViewById(R.id.listView);
+        this.listView.setOnItemClickListener(this);
         this.addSpeakerButton = (Button) view.findViewById(R.id.addSpeakerButton);
         this.addSpeakerButton.setTag(this.ADD);
         this.button.setOnClickListener(this);
@@ -126,5 +129,10 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
         this.height.setText("");
         this.width.setText("");
         this.length.setText("");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ViewHolder holder = (ViewHolder) view.getTag();
     }
 }
