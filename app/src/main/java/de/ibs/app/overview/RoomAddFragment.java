@@ -38,7 +38,7 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
         this.addSpeakerButton = (Button) view.findViewById(R.id.addSpeakerButton);
         this.addSpeakerButton.setTag(this.ADD);
         this.button.setOnClickListener(this);
-        this.button.setOnClickListener(this);
+        this.addSpeakerButton.setOnClickListener(this);
         return view;
 
     }

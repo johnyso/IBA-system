@@ -15,6 +15,8 @@ public class StartActivity extends FragmentActivity {
     private LocalBroadcastManager localBroadcastManager;
     private BroadcastReceiver addRoomReceiver;
     private RoomAddFragment addRoom;
+    private AddSpeakerReceiver addSpeakerReceiver;
+    private AddSpeaker addSpeaker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class StartActivity extends FragmentActivity {
         setContentView(R.layout.container);
         this.localBroadcastManager = LocalBroadcastManager.getInstance(this);
         this.addRoomReceiver = new AddRoomReceiver(this);
+        this.addSpeakerReceiver = new AddSpeakerReceiver(this);
         // TODO: Remove sample Room generator
         SampleRoomGenerator.createRooms(this);
     }
@@ -31,6 +34,7 @@ public class StartActivity extends FragmentActivity {
         super.onResume();
         initializeFragments();
         this.localBroadcastManager.registerReceiver(this.addRoomReceiver, new IntentFilter(AppContract.BROADCAST_ACTION_ADD_ROOM));
+        this.localBroadcastManager.registerReceiver(this.addSpeakerReceiver, new IntentFilter(AppContract.BROADCAST_ACTION_ADD_SPEAKER));
     }
 
     @Override
@@ -38,6 +42,7 @@ public class StartActivity extends FragmentActivity {
         super.onPause();
         tearDownFragments();
         this.localBroadcastManager.unregisterReceiver(this.addRoomReceiver);
+        this.localBroadcastManager.unregisterReceiver(this.addSpeakerReceiver);
     }
 
     private void tearDownFragments() {
@@ -58,6 +63,10 @@ public class StartActivity extends FragmentActivity {
             this.addRoom = new RoomAddFragment();
             transaction.add(R.id.fragment_container, this.addRoom, AppContract.ROOM_ADD_FRAGMENT).hide(this.addRoom);
         }
+        if (this.addSpeaker == null) {
+            this.addSpeaker = new AddSpeaker();
+            transaction.add(R.id.fragment_container, this.addSpeaker, AppContract.SPEAKER_ADD_FRAGMENT).hide(this.addSpeaker);
+        }
         transaction.commit();
     }
     
@@ -65,6 +74,14 @@ public class StartActivity extends FragmentActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(this.roomOverview)
                 .show(this.addRoom)
+                .addToBackStack("")
+                .commit();
+    }
+
+    public void changeToAddSpeaker() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(this.addRoom)
+                .show(this.addSpeaker)
                 .addToBackStack("")
                 .commit();
     }

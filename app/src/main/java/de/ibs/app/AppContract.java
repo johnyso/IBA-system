@@ -21,6 +21,8 @@ public class AppContract {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
     public static final String BROADCAST_UPDATE_VERTICAL = "de.ibs.broadcast.vertical";
+    public static final String BROADCAST_ACTION_ADD_SPEAKER = "de.ibs.broadcast.add.speaker";
+    public static final String SPEAKER_ADD_FRAGMENT = "speaker_add_fragment";
 
     public static String getRestPath(int direction, int deg, String ip) {
 
