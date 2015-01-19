@@ -101,6 +101,27 @@
               android:maxLines="1"
               android:layout_below="@+id/textHeight"
               android:layout_alignParentEnd="true"/>
+    <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/room_add_ip"
+            android:id="@+id/textIp"
+            android:layout_below="@id/editHeight"
+            android:layout_alignParentRight="true"
+            android:textSize="18dp"
+            android:layout_marginTop="36dp"
+            android:textColor="@color/black"
+
+            />
+    <EditText android:layout_width="110dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/editIp"
+              android:inputType="number"
+              android:singleLine="true"
+              android:lines="1"
+              android:maxLines="1"
+              android:layout_below="@+id/textIp"
+              android:layout_alignParentEnd="true"/>
 
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"

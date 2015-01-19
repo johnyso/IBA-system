@@ -20,6 +20,7 @@ public class AddSpeaker extends Fragment implements Button.OnClickListener {
     private EditText width;
     private EditText length;
     private EditText name;
+    private EditText ip;
     private TextView id;
 
     @Override
@@ -36,6 +37,7 @@ public class AddSpeaker extends Fragment implements Button.OnClickListener {
         this.width = (EditText) view.findViewById(R.id.editWidth);
         this.length = (EditText) view.findViewById(R.id.editLength);
         this.name = (EditText) view.findViewById(R.id.editName);
+        this.ip = (EditText) view.findViewById(R.id.editIp);
         this.id = (TextView) view.findViewById(R.id.id);
         this.button.setOnClickListener(this);
         return view;
@@ -47,7 +49,9 @@ public class AddSpeaker extends Fragment implements Button.OnClickListener {
         if (this.height.getText().toString().matches("")
                 || this.width.getText().toString().matches("")
                 || this.length.getText().toString().matches("")
-                || this.name.getText().toString().matches("")) {
+                || this.name.getText().toString().matches("")
+                || this.ip.getText().toString().matches("")
+                ) {
             Toast toast = Toast.makeText(getActivity(), "please Enter all Datas", Toast.LENGTH_SHORT);
             toast.show();
         } else {
