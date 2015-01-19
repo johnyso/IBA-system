@@ -112,6 +112,7 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
         cursor = this.context.getContentResolver().query(RoomContract.getAllSpeakerPath(roomId),null,null,null,null);
         this.adapter = new SpeakerListAdapter(getActivity(),cursor,0);
         this.listView.setAdapter(this.adapter);
+        cursor.close();
 
     }
     public void setRoom(int id) {
