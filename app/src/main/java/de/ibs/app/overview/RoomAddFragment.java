@@ -1,15 +1,18 @@
 package de.ibs.app.overview;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.utils.RoomContract;
 
@@ -70,7 +73,8 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
                 toast.show();
             }
         } else if(tag == this.ADD){
-
+            Intent intent = new Intent(AppContract.BROADCAST_ACTION_ADD_SPEAKER);
+            LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
         }
     }
 }
