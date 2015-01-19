@@ -2,6 +2,7 @@ package de.ibs.app.overview;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
@@ -28,6 +30,7 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
     private EditText length;
     private EditText name;
     private Button addSpeakerButton;
+    private TextView id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
         this.width = (EditText) view.findViewById(R.id.editWidth);
         this.length = (EditText) view.findViewById(R.id.editLength);
         this.name = (EditText) view.findViewById(R.id.editName);
+        this.id = (TextView) view.findViewById(R.id.id);
         this.addSpeakerButton = (Button) view.findViewById(R.id.addSpeakerButton);
         this.addSpeakerButton.setTag(this.ADD);
         this.button.setOnClickListener(this);
@@ -62,19 +66,40 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
                 values.put(RoomContract.Rooms.HEIGHT, this.height.getText().toString());
                 values.put(RoomContract.Rooms.WIDTH, this.width.getText().toString());
                 values.put(RoomContract.Rooms.LENGTH, this.length.getText().toString());
+                Uri uri;
+                if (this.id.getText().equals("")) {
+                    uri = getActivity().getContentResolver().insert(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS), values);
+                    setRoom(uri);
+                    Toast toast = Toast.makeText(getActivity(), "Room added", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    int roomId = Integer.parseInt(this.id.getText().toString());
+                    getActivity().getContentResolver().update(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + roomId), values, null, null);
+                    setRoom(roomId);
+                    Toast toast = Toast.makeText(getActivity(), "Raumänderung gespeichert", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
 
-                this.height.setText("");
-                this.width.setText("");
-                this.length.setText("");
-                this.name.setText("");
-
-                getActivity().getContentResolver().insert(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS), values);
-                Toast toast = Toast.makeText(getActivity(), "Room added", Toast.LENGTH_SHORT);
-                toast.show();
             }
         } else if(tag == this.ADD){
             Intent intent = new Intent(AppContract.BROADCAST_ACTION_ADD_SPEAKER);
             LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
         }
+    }
+
+    public void setRoom(Uri uri) {
+        Cursor cursor = getActivity().getContentResolver().query(uri,null,null,null,null);
+        if(cursor.moveToFirst()) {
+            this.id.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms._ID)));
+            this.name.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.NAME)));
+            this.height.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.HEIGHT)));
+            this.width.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.WIDTH)));
+            this.length.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.LENGTH)));
+        }
+        cursor.close();
+    }
+    public void setRoom(int id) {
+        Uri uri = Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id);
+        setRoom(uri);
     }
 }
