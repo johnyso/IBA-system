@@ -17,6 +17,7 @@ public class StartActivity extends FragmentActivity {
     private RoomAddFragment addRoom;
     private AddSpeakerReceiver addSpeakerReceiver;
     private AddSpeaker addSpeaker;
+    private RoomSettingReceiver roomSettingReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class StartActivity extends FragmentActivity {
         this.localBroadcastManager = LocalBroadcastManager.getInstance(this);
         this.addRoomReceiver = new AddRoomReceiver(this);
         this.addSpeakerReceiver = new AddSpeakerReceiver(this);
+        this.roomSettingReceiver = new RoomSettingReceiver(this);
         // TODO: Remove sample Room generator
         SampleRoomGenerator.createRooms(this);
     }
@@ -35,6 +37,7 @@ public class StartActivity extends FragmentActivity {
         initializeFragments();
         this.localBroadcastManager.registerReceiver(this.addRoomReceiver, new IntentFilter(AppContract.BROADCAST_ACTION_ADD_ROOM));
         this.localBroadcastManager.registerReceiver(this.addSpeakerReceiver, new IntentFilter(AppContract.BROADCAST_ACTION_ADD_SPEAKER));
+        this.localBroadcastManager.registerReceiver(this.roomSettingReceiver, new IntentFilter(AppContract.BROADCAST_ACTION_ROOM_SETTING));
     }
 
     @Override
@@ -82,6 +85,15 @@ public class StartActivity extends FragmentActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(this.addRoom)
                 .show(this.addSpeaker)
+                .addToBackStack("")
+                .commit();
+    }
+
+    public void changeToSetting(int id) {
+        this.addRoom.setRoom(id);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(this.roomOverview)
+                .show(this.addRoom)
                 .addToBackStack("")
                 .commit();
     }
