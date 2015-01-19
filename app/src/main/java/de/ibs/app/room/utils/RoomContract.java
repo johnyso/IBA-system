@@ -36,6 +36,10 @@ public class RoomContract {
         return Uri.withAppendedPath(CONTENT_URI,ROOMS + "-" + roomId + "/" + SPEAKERS + "-" + speakerId);
     }
 
+    public static Uri getAllSpeakerPath(int roomId){
+        return Uri.withAppendedPath(CONTENT_URI,ROOMS + "-" + roomId + "/" + SPEAKERS);
+    }
+
     public static abstract class Rooms implements BaseColumns {
         public static final String TABLE_NAME = "rooms";
 

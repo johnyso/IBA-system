@@ -10,105 +10,108 @@
                 android:paddingBottom="24dp"
                 android:paddingRight="16dp">
 
-         <TextView
+    <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/id"
             android:textSize="18dp"
             android:visibility="invisible"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/room_add_name"
-                android:id="@+id/textName"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/room_add_name"
+            android:id="@+id/textName"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/editName"
-                  android:layout_below="@id/textName"
-                  android:singleLine="true"
-                  android:lines="1"
-                  android:maxLines="1"
-                />
-
-
-        <TextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:text="@string/room_add_width"
-                android:id="@+id/textWidth"
-                android:layout_below="@id/editName"
-                android:layout_alignParentLeft="true"
-                android:textSize="18dp"
-                android:layout_marginTop="36dp"
-                android:textColor="@color/black"
-
-                />
-        <EditText android:layout_width="110dp"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/editWidth"
-                  android:inputType="number"
-                  android:singleLine="true"
-                  android:lines="1"
-                  android:maxLines="1"
-                  android:layout_below="@id/textWidth"
-                  android:layout_alignParentLeft="true"
-                />
+    <EditText android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/editName"
+              android:layout_below="@id/textName"
+              android:singleLine="true"
+              android:lines="1"
+              android:maxLines="1"
+            />
 
 
+    <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/room_add_width"
+            android:id="@+id/textWidth"
+            android:layout_below="@id/editName"
+            android:layout_alignParentLeft="true"
+            android:textSize="18dp"
+            android:layout_marginTop="36dp"
+            android:textColor="@color/black"
 
-        <TextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:text="@string/room_add_length"
-                android:id="@+id/textLength"
-                android:layout_below="@id/editName"
-                android:layout_centerHorizontal="true"
-                android:textSize="18dp"
-                android:layout_marginTop="36dp"
-                android:textColor="@color/black"
-
-                />
-        <EditText android:layout_width="110dp"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/editLength"
-                  android:inputType="number"
-                  android:singleLine="true"
-                  android:lines="1"
-                  android:maxLines="1"
-                  android:layout_below="@+id/textLength"
-                  android:layout_alignStart="@+id/textLength"
-                />
-
+            />
+    <EditText android:layout_width="110dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/editWidth"
+              android:inputType="number"
+              android:singleLine="true"
+              android:lines="1"
+              android:maxLines="1"
+              android:layout_below="@id/textWidth"
+              android:layout_alignParentLeft="true"
+            />
 
 
-        <TextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:text="@string/room_add_height"
-                android:id="@+id/textHeight"
-                android:layout_below="@id/editName"
-                android:layout_alignParentRight="true"
-                android:textSize="18dp"
-                android:layout_marginTop="36dp"
-                android:textColor="@color/black"
+    <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/room_add_length"
+            android:id="@+id/textLength"
+            android:layout_below="@id/editName"
+            android:layout_centerHorizontal="true"
+            android:textSize="18dp"
+            android:layout_marginTop="36dp"
+            android:textColor="@color/black"
 
-                />
-        <EditText android:layout_width="110dp"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/editHeight"
-                  android:inputType="number"
-                  android:singleLine="true"
-                  android:lines="1"
-                  android:maxLines="1"
-                  android:layout_below="@+id/textHeight"
-                  android:layout_alignParentEnd="true"/>
+            />
+    <EditText android:layout_width="110dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/editLength"
+              android:inputType="number"
+              android:singleLine="true"
+              android:lines="1"
+              android:maxLines="1"
+              android:layout_below="@+id/textLength"
+              android:layout_alignStart="@+id/textLength"
+            />
 
 
+    <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/room_add_height"
+            android:id="@+id/textHeight"
+            android:layout_below="@id/editName"
+            android:layout_alignParentRight="true"
+            android:textSize="18dp"
+            android:layout_marginTop="36dp"
+            android:textColor="@color/black"
 
+            />
+    <EditText android:layout_width="110dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/editHeight"
+              android:inputType="number"
+              android:singleLine="true"
+              android:lines="1"
+              android:maxLines="1"
+              android:layout_below="@+id/textHeight"
+              android:layout_alignParentEnd="true"/>
+
+    <ListView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/listView"
+              android:layout_below="@id/editHeight"
+              android:dividerHeight="28dp"
+              android:layout_marginTop="36dp"
+            />
 
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,19 +1,18 @@
 package de.ibs.app.overview;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.utils.RoomContract;
@@ -31,6 +30,15 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
     private EditText name;
     private Button addSpeakerButton;
     private TextView id;
+    private ListView listView;
+    private SpeakerListAdapter adapter;
+    private Context context;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.context = getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +50,7 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
         this.length = (EditText) view.findViewById(R.id.editLength);
         this.name = (EditText) view.findViewById(R.id.editName);
         this.id = (TextView) view.findViewById(R.id.id);
+        this.listView = (ListView) view.findViewById(R.id.listView);
         this.addSpeakerButton = (Button) view.findViewById(R.id.addSpeakerButton);
         this.addSpeakerButton.setTag(this.ADD);
         this.button.setOnClickListener(this);
@@ -89,14 +98,21 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener{
 
     public void setRoom(Uri uri) {
         Cursor cursor = getActivity().getContentResolver().query(uri,null,null,null,null);
+        int roomId = 0;
         if(cursor.moveToFirst()) {
-            this.id.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms._ID)));
+            roomId = cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms._ID));
+            this.id.setText(Integer.toString(roomId));
             this.name.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.NAME)));
             this.height.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.HEIGHT)));
             this.width.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.WIDTH)));
             this.length.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.LENGTH)));
         }
         cursor.close();
+
+        cursor = this.context.getContentResolver().query(RoomContract.getAllSpeakerPath(roomId),null,null,null,null);
+        this.adapter = new SpeakerListAdapter(getActivity(),cursor,0);
+        this.listView.setAdapter(this.adapter);
+
     }
     public void setRoom(int id) {
         Uri uri = Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS + "-" + id);
