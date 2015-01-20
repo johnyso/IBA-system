@@ -89,7 +89,17 @@ public class AddSpeaker extends Fragment implements Button.OnClickListener {
         if (speakerId != 0) {
             this.id.setText(Integer.toString(speakerId));
             initSpeaker();
+        } else {
+            reset();
         }
+    }
+
+    private void reset() {
+        this.name.setText("");
+        this.ip.setText("");
+        this.x.setText("");
+        this.y.setText("");
+        this.height.setText("");
     }
 
     private void initSpeaker() {
