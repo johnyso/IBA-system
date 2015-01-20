@@ -16,7 +16,7 @@ public class Room {
     private int personHeight;
     private float paddingLeft;
     private double lengthInPixel;
-    private float widthInPixel;
+    private double widthInPixel;
 
     public float getPaddingLeft() {
         return paddingLeft;
@@ -87,10 +87,22 @@ public class Room {
 
     public RectF getRectInPixel(int height, int width) {
         RectF drawRoundRect = new RectF();
-        double pixelFactor = (double) this.getWidth() / (double) width;
-        this.lengthInPixel = (double) this.getLength() / pixelFactor;
-        this.paddingLeft = (float) (width - this.lengthInPixel) / 2;
-        drawRoundRect.set(this.paddingLeft, 0, (int) this.lengthInPixel + this.paddingLeft, (float) height);
+        // get 100%
+
+        double pixelWidth = (double) width / (double) this.getWidth();
+        double pixelLength = (double) height / (double) this.getLength();
+
+        if (this.getLength() * pixelWidth < height){
+            this.widthInPixel = (double) this.getWidth() * pixelWidth;
+            this.lengthInPixel = (double) this.getLength() * pixelWidth;
+        } else {
+            this.widthInPixel = (double) this.getWidth() * pixelLength;
+            this.lengthInPixel = (double) this.getLength() * pixelLength;
+        }
+
+        this.paddingLeft = (float) (width - this.widthInPixel) / 2;
+
+        drawRoundRect.set(this.paddingLeft, 0, (int) this.widthInPixel + this.paddingLeft, (float) this.lengthInPixel);
         return drawRoundRect;
     }
 

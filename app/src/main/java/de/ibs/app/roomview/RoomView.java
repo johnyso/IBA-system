@@ -43,32 +43,34 @@ public class RoomView extends View implements View.OnTouchListener {
 
     private void init() {
         this.borderColor = new Paint();
-        borderColor.setARGB(255, 255, 255, 255);
+        borderColor.setColor(getResources().getColor(R.color.darkGrey));
+        //borderColor.setARGB(255, 255, 255, 255);
         borderColor.setStyle(Paint.Style.STROKE);
         borderColor.setStrokeWidth(4);
 
         this.transparent = new Paint();
-        transparent.setARGB(0, 0, 0, 0);
-        transparent.setAlpha(0);
+        transparent.setColor(getResources().getColor(R.color.themeWhite));
         transparent.setStyle(Paint.Style.FILL);
     }
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        double pixelFactor = (double) this.room.getWidth() / (double) getWidth();
         RectF rect = this.room.getRectInPixel(getHeight(), getWidth());
 
         this.icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        canvas.drawBitmap(this.icon, this.room.getPersonX(), this.room.getPersonY(), null);
 
         canvas.drawRoundRect(rect, 2, 2, this.transparent);
         canvas.drawRoundRect(rect, 2, 2, this.borderColor);
 
-        //TODO: remove this code an put the speakers in
+        canvas.drawBitmap(this.icon, this.room.getPersonX(), this.room.getPersonY(), null);
+
         Bitmap speakerIcon = BitmapFactory.decodeResource(getResources(), R.drawable.speaker_icon);
         speakerIcon = Bitmap.createScaledBitmap(speakerIcon, 40, 40, true);
         Bitmap rot;
         Matrix matrix = new Matrix();
+
+
         if (speakers != null) {
             for (Speaker speaker : this.speakers) {
                 switch (speaker.getAlignment()){
@@ -89,7 +91,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
                 rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
 
-                canvas.drawBitmap(rot, this.room.getPaddingLeft() + speaker.getPositionX(), speaker.getPositionY(), null);
+                canvas.drawBitmap(rot, this.room.getPaddingLeft() + (int) (speaker.getPositionX()*pixelFactor), (int) (speaker.getPositionY()*pixelFactor), null);
             }
         }
     }

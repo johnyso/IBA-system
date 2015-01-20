@@ -28,8 +28,8 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue1() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.34:8080");
-        value.put(RoomContract.Speakers.POSITION_X, 320);
-        value.put(RoomContract.Speakers.POSITION_Y, 10);
+        value.put(RoomContract.Speakers.POSITION_X, 300);
+        value.put(RoomContract.Speakers.POSITION_Y, 20);
         value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_RIGHT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
@@ -41,8 +41,8 @@ public class SampleRoomGenerator {
     private static ContentValues speakerValue2() {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.35:8080");
-        value.put(RoomContract.Speakers.POSITION_X, 320);
-        value.put(RoomContract.Speakers.POSITION_Y, 200);
+        value.put(RoomContract.Speakers.POSITION_X, 300);
+        value.put(RoomContract.Speakers.POSITION_Y, 300);
         value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_RIGHT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
@@ -55,7 +55,7 @@ public class SampleRoomGenerator {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.37:8080");
         value.put(RoomContract.Speakers.POSITION_X, 0);
-        value.put(RoomContract.Speakers.POSITION_Y, 200);
+        value.put(RoomContract.Speakers.POSITION_Y, 300);
         value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_LEFT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
@@ -68,7 +68,7 @@ public class SampleRoomGenerator {
         ContentValues value = new ContentValues();
         value.put(RoomContract.Speakers.IP, "192.168.1.38:8080");
         value.put(RoomContract.Speakers.POSITION_X, 0);
-        value.put(RoomContract.Speakers.POSITION_Y, 200);
+        value.put(RoomContract.Speakers.POSITION_Y, 20);
         value.put(RoomContract.Speakers.POSITION_HEIGHT, 150);
         value.put(RoomContract.Speakers.ALIGNMENT, RoomContract.Speakers.ALIGNMENT_LEFT);
         value.put(RoomContract.Speakers.HORIZONTAL, 0);
