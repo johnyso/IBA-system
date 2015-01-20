@@ -55,7 +55,7 @@ public class RoomView extends View implements View.OnTouchListener {
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        double pixelFactor = (double) this.room.getWidth() / (double) getWidth();
+        double pixel = (double) getWidth() / (double) this.room.getWidth();
         RectF rect = this.room.getRectInPixel(getHeight(), getWidth());
 
         this.icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
@@ -90,8 +90,14 @@ public class RoomView extends View implements View.OnTouchListener {
 
 
                 rot = speakerIcon.createBitmap(speakerIcon, 0, 0, speakerIcon.getWidth(), speakerIcon.getHeight(), matrix, true);
-
-                canvas.drawBitmap(rot, this.room.getPaddingLeft() + (int) (speaker.getPositionX()*pixelFactor), (int) (speaker.getPositionY()*pixelFactor), null);
+                int x = 0;
+                if (speaker.getAlignment() == RoomContract.Speakers.ALIGNMENT_LEFT){
+                    x = (int) (speaker.getPositionX()* pixel) + (int) this.room.getPaddingLeft();
+                } else if (speaker.getAlignment() == RoomContract.Speakers.ALIGNMENT_RIGHT) {
+                    x = (int) (speaker.getPositionX()* pixel) - this.icon.getWidth() - (int) this.room.getPaddingLeft();
+                }
+                int y = (int) (speaker.getPositionY()*pixel);
+                canvas.drawBitmap(rot,  x, y, null);
             }
         }
     }
@@ -100,8 +106,10 @@ public class RoomView extends View implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         int eventaction = event.getAction();
 
+        double pixel = (double) getWidth() / (double) this.room.getWidth();
+
         this.iconLeftPosition = this.room.getPaddingLeft() + (this.icon.getWidth() / 2);
-        this.iconRightPosition = (float) this.room.getLengthInPixel() + this.room.getPaddingLeft() - (this.icon.getWidth() / 2);
+        this.iconRightPosition = (float) (this.room.getWidth() * pixel) - this.room.getPaddingLeft() - (this.icon.getWidth() / 2);
 
         // x-Richtung
         if (event.getX() > this.iconLeftPosition && event.getX() < (int) this.iconRightPosition) {
@@ -127,8 +135,19 @@ public class RoomView extends View implements View.OnTouchListener {
         if (speakers != null) {
             for (Speaker speaker : this.speakers) {
                 // x
-                float x = this.room.getPersonX() - this.room.getPaddingLeft() - speaker.getPositionX();
-                float y = this.room.getPersonY() - speaker.getPositionY();
+                float x;
+                float y;
+                if (this.room.getPersonX() > (int)(speaker.getPositionX()*pixel)){
+                    x = this.room.getPersonX() - this.room.getPaddingLeft() - (int)(speaker.getPositionX()*pixel);
+                } else {
+                    x = (float)(speaker.getPositionX()*pixel) - this.room.getPersonX() - this.room.getPaddingLeft() - this.icon.getWidth();
+                }
+                if (this.room.getPersonY() < (int)(speaker.getPositionY()*pixel)){
+                    y = this.room.getPersonY() - (int) (speaker.getPositionY() * pixel);
+                } else {
+                    y = (float) (speaker.getPositionY() * pixel) - this.room.getPersonY();
+                }
+
                 double deg = Math.toDegrees(Math.atan(y / x));
                 int align = speaker.getAlignment();
                 int test = RoomContract.Speakers.ALIGNMENT_TOP;
@@ -156,7 +175,7 @@ public class RoomView extends View implements View.OnTouchListener {
                         }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_LEFT:
-                        if(deg<0) {
+                        if(deg < 0 || Double.toString(deg).equals("-0.0")) {
                             deg = 90 + deg;
                         } else {
                             deg = Math.abs(90 + deg);
