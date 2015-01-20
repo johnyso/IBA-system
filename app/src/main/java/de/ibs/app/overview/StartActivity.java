@@ -46,6 +46,7 @@ public class StartActivity extends FragmentActivity {
         tearDownFragments();
         this.localBroadcastManager.unregisterReceiver(this.addRoomReceiver);
         this.localBroadcastManager.unregisterReceiver(this.addSpeakerReceiver);
+        this.localBroadcastManager.unregisterReceiver(this.roomSettingReceiver);
     }
 
     private void tearDownFragments() {
@@ -82,7 +83,8 @@ public class StartActivity extends FragmentActivity {
                 .commit();
     }
 
-    public void changeToAddSpeaker() {
+    public void changeToAddSpeaker(int roomId, int speakerId) {
+        this.addSpeaker.init(roomId, speakerId);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(this.addRoom)
                 .show(this.addSpeaker)

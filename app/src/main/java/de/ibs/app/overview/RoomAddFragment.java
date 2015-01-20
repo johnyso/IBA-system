@@ -35,6 +35,7 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener,
     private ListView listView;
     private SpeakerListAdapter adapter;
     private Context context;
+    private int roomId = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,15 +96,18 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener,
             }
         } else if(tag == this.ADD){
             Intent intent = new Intent(AppContract.BROADCAST_ACTION_ADD_SPEAKER);
+            Bundle extra = new Bundle();
+            extra.putInt(RoomContract.Speakers._ID, 0);
+            extra.putInt(RoomContract.Speakers.ROOM_ID, this.roomId);
+            intent.putExtras(extra);
             LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
         }
     }
 
     public void setRoom(Uri uri) {
         Cursor cursor = getActivity().getContentResolver().query(uri,null,null,null,null);
-        int roomId = 0;
         if(cursor.moveToFirst()) {
-            roomId = cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms._ID));
+            this.roomId = cursor.getInt(cursor.getColumnIndex(RoomContract.Rooms._ID));
             this.id.setText(Integer.toString(roomId));
             this.name.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.NAME)));
             this.height.setText(cursor.getString(cursor.getColumnIndex(RoomContract.Rooms.HEIGHT)));
@@ -133,5 +137,12 @@ public class RoomAddFragment extends Fragment implements Button.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ViewHolder holder = (ViewHolder) view.getTag();
+        Intent intent = new Intent(AppContract.BROADCAST_ACTION_ADD_SPEAKER);
+        Bundle extra = new Bundle();
+        extra.putInt(RoomContract.Speakers._ID, holder.id);
+        extra.putInt(RoomContract.Speakers.ROOM_ID, this.roomId);
+        intent.putExtras(extra);
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+
     }
 }

@@ -116,7 +116,6 @@
     <EditText android:layout_width="110dp"
               android:layout_height="wrap_content"
               android:id="@+id/editIp"
-              android:inputType="number"
               android:singleLine="true"
               android:lines="1"
               android:maxLines="1"
