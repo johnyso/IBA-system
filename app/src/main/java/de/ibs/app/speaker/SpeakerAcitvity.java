@@ -1,6 +1,7 @@
 package de.ibs.app.speaker;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.speaker.processor.SpeakerParser;
+import de.ibs.app.speaker.restmethod.SpeakerRequest;
 
 public class SpeakerAcitvity extends Activity implements View.OnClickListener {
 
@@ -45,19 +47,15 @@ public class SpeakerAcitvity extends Activity implements View.OnClickListener {
         String hPath = AppContract.getRestPath(AppContract.HORIZONTAL, this.horizontal, this.ip);
 
         Button buttonUp = (Button) findViewById(R.id.button_up);
-        buttonUp.setTag(this.BUTTON_UP);
         buttonUp.setOnClickListener(this);
 
         Button buttonRight = (Button) findViewById(R.id.button_right);
-        buttonUp.setTag(this.BUTTON_RIGTH);
         buttonRight.setOnClickListener(this);
 
         Button buttonDown = (Button) findViewById(R.id.button_down);
-        buttonUp.setTag(this.BUTTON_DOWN);
         buttonDown.setOnClickListener(this);
 
         Button buttonLeft = (Button) findViewById(R.id.button_left);
-        buttonUp.setTag(this.BUTTON_LEFT);
         buttonLeft.setOnClickListener(this);
 
     }
@@ -65,23 +63,40 @@ public class SpeakerAcitvity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int direction = (Integer) v.getTag();
-        int nVertical;
-        int nHorizontal;
-        switch (direction){
-            case 1:
-                nVertical = this.vertical + 5;
+        int stepsH = 10;
+        int stepsV = 2;
+        int nVertical = 0;
+        int nHorizontal = 0;
+        int id = v.getId();
+        ContentValues values = new ContentValues();
+        Intent intent = new Intent(this, SpeakerRequest.class);
+        switch (id){
+            case R.id.button_up:
+                nVertical = this.vertical + stepsV;
+                this.vertical = nVertical;
+                values.put(RoomContract.Speakers.VERTICAL, nVertical);
+                intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.VERTICAL, nVertical, this.ip));
                 break;
-            case 2:
-                nHorizontal = this.horizontal + 5;
+            case R.id.button_right:
+                nHorizontal = this.horizontal + stepsH;
+                this.horizontal = nHorizontal;
+                intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, nHorizontal, this.ip));
+                values.put(RoomContract.Speakers.HORIZONTAL, nHorizontal);
                 break;
-            case 3:
-                nVertical = this.vertical - 5;
+            case R.id.button_down:
+                nVertical = this.vertical - stepsV;
+                this.vertical = nVertical;
+                values.put(RoomContract.Speakers.VERTICAL, nVertical);
+                intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.VERTICAL, nVertical, this.ip));
                 break;
-            case 4:
-                nHorizontal = this.horizontal - 5;
+            case R.id.button_left:
+                nHorizontal = this.horizontal - stepsH;
+                this.horizontal = nHorizontal;
+                intent.putExtra(SpeakerConstants.REST_ID, AppContract.getRestPath(AppContract.HORIZONTAL, nHorizontal, this.ip));
+                values.put(RoomContract.Speakers.HORIZONTAL, nHorizontal);
                 break;
-
         }
+        getContentResolver().update(RoomContract.getSpeakerPath(this.roomId, this.id), values, null, null);
+        this.startService(intent);
     }
 }

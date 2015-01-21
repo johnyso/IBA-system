@@ -70,6 +70,10 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
         this.seekBar.setProgress(this.room.getPersonHeight());
         this.seekBar.setOnSeekBarChangeListener(this);
 
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(16, 16, 16, 16);
+
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.button_group);
         if (this.speakers != null) {
             for (Speaker speaker : this.speakers) {
@@ -77,6 +81,7 @@ public class RoomDetailFragment extends Fragment implements SeekBar.OnSeekBarCha
                 button.setText("Wandhalterung " + speaker.getName());
                 button.setTag(speaker.getId());
                 button.setOnClickListener(this);
+                button.setLayoutParams(params);
                 layout.addView(button);
             }
         }
