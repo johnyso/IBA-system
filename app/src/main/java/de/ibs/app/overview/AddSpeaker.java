@@ -28,6 +28,7 @@ public class AddSpeaker extends Fragment implements Button.OnClickListener {
     private TextView id;
     private int speakerId = 0;
     private int roomId = 0;
+    private RadioGroup radioGroup;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class AddSpeaker extends Fragment implements Button.OnClickListener {
         this.name = (EditText) view.findViewById(R.id.editName);
         this.ip = (EditText) view.findViewById(R.id.editIp);
         this.id = (TextView) view.findViewById(R.id.id);
+        this.radioGroup = (RadioGroup) view.findViewById(R.id.button_group);
         this.button.setOnClickListener(this);
         return view;
 

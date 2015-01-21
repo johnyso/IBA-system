@@ -25,5 +25,9 @@
     <string name="speaker_add_name">Wandhalterung Name</string>
     <string name="button_add_speaker">Wandhalterung Speichern</string>
     <string name="room_add_ip">IP</string>
+    <string name="speaker_top">Top</string>
+    <string name="speaker_right">Rechts</string>
+    <string name="speaker_bottom">Unten</string>
+    <string name="speaker_left">Links</string>
 
 </resources>
