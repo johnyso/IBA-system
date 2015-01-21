@@ -130,18 +130,23 @@
         <RadioButton android:id="@+id/radio_top"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
+                     android:checked="true"
+                     android:tag="1"
                      android:text="@string/speaker_top"/>
         <RadioButton android:id="@+id/radio_right"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
+                     android:tag="2"
                      android:text="@string/speaker_right"/>
         <RadioButton android:id="@+id/radio_bottom"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
+                     android:tag="3"
                      android:text="@string/speaker_bottom"/>
         <RadioButton android:id="@+id/radio_left"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
+                     android:tag="4"
                      android:text="@string/speaker_left"/>
     </RadioGroup>
 

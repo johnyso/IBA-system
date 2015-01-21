@@ -60,15 +60,32 @@ public class AddSpeaker extends Fragment implements Button.OnClickListener {
                 || this.name.getText().toString().matches("")
                 || this.ip.getText().toString().matches("")
                 ) {
-            Toast toast = Toast.makeText(getActivity(), "please Enter all Datas", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getActivity(), "Bitte alle Daten angeben", Toast.LENGTH_SHORT);
             toast.show();
         } else {
+            int alignment = 0;
+            int checkedId = this.radioGroup.getCheckedRadioButtonId();
+            switch (checkedId){
+                case R.id.radio_top:
+                    alignment = RoomContract.Speakers.ALIGNMENT_TOP;
+                    break;
+                case R.id.radio_right:
+                    alignment = RoomContract.Speakers.ALIGNMENT_RIGHT;
+                    break;
+                case R.id.radio_bottom:
+                    alignment = RoomContract.Speakers.ALIGNMENT_BOTTOM;
+                    break;
+                case R.id.radio_left:
+                    alignment = RoomContract.Speakers.ALIGNMENT_LEFT;
+                    break;
+            }
             ContentValues values = new ContentValues();
             values.put(RoomContract.Speakers.NAME, this.name.getText().toString());
             values.put(RoomContract.Speakers.POSITION_X, this.x.getText().toString());
             values.put(RoomContract.Speakers.POSITION_Y, this.y.getText().toString());
             values.put(RoomContract.Speakers.IP, this.ip.getText().toString());
             values.put(RoomContract.Speakers.POSITION_HEIGHT, this.height.getText().toString());
+            values.put(RoomContract.Speakers.ALIGNMENT, alignment);
 
             Uri uri;
             if (this.id.getText().equals("")) {
