@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.utils.RoomContract;
@@ -46,16 +47,16 @@ public class SpeakerAcitvity extends Activity implements View.OnClickListener {
         String vPath = AppContract.getRestPath(AppContract.VERTICAL, this.vertical, this.ip);
         String hPath = AppContract.getRestPath(AppContract.HORIZONTAL, this.horizontal, this.ip);
 
-        Button buttonUp = (Button) findViewById(R.id.button_up);
+        ImageButton buttonUp = (ImageButton) findViewById(R.id.button_up);
         buttonUp.setOnClickListener(this);
 
-        Button buttonRight = (Button) findViewById(R.id.button_right);
+        ImageButton buttonRight = (ImageButton) findViewById(R.id.button_right);
         buttonRight.setOnClickListener(this);
 
-        Button buttonDown = (Button) findViewById(R.id.button_down);
+        ImageButton buttonDown = (ImageButton) findViewById(R.id.button_down);
         buttonDown.setOnClickListener(this);
 
-        Button buttonLeft = (Button) findViewById(R.id.button_left);
+        ImageButton buttonLeft = (ImageButton) findViewById(R.id.button_left);
         buttonLeft.setOnClickListener(this);
 
     }

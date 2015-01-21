@@ -9,36 +9,60 @@
               android:paddingBottom="@dimen/activity_vertical_margin"
               tools:context="de.ibs.app.speaker.SpeakerAcitvity">
 
-    <Button
-            android:layout_width="match_parent"
+    <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button_left"
-            android:text="left"
-            android:layout_margin="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/hintergrund_speaker"
+            android:id="@+id/hintergrund_speaker"
+            android:scaleType="matrix" />
+
+    <ImageButton android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/links"
+                 android:id="@+id/button_left"
+                 android:layout_marginTop="135dp"
+                 android:layout_marginLeft="15dp"
+                 style="@style/ActionBar.Transparent.Apptheme"
             />
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_right"
-            android:text="right"
-            android:layout_below="@id/button_left"
-            android:layout_margin="16dp"
+
+    <ImageButton android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="135dp"
+                 android:layout_marginLeft="228dp"
+                 android:src="@drawable/rechts"
+                 android:id="@+id/button_right"
+                 style="@style/ActionBar.Transparent.Apptheme"
             />
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_up"
-            android:text="up"
-            android:layout_below="@id/button_right"
-            android:layout_margin="16dp"
+
+    <ImageButton android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="242dp"
+                 android:layout_centerHorizontal="true"
+                 android:src="@drawable/unten"
+                 android:id="@+id/button_down"
+                 style="@style/ActionBar.Transparent.Apptheme"
             />
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_down"
-            android:text="down"
-            android:layout_below="@+id/button_up"
-            android:layout_margin="16dp"
+
+    <ImageButton android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="30dp"
+                 android:layout_centerHorizontal="true"
+                 android:src="@drawable/oben"
+                 android:id="@+id/button_up"
+                 style="@style/ActionBar.Transparent.Apptheme"
             />
+
+
+    <ImageButton android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="430dp"
+                 android:layout_centerHorizontal="true"
+                 android:src="@drawable/pos_zuruecksetzen"
+                 android:id="@+id/pos_zuruecksetzen"
+                 style="@style/ActionBar.Transparent.Apptheme"
+            />
+
 
 </RelativeLayout>
