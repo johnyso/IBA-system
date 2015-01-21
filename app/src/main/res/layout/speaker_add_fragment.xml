@@ -3,13 +3,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:textColor="@color/black"
                 android:paddingTop="24dp"
                 android:paddingLeft="16dp"
                 android:paddingBottom="24dp"
                 android:paddingRight="16dp">
-
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +17,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/room_add_name"
+            android:text="@string/speaker_add_name"
             android:id="@+id/textName"
             android:textSize="18dp"
             android:textColor="@color/black"/>
@@ -104,33 +101,61 @@
               android:maxLines="1"
               android:layout_below="@+id/textHeight"
               android:layout_alignParentEnd="true"/>
+    <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/room_add_ip"
+            android:id="@+id/textIp"
+            android:layout_below="@id/editHeight"
+            android:layout_alignParentRight="true"
+            android:textSize="18dp"
+            android:layout_marginTop="36dp"
+            android:textColor="@color/black"
 
-    <ListView android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/listView"
-              android:layout_below="@id/editHeight"
-              android:dividerHeight="28dp"
-              android:layout_marginTop="36dp"
             />
+    <EditText android:layout_width="110dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/editIp"
+              android:singleLine="true"
+              android:lines="1"
+              android:maxLines="1"
+              android:layout_below="@+id/textIp"
+              android:layout_alignParentEnd="true"/>
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editIp"
+                android:id="@+id/button_group"
+                android:orientation="vertical">
+        <RadioButton android:id="@+id/radio_top"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:checked="true"
+                     android:tag="1"
+                     android:text="@string/speaker_top"/>
+        <RadioButton android:id="@+id/radio_right"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:tag="2"
+                     android:text="@string/speaker_right"/>
+        <RadioButton android:id="@+id/radio_bottom"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:tag="3"
+                     android:text="@string/speaker_bottom"/>
+        <RadioButton android:id="@+id/radio_left"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:tag="4"
+                     android:text="@string/speaker_left"/>
+    </RadioGroup>
 
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button"
-            android:text="@string/button_add_room"
+            android:text="@string/button_add_speaker"
             android:background="@color/white"
             android:textSize="18dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"/>
-
-    <Button android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/addSpeakerButton"
-            android:text="@string/halterungHinzufuegenButton"
-            android:background="@color/white"
-            android:textSize="18dp"
-            android:layout_above="@+id/button"
-            android:layout_marginBottom="8dp"
-            />
-
-
 </RelativeLayout>

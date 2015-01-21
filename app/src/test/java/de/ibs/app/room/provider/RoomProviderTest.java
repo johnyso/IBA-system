@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import de.ibs.app.room.RoomContract;
 import de.ibs.app.utils.DatabaseOpenHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -16,7 +15,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.ShadowLog;
 
-import static de.ibs.app.room.RoomContract.*;
+import static de.ibs.app.room.utils.RoomContract.*;
 import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

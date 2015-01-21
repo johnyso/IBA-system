@@ -1,6 +1,8 @@
 package de.ibs.app;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
 
 /**
@@ -19,10 +21,13 @@ public class AppContract {
     public static final String ROOM_ADD_BACKSTACK = "backstack_room_add";
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
+    public static final String BROADCAST_UPDATE_VERTICAL = "de.ibs.broadcast.vertical";
+    public static final String BROADCAST_ACTION_ADD_SPEAKER = "de.ibs.broadcast.add.speaker";
+    public static final String SPEAKER_ADD_FRAGMENT = "speaker_add_fragment";
+    public static final String BROADCAST_ACTION_ROOM_SETTING = "de.ibs.broadcast.room.setting";
 
     public static String getRestPath(int direction, int deg, String ip) {
 
-        Log.d("AppContract", "Position: " + Math.abs((int) (deg * 0.28)));
 
         if (direction == HORIZONTAL){
             return "http://" + ip + "/index.php/horizontal-" + Math.abs((int) (deg * 0.28));

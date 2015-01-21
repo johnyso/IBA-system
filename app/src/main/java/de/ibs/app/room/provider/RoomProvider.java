@@ -3,13 +3,14 @@ package de.ibs.app.room.provider;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.net.Uri;
-import de.ibs.app.room.RoomContract;
+import de.ibs.app.AppContract;
+import de.ibs.app.room.processor.Room;
+import de.ibs.app.room.utils.RoomContract;
 
 import java.util.List;
 
-import static de.ibs.app.room.RoomContract.*;
+import static de.ibs.app.room.utils.RoomContract.*;
 
 public class RoomProvider extends ContentProvider {
     private RoomDatabaseHelper roomDatabaseHelper;
@@ -63,6 +64,9 @@ public class RoomProvider extends ContentProvider {
             case TYPE_SPEAKERS:
                 list = URI_MATCHER.match(uri).getCapturings();
                 return this.roomDatabaseHelper.getSpeakers(list.get(1));
+            case TYPE_SPEAKER:
+                list = URI_MATCHER.match(uri).getCapturings();
+                return this.roomDatabaseHelper.getSpeaker(list.get(1),list.get(2));
             case TYPE_ROOM:
                 list = URI_MATCHER.match(uri).getCapturings();
                 return this.roomDatabaseHelper.getRoom(list.get(1));
@@ -80,7 +84,11 @@ public class RoomProvider extends ContentProvider {
         switch (uriType) {
             case TYPE_ROOM:
                 list = URI_MATCHER.match(uri).getCapturings();
+                getContext().getContentResolver().notifyChange(Uri.withAppendedPath(RoomContract.CONTENT_URI, RoomContract.ROOMS),null);
                 return this.roomDatabaseHelper.updateRoom(values, list.get(1));
+            case TYPE_SPEAKER:
+                list = URI_MATCHER.match(uri).getCapturings();
+                return this.roomDatabaseHelper.updateSpeaker(values, list.get(1), list.get(2));
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
         }

@@ -2,9 +2,7 @@ package de.ibs.app.speaker.processor;
 
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
-import de.ibs.app.room.RoomContract;
-
-import java.util.List;
+import de.ibs.app.room.utils.RoomContract;
 
 /**
  * Created by johnyso on 26.11.14.

@@ -1,4 +1,4 @@
-package de.ibs.app.room;
+package de.ibs.app.overview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
+import de.ibs.app.room.RoomDetailActivity;
+import de.ibs.app.room.utils.RoomContract;
 
-import static de.ibs.app.room.RoomListAdapter.*;
+import static de.ibs.app.overview.RoomListAdapter.*;
 
 /**
  * Created by johnyso on 11.11.14.
@@ -72,14 +74,13 @@ public class RoomListFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // TODO: get ID from viewHolder
         ViewHolder holder = (ViewHolder) view.getTag();
-        Intent intent = new Intent(AppContract.BROADCAST_ACTION_ROOM);
+        Intent intent = new Intent(getActivity(),RoomDetailActivity.class);
         intent.putExtra(RoomContract.Rooms._ID, holder.id);
-        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+        startActivity(intent);
     }
 
     @Override
     public void onClick(View v) {
-        Log.d("RoomListFragment", "OnClickListener Add new Room");
         Intent intent = new Intent(AppContract.BROADCAST_ACTION_ADD_ROOM);
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
     }
