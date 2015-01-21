@@ -37,7 +37,7 @@
               android:id="@+id/hoeheDerPerson"/>
     
     <SeekBar android:layout_width="200dp"
-             android:layout_height="match_parent"
+             android:layout_height="50dp"
              android:id="@+id/roomHeightSeek"
              android:progress="20"
              android:max="100"
