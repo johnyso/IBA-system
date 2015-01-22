@@ -25,12 +25,13 @@ public class AppContract {
     public static final String BROADCAST_ACTION_ADD_SPEAKER = "de.ibs.broadcast.add.speaker";
     public static final String SPEAKER_ADD_FRAGMENT = "speaker_add_fragment";
     public static final String BROADCAST_ACTION_ROOM_SETTING = "de.ibs.broadcast.room.setting";
+    public static final double hFactor = 0.5;
 
     public static String getRestPath(int direction, int deg, String ip) {
 
 
         if (direction == HORIZONTAL){
-            return "http://" + ip + "/index.php/horizontal-" + Math.abs((int) (deg * 0.28));
+            return "http://" + ip + "/index.php/horizontal-" + Math.abs((int) (deg * hFactor));
         } else {
             return "http://" + ip + "/index.php/vertical-" + deg ;
         }
