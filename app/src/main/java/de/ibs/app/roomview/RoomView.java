@@ -78,7 +78,7 @@ public class RoomView extends View implements View.OnTouchListener {
                         matrix.setRotate(Math.abs(speaker.getHorizontal() + 270), 0, 0);
                         break;
                     case RoomContract.Speakers.ALIGNMENT_RIGHT:
-                        matrix.setRotate(speaker.getHorizontal() + 90, 0, 0);
+                        matrix.setRotate(180 - speaker.getHorizontal() + 90, 0, 0);
                         break;
                     case RoomContract.Speakers.ALIGNMENT_BOTTOM:
                         matrix.setRotate(Math.abs(speaker.getHorizontal() - 360), 0, 0);
@@ -156,10 +156,10 @@ public class RoomView extends View implements View.OnTouchListener {
                         }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_RIGHT:
-                        if (deg >= 0) {
-                            deg = -(deg - 90);
+                        if (deg < 0 || !Double.toString(deg).equals("-0.0")) {
+                            deg = 90 + deg;
                         } else {
-                            deg = Math.abs(-90 + deg);
+                            deg = Math.abs(90 + deg);
                         }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_BOTTOM:
@@ -170,10 +170,10 @@ public class RoomView extends View implements View.OnTouchListener {
                         }
                         break;
                     case RoomContract.Speakers.ALIGNMENT_LEFT:
-                        if (deg < 0 || !Double.toString(deg).equals("-0.0")) {
-                            deg = 90 + deg;
+                        if (deg >= 0) {
+                            deg = -(deg - 90);
                         } else {
-                            deg = Math.abs(90 + deg);
+                            deg = Math.abs(-90 + deg);
                         }
                         break;
                     default:
