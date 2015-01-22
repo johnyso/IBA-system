@@ -75,7 +75,7 @@ public class RoomView extends View implements View.OnTouchListener {
             for (Speaker speaker : this.speakers) {
                 switch (speaker.getAlignment()) {
                     case RoomContract.Speakers.ALIGNMENT_LEFT:
-                        matrix.setRotate(Math.abs(speaker.getHorizontal() + 270), 0, 0);
+                        matrix.setRotate(180 - Math.abs(speaker.getHorizontal() + 90), 0, 0);
                         break;
                     case RoomContract.Speakers.ALIGNMENT_RIGHT:
                         matrix.setRotate(180 - speaker.getHorizontal() + 90, 0, 0);
