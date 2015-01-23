@@ -1,5 +1,6 @@
 package de.ibs.app.room;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -18,11 +19,17 @@ import de.ibs.app.room.provider.SampleRoomGenerator;
 import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.speaker.NavDrawerItem;
 import de.ibs.app.speaker.NavDrawerListAdapter;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import java.util.ArrayList;
 
 public class RoomDetailActivity extends FragmentActivity {
     private int currentRoom = 1;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

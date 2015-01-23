@@ -2,6 +2,7 @@ package de.ibs.app.speaker;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import de.ibs.app.R;
 import de.ibs.app.room.utils.RoomContract;
 import de.ibs.app.speaker.processor.SpeakerParser;
 import de.ibs.app.speaker.restmethod.SpeakerRequest;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SpeakerAcitvity extends Activity implements View.OnClickListener {
 
@@ -28,6 +30,11 @@ public class SpeakerAcitvity extends Activity implements View.OnClickListener {
     private int vertical;
     private int horizontal;
     private int roomId;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

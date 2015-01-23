@@ -103,6 +103,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.+'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
+    compile 'uk.co.chrisjenx:calligraphy:0.7.+'
 }
 apply plugin: 'idea'
 

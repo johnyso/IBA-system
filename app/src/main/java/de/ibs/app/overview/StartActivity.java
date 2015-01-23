@@ -1,6 +1,7 @@
 package de.ibs.app.overview;
 
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import de.ibs.app.AppContract;
 import de.ibs.app.R;
 import de.ibs.app.room.provider.SampleRoomGenerator;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class StartActivity extends FragmentActivity {
     private RoomOverview roomOverview;
@@ -18,6 +20,11 @@ public class StartActivity extends FragmentActivity {
     private AddSpeakerReceiver addSpeakerReceiver;
     private AddSpeaker addSpeaker;
     private RoomSettingReceiver roomSettingReceiver;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
